@@ -1,16 +1,14 @@
 <template>
     <div class="v-button"
          >
-        {{msg}}
+        {{textButton}}
     </div>
 </template>
 
 <script setup>
-    const props=defineProps({
-        msg:{
-            type:String,
-            default:'Button'
-        }
+import {defineProps} from 'vue'
+    defineProps({
+        textButton: String
     })
 </script>
 
