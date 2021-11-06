@@ -5,7 +5,10 @@ import mutations from './mutations'
 
 const state={
     activePage:1,
-    paginator:[]
+    paginator:[],
+    groups:7,
+    groupsData:[1,2,3,4,5,6,7]
+    
 }
 
 export default createStore({
