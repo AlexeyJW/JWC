@@ -1,7 +1,7 @@
 <template>
     <div class="block-table">
         <div>
-            <h1><strong>General Meeting Report (S-3)</strong></h1>
+            <h3><strong>General Meeting Report (S-3)</strong></h3>
         </div>
         <div>
         <table class="v-table">
@@ -46,7 +46,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Average:</td>
+                    <td><strong>Average:</strong></td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -70,13 +70,14 @@
         box-shadow: 0 0 8px 0 darkgray;
         padding: 10px;
         /* flex-basis:500px; */
-        width:700px;
+        width:600px;
    }
    .v-table{
        border-collapse: collapse;
        border-spacing: 0;
        width:100%;
        overflow: hidden;
+        font-size: 12px;
        
 
    }
