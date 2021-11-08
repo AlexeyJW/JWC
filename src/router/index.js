@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from '../views/Home.vue'
 import AllGroups from '../views/AllGroups.vue'
 import Auth from '../views/Auth.vue'
+import InputV from '../views/InputV.vue'
 const routes=[
     {
         path:'/',
@@ -12,6 +13,11 @@ const routes=[
         path:'/AllGroups',
         name: 'AllGroups',
         component: AllGroups
+    },
+    {
+        path:'/InputV',
+        name: 'InputV',
+        component: InputV
     },
     {
         path:'/Auth',

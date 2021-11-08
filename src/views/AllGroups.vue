@@ -1,7 +1,8 @@
 <template>
   <div class="all-group">
     <v-title :groupNumber="paginator" /> 
-    <v-table-s3/>
+    <!-- <v-table-s3 :title="paginator"/> -->
+    <v-wrapper-table :groups="paginator"/>
   </div>
     <div class="pagination">
        <div v-for="i in pages" :key="i">
@@ -21,9 +22,9 @@
    import vPaginator from '../components/v-paginator.vue'
    import VTableS3 from '../components/v-table-s3.vue';
    import VTitle from '../components/v-title.vue'
-
+   import VWrapperTable from '../components/v-wrapper-table.vue'
    const store=useStore()
-   const groupNumber=1
+   const groupNumber=2
    let pageNumber=ref(store.getters.ACTIVE_PAGE)
    const pages=Math.ceil(store.state.groups/groupNumber)
    let isActive=ref(false)

@@ -1,7 +1,7 @@
 <template>
     <div class="block-table">
         <div>
-            <h3><strong>General Meeting Report (S-3)</strong></h3>
+            <h3><strong>General Meeting Report (S-3) {{props.title}}</strong></h3>
         </div>
         <div>
         <table class="v-table">
@@ -57,7 +57,10 @@
 </template>
 
 <script setup>
-
+   import {defineProps} from 'vue'
+   const props=defineProps({
+       title:{type:String}
+   })
 </script>
 
 <style>

@@ -1,20 +1,22 @@
 <script setup>
-     
-
+    import VNavBar from './components/v-nav-bar.vue'
 </script>
 
 <template>
-    <div class="nav">
-          <router-link to='/'>Home</router-link>|
-          <router-link to='/AllGroups'>All Groups</router-link>|
-          <router-link to='/Auth'>Auth</router-link>
-    </div>
+    <div id="app">
+    <v-nav-bar/>
+    
     <div>
           <router-view/>
+         
+    </div>
     </div>
 </template>
 
 <style>
+*{
+  text-decoration: none;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   font-size:auto;
@@ -22,6 +24,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
+  
 }
 </style>
