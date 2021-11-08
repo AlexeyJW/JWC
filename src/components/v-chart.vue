@@ -9,8 +9,14 @@
 <script setup>
 import { BarChart, useBarChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
-import {ref, computed} from 'vue'
+import {ref, computed, defineProps} from 'vue'
 Chart.register(...registerables);
+const props=defineProps({
+  data:{
+    type:Array,
+    default:[]
+  }
+})
 
 const data = ref([30, 40, 60, 70, 85,115]);
 

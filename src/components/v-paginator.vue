@@ -28,7 +28,7 @@
 
 <style scoped>
    div{
-        border: 1px solid lightblue;
+        border: 1px solid rgb(83, 155, 155);
         padding:8px;
         margin:5px;
    }
