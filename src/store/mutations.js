@@ -17,5 +17,8 @@ export default{
     SET_ACTIVE_PAGE (state, page){
         state.activePage=page
     },
+    ADD_S3 (state, o){
+        state.s3.push(o)
+    }
     
 }

@@ -1,16 +1,30 @@
 <template>
     <div class="v-nav-bar">
-        <ul class="nav-ul">
-            <li class="nav-li"><router-link class="nav-router" to='/InputV'>Input</router-link></li>
-            <li class="nav-li"><router-link class="nav-router" to='/'>General</router-link></li>
-            <li class="nav-li"><router-link class="nav-router" to='/AllGroups'>All Groups</router-link></li>
-            <li class="nav-li auth"><router-link class="nav-router" to='/Auth'>Logout</router-link></li>
+        <ul class="nav-ul" >
+            <li v-for="(i, index) in items" :key="index"
+                class="nav-li"             
+            >
+            <router-link class="nav-router" 
+                         :to="i.path">
+                {{i.label}}
+            </router-link>
+            </li>    
         </ul>
     </div>
 </template>
 
 <script setup>
+   import {ref} from 'vue'
+   let isActive=ref(false)
+   const items=[
+       {id:1, label:'Input', path:'/InputV',choice: false,}, 
+       {id:2, label:'General', path:'/',choice: false}, 
+       {id:3, label:'All Groups', path:'/AllGroups', choice: false},
+       {id:4, label:'Logout', path:'/Auth', choice: false}
+   ]
+  
 
+   
 </script>
 
 <style>
@@ -35,17 +49,22 @@
        
         margin-right:10px;
         padding:5px;
-        border: 1px solid lightgray;
+        /* border: 1px solid lightgray; */
+        border-bottom: 2px solid rgb(83, 155, 155);
       
        
        
        
 
     }
-    .nav-li:hover{
-        /* background:#b8600e; */
-         box-shadow: 0 0 8px 0 rgb(216, 235, 221);
-    }
+    /* .nav-li:hover{
+      
+          border-bottom: 2px solid rgb(227, 241, 241);
+    } */
+     /* .nav-li:active{
+      
+          border-bottom: 2px solid rgb(227, 241, 241);
+    } */
     
     .nav-img{
         width:30px;
@@ -56,6 +75,12 @@
     }
     .nav-router{
         text-decoration: none;
+       
         color: white;
+    }
+    
+    .router-link-exact-active{
+       
+         border-bottom: 2px solid rgb(227, 241, 241);
     }
 </style>

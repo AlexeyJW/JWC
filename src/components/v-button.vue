@@ -17,6 +17,8 @@ import {defineProps} from 'vue'
         border: 1px solid #888;
         width: 60px;
         height: 20px;
+        background:rgb(83, 155, 155);
+        color: white;
         
    }
    .v-button:active{

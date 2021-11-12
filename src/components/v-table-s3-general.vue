@@ -17,8 +17,8 @@
             <tbody class="v-tbody">
                 <tr>
                     <td>1</td>
-                    <td>{{wd.find((el)=>el.weekNumber==1).total??0}}</td>
-                    <td>{{we.find((el)=>el.weekNumber==1).total??0}}</td>
+                    <td>{{sum}}</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>2</td>
@@ -53,7 +53,6 @@
             </tbody>
         </table>
         </div>
-        
     </div>
 </template>
 
@@ -62,9 +61,7 @@
    import {useStore} from 'vuex'
    const props=defineProps({
        title:{type:String},
-       group:{type:String,
-              default:'6'
-              }
+      
       
    })
   
@@ -74,25 +71,10 @@
    const dateNow=new Date()
    const monthNow=dateNow.getMonth()
    const yearNow=dateNow.getFullYear()
-  
+ 
    const store=useStore()
-   
-   const tableData =computed(()=>store.getters.FILTER_GROUP(props.group, ''+yearNow, ''+monthNow))
-   const wd=computed(()=>tableData.value.filter(el=>el.weekday=='weekdays'))
-   const we=computed(()=>tableData.value.filter(el=>el.weekday=='weekend'))
+   const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow, ''+monthNow))
 
-//    const wd1=0
-//    const wd2=0
-//    const wd3=0
-//    const wd4=0 
-//    const wd5=0 
-//    const we1=0
-//    const we2=0 
-//    const we3=0
-//    const we4=0 
-//    const we5=0 
-
-        
 </script>
 
 <style>

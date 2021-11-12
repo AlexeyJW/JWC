@@ -17,6 +17,7 @@
 *{
   text-decoration: none;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   font-size:auto;

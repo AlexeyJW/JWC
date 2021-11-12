@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper-table"
          v-for="i in props.groups" :key="i">
-         <v-table-s3 :title="i"/>  
+         <v-table-s3 :title="i" :group="i"/>  
          
     </div>
 </template>
