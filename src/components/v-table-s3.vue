@@ -17,33 +17,33 @@
             <tbody class="v-tbody">
                 <tr>
                     <td>1</td>
-                    <td>{{wd.find((el)=>el.weekNumber==1).total??0}}</td>
-                    <td>{{we.find((el)=>el.weekNumber==1).total??0}}</td>
+                    <td>{{wd.find((el)=>el.weekNumber==1)?.total}}</td>
+                    <td>{{we.find((el)=>el.weekNumber==1)?.total}}</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td></td>
-                    <td></td>
+                   <td>{{wd.find((el)=>el.weekNumber==2)?.total}}</td>
+                   <td>{{we.find((el)=>el.weekNumber==2)?.total}}</td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{wd.find((el)=>el.weekNumber==3)?.total}}</td>
+                    <td>{{we.find((el)=>el.weekNumber==3)?.total}}</td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{wd.find((el)=>el.weekNumber==4)?.total}}</td>
+                    <td>{{we.find((el)=>el.weekNumber==4)?.total}}</td>
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{wd.find((el)=>el.weekNumber==5)?.total}}</td>
+                    <td>{{we.find((el)=>el.weekNumber==5)?.total}}</td>
                 </tr>
                 <tr>
-                    <td>Total:</td>
-                    <td></td>
-                    <td></td>
+                    <td><strong>Total:</strong></td>
+                    <td><strong>{{wd.reduce((sum, el)=>sum+el.total, 0)}}</strong></td>
+                    <td><strong>{{we.reduce((sum, el)=>sum+el.total, 0)}}</strong></td>
                 </tr>
                 <tr>
                     <td><strong>Average:</strong></td>

@@ -2,15 +2,25 @@
     <div class="v-input">
       
         <select class="field-select" v-model="Group" id="group">
+            <option disabled selected>Choice group</option>
             <option value="1">Group 1</option>
             <option value="2">Group 2</option>
             <option value="3">Group 3</option>
             <option value="4">Group 4</option>
             <option value="5">Group 5</option>
             <option value="6">Group 6</option>
-            <option value="7" selected>Group 7</option>
+            <option value="7">Group 7</option>
         </select>
-        <select  class="field-weekday" name="weekday" v-model="Weekday" placeholder="weekday">
+        <select class="field-week-number" v-model="WeekNumber" name='Week'>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+           
+        </select>
+        <select  class="field-weekday" name="weekday" v-model="Weekday">
+            <option disabled selected>Choice</option>
             <option value="weekdays">weekdays</option>
             <option value="weekend">weekend</option>
         </select>
@@ -30,13 +40,13 @@ const Group=ref('')
 const vDate=ref(null)
 const vTotal=ref(null)
 const Weekday=ref('')
-
+const WeekNumber=ref(null)
 const sendObj=()=>{
        const obj={
             month: (vDate.value.slice(5,7)-1).toString(),
             year: vDate.value.slice(0,4),
             weekday:Weekday.value,
-            weekNumber:1,
+            weekNumber:WeekNumber.value,
             group:Group.value,
             date:vDate.value,
             total:vTotal.value
@@ -52,6 +62,10 @@ const sendObj=()=>{
         /* flex-direction: row; */
         padding: 10px;
         align-items: stretch;
+        border:1px solid lightgray;
+        box-shadow: 0 0 8px 0 darkgray;
+        margin-top:10px;
+        width:600px;
   
     }
     .field-data, .field-select{

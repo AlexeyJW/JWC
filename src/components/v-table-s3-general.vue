@@ -17,33 +17,33 @@
             <tbody class="v-tbody">
                 <tr>
                     <td>1</td>
-                    <td>{{sum}}</td>
-                    <td></td>
+                    <td>{{arrWD.filter(el=>el.weekNumber==1).reduce((sum,{total})=>sum+total, 0)}}</td>
+                    <td>{{arrWE.filter(el=>el.weekNumber==1).reduce((sum,el)=>sum+el.total, 0)}}</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{arrWD.filter(el=>el.weekNumber==2).reduce((sum,{total})=>sum+total, 0)}}</td>
+                    <td>{{arrWE.filter(el=>el.weekNumber==2).reduce((sum,el)=>sum+el.total, 0)}}</td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{arrWD.filter(el=>el.weekNumber==3).reduce((sum,{total})=>sum+total, 0)}}</td>
+                    <td>{{arrWE.filter(el=>el.weekNumber==3).reduce((sum,el)=>sum+el.total, 0)}}</td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{arrWD.filter(el=>el.weekNumber==4).reduce((sum,{total})=>sum+total, 0)}}</td>
+                    <td>{{arrWE.filter(el=>el.weekNumber==4).reduce((sum,el)=>sum+el.total, 0)}}</td>
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{arrWD.filter(el=>el.weekNumber==5).reduce((sum,{total})=>sum+total, 0)}}</td>
+                    <td>{{arrWE.filter(el=>el.weekNumber==5).reduce((sum,el)=>sum+el.total, 0)}}</td>
                 </tr>
                 <tr>
-                    <td>Total:</td>
-                    <td></td>
-                    <td></td>
+                    <td><strong>Total:</strong></td>
+                    <td><strong>{{arrWD.reduce((sum,{total})=>sum+total, 0)}}</strong></td>
+                    <td><strong>{{arrWE.reduce((sum,{total})=>sum+total, 0)}}</strong></td>
                 </tr>
                 <tr>
                     <td><strong>Average:</strong></td>
@@ -74,7 +74,9 @@
  
    const store=useStore()
    const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow, ''+monthNow))
-
+   const arrWD=computed(()=>store.getters.GET_S3(''+yearNow, ''+monthNow).filter(el=>el.weekday=='weekdays'))
+   const arrWE=computed(()=>store.getters.GET_S3(''+yearNow, ''+monthNow).filter(el=>el.weekday=='weekend'))
+   
 </script>
 
 <style>
