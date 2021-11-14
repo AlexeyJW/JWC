@@ -1,8 +1,12 @@
 <template>
     <div class="block-table">
-        <div>
+        <div class="v-button-block">
             <h3><strong>General Meeting Report (S-3) {{props.title}}</strong></h3>
+            <v-button class="v-button-item" textButton="Send"/>
+           
         </div>
+       
+        
         <div>
         <table class="v-table">
             <thead class="v-thead">
@@ -59,6 +63,7 @@
 <script setup>
    import {defineProps, computed, ref} from 'vue'
    import {useStore} from 'vuex'
+   import vButton from './v-button.vue'
    const props=defineProps({
        title:{type:String},
       
@@ -90,6 +95,18 @@
         padding: 10px;
         /* flex-basis:500px; */
         width:600px;
+   }
+   .v-button-block{
+       display:flex;
+       flex-direction:row;
+       align-items: center;
+       justify-content: center;
+  
+      
+       
+   }
+   .v-button-item{
+       margin-left: 20px;
    }
    .v-table{
        border-collapse: collapse;
