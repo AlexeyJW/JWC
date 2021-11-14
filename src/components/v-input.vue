@@ -1,5 +1,13 @@
 <template>
+    <div class="v-input-lable">
+        <h4>Group:</h4>
+        <h4>Week:</h4>
+        <h4>Weekdays/Weekend</h4>
+        <h4>Date:</h4>
+        <h4>Total:</h4>
+     </div>
     <div class="v-input">
+        
       
         <select class="field-select" v-model="Group" id="group">
             <option disabled selected>Choice group</option>
@@ -42,6 +50,7 @@ const vTotal=ref(null)
 const Weekday=ref('')
 const WeekNumber=ref(null)
 const sendObj=()=>{
+
        const obj={
             month: (vDate.value.slice(5,7)-1).toString(),
             year: vDate.value.slice(0,4),
@@ -57,6 +66,7 @@ const sendObj=()=>{
 </script>
    
 <style>
+    
     .v-input{
         display: flex;
         /* flex-direction: row; */
@@ -78,7 +88,14 @@ const sendObj=()=>{
     .field-weekday{
         width:100px;
     }
-    
+    .v-input-lable{
+        display:flex;
+        flex-direction:row;
+        justify-content:center;
+        color:gray;
+        font-size:thin;
+        
+    }
   
    
 </style>

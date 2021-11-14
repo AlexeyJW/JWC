@@ -47,8 +47,8 @@
                 </tr>
                 <tr>
                     <td><strong>Average:</strong></td>
-                    <td></td>
-                    <td></td>
+                    <td><strong>{{averageWD}}</strong></td>
+                    <td><strong>{{averageWE}}</strong></td>
                 </tr>
             </tbody>
         </table>
@@ -68,8 +68,6 @@
       
    })
   
-//    const groups=computed(()=>store.getters.TOTAL_GROUPS)
-   
    //date now
    const dateNow=new Date()
    const monthNow=dateNow.getMonth()
@@ -80,19 +78,23 @@
    const tableData =computed(()=>store.getters.FILTER_GROUP(props.group, ''+yearNow, ''+monthNow))
    const wd=computed(()=>tableData.value.filter(el=>el.weekday=='weekdays'))
    const we=computed(()=>tableData.value.filter(el=>el.weekday=='weekend'))
+   const averageWD=computed(()=>{
+       let max=0
+       wd.value.forEach(el=>{
+           if(el.weekNumber>max) max=el.weekNumber
+       })
 
-//    const wd1=0
-//    const wd2=0
-//    const wd3=0
-//    const wd4=0 
-//    const wd5=0 
-//    const we1=0
-//    const we2=0 
-//    const we3=0
-//    const we4=0 
-//    const we5=0 
+       return max!=0? (wd.value.reduce((sum, el)=>sum+el.total, 0)/max).toFixed(2): 0
+   })
+  const averageWE=computed(()=>{
+       let max=0
+       we.value.forEach(el=>{
+           if(el.weekNumber>max) max=el.weekNumber
+       })
 
-        
+       return max!=0? (we.value.reduce((sum, el)=>sum+el.total, 0)/max).toFixed(2): 0
+   })
+       
 </script>
 
 <style>
