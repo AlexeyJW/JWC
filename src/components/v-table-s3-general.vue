@@ -21,28 +21,28 @@
             <tbody class="v-tbody">
                 <tr>
                     <td>1</td>
-                    <td>{{arrWD.filter(el=>el.weekNumber==1).reduce((sum,{total})=>sum+total, 0)}}</td>
-                    <td>{{arrWE.filter(el=>el.weekNumber==1).reduce((sum,el)=>sum+el.total, 0)}}</td>
+                    <td :class="{active:isAllReportsWD(1)}">{{arrWD.filter(el=>el.weekNumber==1).reduce((sum,{total})=>sum+total, 0)}}</td>
+                    <td :class="{active:isAllReportsWE(1)}">{{arrWE.filter(el=>el.weekNumber==1).reduce((sum,el)=>sum+el.total, 0)}}</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>{{arrWD.filter(el=>el.weekNumber==2).reduce((sum,{total})=>sum+total, 0)}}</td>
-                    <td>{{arrWE.filter(el=>el.weekNumber==2).reduce((sum,el)=>sum+el.total, 0)}}</td>
+                    <td :class="{active:isAllReportsWD(2)}">{{arrWD.filter(el=>el.weekNumber==2).reduce((sum,{total})=>sum+total, 0)}}</td>
+                    <td :class="{active:isAllReportsWE(2)}">{{arrWE.filter(el=>el.weekNumber==2).reduce((sum,el)=>sum+el.total, 0)}}</td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>{{arrWD.filter(el=>el.weekNumber==3).reduce((sum,{total})=>sum+total, 0)}}</td>
-                    <td>{{arrWE.filter(el=>el.weekNumber==3).reduce((sum,el)=>sum+el.total, 0)}}</td>
+                    <td :class="{active:isAllReportsWD(3)}">{{arrWD.filter(el=>el.weekNumber==3).reduce((sum,{total})=>sum+total, 0)}}</td>
+                    <td :class="{active:isAllReportsWE(3)}">{{arrWE.filter(el=>el.weekNumber==3).reduce((sum,el)=>sum+el.total, 0)}}</td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td>{{arrWD.filter(el=>el.weekNumber==4).reduce((sum,{total})=>sum+total, 0)}}</td>
-                    <td>{{arrWE.filter(el=>el.weekNumber==4).reduce((sum,el)=>sum+el.total, 0)}}</td>
+                    <td :class="{active:isAllReportsWD(4)}">{{arrWD.filter(el=>el.weekNumber==4).reduce((sum,{total})=>sum+total, 0)}}</td>
+                    <td :class="{active:isAllReportsWE(4)}">{{arrWE.filter(el=>el.weekNumber==4).reduce((sum,el)=>sum+el.total, 0)}}</td>
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td>{{arrWD.filter(el=>el.weekNumber==5).reduce((sum,{total})=>sum+total, 0)}}</td>
-                    <td>{{arrWE.filter(el=>el.weekNumber==5).reduce((sum,el)=>sum+el.total, 0)}}</td>
+                    <td :class="{active:isAllReportsWD(5)}">{{arrWD.filter(el=>el.weekNumber==5).reduce((sum,{total})=>sum+total, 0)}}</td>
+                    <td :class="{active:isAllReportsWE(5)}">{{arrWE.filter(el=>el.weekNumber==5).reduce((sum,el)=>sum+el.total, 0)}}</td>
                 </tr>
                 <tr>
                     <td><strong>Total:</strong></td>
@@ -81,6 +81,26 @@
    const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow, ''+monthNow))
    const arrWD=computed(()=>store.getters.GET_S3(''+yearNow, ''+monthNow).filter(el=>el.weekday=='weekdays'))
    const arrWE=computed(()=>store.getters.GET_S3(''+yearNow, ''+monthNow).filter(el=>el.weekday=='weekend'))
+   const allReports=ref(false)
+   const isAllReportsWD=(week)=>{
+       let all=0
+       arrWD.value.forEach(el=>{
+           if (el.weekNumber==week) all++
+       })
+       console.log("all="+all)
+       if (all!=7) return true
+       return false
+   }
+
+    const isAllReportsWE=(week)=>{
+       let all=0
+       arrWE.value.forEach(el=>{
+           if (el.weekNumber==week) all++
+       })
+       console.log("all="+all)
+       if (all!=7) return true
+       return false
+   }
    
 </script>
 
@@ -149,5 +169,12 @@
        top:-5000px;
        width: 100%;
        z-index: -1;
+   }
+   .v-td{
+       color:black;
+   }
+   .active{
+       color:rgb(83, 155, 155);
+        
    }
 </style>
