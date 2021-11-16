@@ -1,24 +1,31 @@
 <template>
-    <div class="v-button"
+    <div class="v-button" :style="{background:props.colorButton}"
          >
-        {{textButton}}
+        {{props.textButton}}
     </div>
 </template>
 
 <script setup>
 import {defineProps} from 'vue'
-    defineProps({
-        textButton: String
+    const props=defineProps({
+        textButton: {type:String},
+        colorButton:{type:String,
+               default:'rgb(83, 155, 155)'}
     })
+    const styleObject={
+        background:props.colorButton
+    }
 </script>
 
 <style>
    .v-button{
+
         border: 1px solid #888;
         width: 60px;
-        height: 20px;
-        background:rgb(83, 155, 155);
+        height: 25px;
+        /* background:rgb(83, 155, 155); */
         color: white;
+        vertical-align:middle;
         
    }
    .v-button:active{

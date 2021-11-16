@@ -35,20 +35,32 @@
         <input class="field-data" type="date" v-model="vDate"/>
         <input class="field-input" type="number" placeholder="total" v-model="vTotal"/>
         <v-button class="field-button" textButton="Send" @click="sendObj"/>
+     
     </div>
+    <span class="v-span" v-if="isConfirm"><v-confirm>Record already exists, Want to replace?</v-confirm></span>
 </template>
    
 <script setup>
 import VButton from './v-button.vue'
-import {ref} from 'vue'
+import vConfirm from './v-confirm.vue'
+import {ref, computed} from 'vue'
 import {useStore} from 'vuex'
 const store=useStore()
+//----------Date Now----------------------
+const dateNow=new Date()
+const yearNow=dateNow.getFullYear()
+const monthNow=dateNow.getMonth()
+//----------------------------------------
 
+const isConfirm=ref(false)
 const Group=ref('')
 const vDate=ref(null)
 const vTotal=ref(null)
 const Weekday=ref('')
 const WeekNumber=ref(null)
+const bd=computed(()=>store.getters.GET_S3(''+yearNow, ''+monthNow))
+const isRecord=(obj)=>bd.value.find(el=>el.group==obj.group&& el.weekNumber==obj.weekNumber)
+
 const sendObj=()=>{
 
        const obj={
@@ -60,9 +72,11 @@ const sendObj=()=>{
             date:vDate.value,
             total:vTotal.value
         }
-  
-    store.commit('ADD_S3', obj)
-}
+    if (typeof isRecord(obj)!='object') store.commit('ADD_S3', obj)
+
+    else isConfirm.value=true
+    
+}  
 </script>
    
 <style>
@@ -96,6 +110,11 @@ const sendObj=()=>{
         font-size:thin;
         
     }
-  
+    .v-span{
+         position:absolute;
+         top:150px; 
+         left:auto;
+         z-index:999999;
+    }
    
 </style>
