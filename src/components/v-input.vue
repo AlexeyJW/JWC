@@ -1,11 +1,6 @@
 <template>
-    <div class="v-input-lable">
-        <h4>Group:</h4>
-        <h4>Week:</h4>
-        <h4>Weekdays/Weekend</h4>
-        <h4>Date:</h4>
-        <h4>Total:</h4>
-     </div>
+   
+    
     <div class="v-input">
         
       
@@ -38,6 +33,7 @@
      
     </div>
     <span class="v-span" v-if="isConfirm"><v-confirm>Record already exists, Want to replace?</v-confirm></span>
+     <div  :class="{activeoverflow: isConfirm}"></div>
 </template>
    
 <script setup>
@@ -116,5 +112,13 @@ const sendObj=()=>{
          left:auto;
          z-index:999999;
     }
-   
+   .activeoverflow{
+     position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.2);
+  z-index: 2;
+   }
 </style>
