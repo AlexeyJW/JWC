@@ -99,9 +99,11 @@ const sendObj=()=>{
 <style>
    #left{
        border-left:1px solid rgb(83, 155, 155);
+       padding-left:10px;
    }
    #right{
        border-right:1px solid rgb(83, 155, 155);
+       padding-right: 10px;
    }
     .v-input{
         display: flex;
