@@ -8,6 +8,7 @@
        
         
         <div>
+       
         <table class="v-table">
             <thead class="v-thead">
                 <tr>
@@ -77,6 +78,7 @@
    const monthNow=dateNow.getMonth()
    const yearNow=dateNow.getFullYear()
  
+  
    const store=useStore()
    const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow, ''+monthNow))
    const arrWD=computed(()=>store.getters.GET_S3(''+yearNow, ''+monthNow).filter(el=>el.weekday=='weekdays'))

@@ -26,3 +26,7 @@ export const FILTER_ALL_GROUPS=(state, getters)=>(year, month)=>{
        return sum 
 
 }
+export const All_REPORTS =(state, getters)=>(year, month)=>{
+       let arr=getters.GET_S3(year, month)
+       
+}
