@@ -1,36 +1,57 @@
 <template>
-   
-    
     <div class="v-input">
+       
+        <div class="v-input-content">
         
-      
-        <select class="field-select" v-model="Group" id="group">
-            <option disabled selected>Choice group</option>
-            <option value="1">Group 1</option>
-            <option value="2">Group 2</option>
-            <option value="3">Group 3</option>
-            <option value="4">Group 4</option>
-            <option value="5">Group 5</option>
-            <option value="6">Group 6</option>
-            <option value="7">Group 7</option>
-        </select>
-        <select class="field-week-number" v-model="WeekNumber" name='Week'>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-           
-        </select>
-        <select  class="field-weekday" name="weekday" v-model="Weekday">
-            <option disabled selected>Choice</option>
-            <option value="weekdays">weekdays</option>
-            <option value="weekend">weekend</option>
-        </select>
-        <input class="field-data" type="date" v-model="vDate"/>
-        <input class="field-input" type="number" placeholder="total" v-model="vTotal"/>
-        <v-button class="field-button" textButton="Send" @click="sendObj"/>
+        <div class="v-input-group" id="left">
+            <h5 class="v-input-label">Group:</h5>
+            <select class="field-select" v-model="Group" id="group">
+                <option disabled selected>Choice group</option>
+                <option value="1">Group 1</option>
+                <option value="2">Group 2</option>
+                <option value="3">Group 3</option>
+                <option value="4">Group 4</option>
+                <option value="5">Group 5</option>
+                <option value="6">Group 6</option>
+                <option value="7">Group 7</option>
+            </select>
+        </div>
+        <div class="v-input-group">
+            <h5 class="v-input-label">Week:</h5>
+            <select class="field-week-number" v-model="WeekNumber" name='Week' id="week">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            
+            </select>
+        </div>
+        <div class="v-input-group">
+            <h5 class="v-input-label">WD/WE:</h5>
+            <select  class="field-weekday" name="weekday" v-model="Weekday" id="w">
+                <option disabled selected>Choice</option>
+                <option value="weekdays">weekdays</option>
+                <option value="weekend">weekend</option>
+            </select>
+        </div>
+        
+        
+        <div class="v-input-group">
+            <h5 class="v-input-label">Date:</h5>
+            <input class="field-data" type="date" v-model="vDate"/>
+        </div>
+        <div class="v-input-group">
+            <h5 class="v-input-label">Total:</h5>
+            <input class="field-input" type="number" placeholder="total" v-model="vTotal" id="total"/>
+        </div>
+        <div class="v-input-group" id="right">
+            <h5 class="v-input-label">Send Report:</h5>
+            <v-button class="field-button" textButton="Send" @click="sendObj"/>
+        </div>
+        
      
+     </div>
     </div>
     <span class="v-span" v-if="isConfirm"><v-confirm>Record already exists, Want to replace?</v-confirm></span>
      <div  :class="{activeoverflow: isConfirm}"></div>
@@ -76,20 +97,53 @@ const sendObj=()=>{
 </script>
    
 <style>
-    
+   #left{
+       border-left:1px solid rgb(83, 155, 155);
+   }
+   #right{
+       border-right:1px solid rgb(83, 155, 155);
+   }
     .v-input{
         display: flex;
-        /* flex-direction: row; */
-        padding: 10px;
+        flex-direction: row;
         align-items: stretch;
+        padding: 10px;
+        flex-direction:column;
         border:1px solid lightgray;
         box-shadow: 0 0 8px 0 darkgray;
         margin-top:10px;
         width:600px;
   
     }
+     .v-input-label{
+        align-self:flex-start;
+        margin:2px;
+        font-size:10px;
+        font-weight: lighter;
+        color:grey;
+       
+    }
+    .v-input-group{
+        display: flex;
+        flex-direction: column;
+        justify-content:flex-end;
+        align-items:flex-end;
+        border-top:1px solid rgb(83, 155, 155);
+        border-bottom:1px solid rgb(83, 155, 155);
+        /* margin-left:2px; */
+        padding:3px;
+        /* background:rgb(231, 230, 230); */
+    }
+   
+    .v-input-content{
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: center;
+    }
     .field-data, .field-select{
         margin-right:5px;
+        top:-30;
     }
     .field-input{
         width:60px;
@@ -98,14 +152,7 @@ const sendObj=()=>{
     .field-weekday{
         width:100px;
     }
-    .v-input-lable{
-        display:flex;
-        flex-direction:row;
-        justify-content:center;
-        color:gray;
-        font-size:thin;
-        
-    }
+   
     .v-span{
          position:absolute;
          top:150px; 
@@ -113,12 +160,12 @@ const sendObj=()=>{
          z-index:999999;
     }
    .activeoverflow{
-     position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,.2);
-  z-index: 2;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,.2);
+        z-index: 2;
    }
 </style>
