@@ -4,8 +4,15 @@
        <table class="v-table-s88">
            <thead>
                <tr>
-                   <th>Year 202</th>
+                   <th rowspan="2">Year 2022</th>
+                   <th colspan="3">Weekdays</th>
+                   <th colspan="3">Weekend</th>
+                </tr>
+                <tr>
                    <th>Total meetings</th>
+                   <th>Total attendees</th>
+                   <th>Average in week</th>
+                    <th>Total meetings</th>
                    <th>Total attendees</th>
                    <th>Average in week</th>
                </tr>
@@ -13,42 +20,63 @@
            <tbody>
                <tr>
                    <td>September</td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                   <td>{{s88?.find(el=>el.month=='8')?.totalMeetingsWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='8')?.totalWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='8')?.averageWD.toFixed(2)}}</td>
+                   <td>{{s88?.find(el=>el.month=='8')?.totalMeetingsWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='8')?.totalWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='8')?.averageWE.toFixed(2)}}</td>
                </tr>
                <tr>
                    <td>October</td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                    <td>{{s88?.find(el=>el.month=='9')?.totalMeetingsWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='9')?.totalWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='9')?.averageWD.toFixed(2)}}</td>
+                   <td>{{s88?.find(el=>el.month=='9')?.totalMeetingsWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='9')?.totalWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='9')?.averageWE.toFixed(2)}}</td>
                </tr>
                <tr>
                    <td>November</td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                    <td>{{s88?.find(el=>el.month=='10')?.totalMeetingsWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='10')?.totalWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='10')?.averageWD.toFixed(2)}}</td>
+                   <td>{{s88?.find(el=>el.month=='10')?.totalMeetingsWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='10')?.totalWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='10')?.averageWE.toFixed(2)}}</td>
                </tr>
                <tr>
                    <td>December</td>
                    <td></td>
                    <td></td>
                    <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
                </tr>
                <tr>
                    <td>Junuary</td>
+                  <td></td>
+                   <td></td>
+                   <td></td>
                    <td></td>
                    <td></td>
                    <td></td>
                </tr>
                <tr>
                    <td>February</td>
+                  <td></td>
+                   <td></td>
+                   <td></td>
                    <td></td>
                    <td></td>
                    <td></td>
                </tr>
                <tr>
                    <td>Mach</td>
+                  <td></td>
+                   <td></td>
+                   <td></td>
                    <td></td>
                    <td></td>
                    <td></td>
@@ -58,9 +86,15 @@
                    <td></td>
                    <td></td>
                    <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
                </tr>
                <tr>
                    <td>May</td>
+                  <td></td>
+                   <td></td>
+                   <td></td>
                    <td></td>
                    <td></td>
                    <td></td>
@@ -70,9 +104,15 @@
                    <td></td>
                    <td></td>
                    <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
                </tr>
                <tr>
                    <td>July</td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
                    <td></td>
                    <td></td>
                    <td></td>
@@ -82,9 +122,14 @@
                    <td></td>
                    <td></td>
                    <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
                </tr>
                <tr>
                    <td colspan="3"><strong>Average:</strong></td>
+                   <td></td>
+                   <td colspan="2"><strong>Average:</strong></td>
                    <td></td>
                </tr>
            </tbody>
@@ -92,6 +137,13 @@
    </div>
 </template>
 <script setup>
+   import {useStore} from 'vuex'
+   import {ref, computed} from 'vue'
+
+   const store=useStore()
+   store.dispatch('GET_S88')
+   const s88=computed(()=>store.getters.YEAR_SERVICE('2022'))
+   console.log(s88.value)
 </script>
 <style>
    .v-block-table-s88{

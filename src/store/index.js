@@ -8,7 +8,8 @@ const state={
     paginator:[],
     groups:7,
     groupsData:[1,2,3,4,5,6,7],
-    s3:[]
+    s3:[],
+    s88:[]
     
 }
 

@@ -6,14 +6,19 @@
          </div>
        
         <div class="v-confirm-button">
-            <v-button class="v-confirm-ok" textButton="OK" colorButton="red"/>
-            <v-button class="v-confirm-cancel" textButton="Cancel"/>
+            <v-button class="v-confirm-ok" textButton="OK" colorButton="red" @click="pOK"/>
+            <v-button class="v-confirm-cancel" textButton="Cancel" @click="pCancel"/>
         </div>
     </div>
     
 </template>
 <script setup>
+  import {defineEmits} from 'vue'
   import vButton from './v-button.vue'
+
+  const emits=defineEmits(['pressedOK', 'pressedCancel'])
+  const pOK=()=>emits('pressedOK')
+  const pCancel=()=>emits("pressedCancel")
 </script>
 <style>
    .v-confirm{

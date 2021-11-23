@@ -1,0 +1,33 @@
+[
+    {
+        "yearService":"2022",
+        "month":"8",
+        "totalMeetingsWD":4,
+        "totalWD":190,
+        "averageWD":47.50,
+        "totalMeetingsWE":4,
+        "totalWE":205,
+        "averageWE":51.25
+    },
+    {
+        "yearService":"2022",
+        "month":"9",
+        "totalMeetingsWD":4,
+        "totalWD":199,
+        "averageWD":49.75,
+        "totalMeetingsWE":4,
+        "totalWE":200,
+        "averageWE":50.00
+    },
+    {
+        "yearService":"2022",
+        "month":"10",
+        "totalMeetingsWD":4,
+        "totalWD":215,
+        "averageWD":53.75,
+        "totalMeetingsWE":4,
+        "totalWE":200,
+        "averageWE":50.00
+    }
+   
+]
