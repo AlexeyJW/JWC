@@ -20,6 +20,9 @@ export default{
     ADD_S3 (state, o){
         state.s3.push(o)
     },
+    SET_S3 (state, arr){
+        state.s3=[...arr]
+    },
     SET_S88 (state, arr){
         arr.forEach(el=>state.s88.push(el))
         

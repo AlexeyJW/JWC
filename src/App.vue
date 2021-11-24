@@ -1,5 +1,14 @@
 <script setup>
     import VNavBar from './components/v-nav-bar.vue'
+    import {onMounted} from 'vue'
+    import {useStore} from 'vuex'
+
+    const store=useStore()
+
+    onMounted(()=>{
+      store.dispatch('GET_S3')
+      store.dispatch('GET_S88')
+    })
 </script>
 
 <template>
@@ -19,7 +28,8 @@
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
+  font-family: 'Microsoft YaHei UI Light', sans-serif;
   font-size:auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

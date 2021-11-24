@@ -6,3 +6,7 @@ export const GET_S88=({commit})=>{
         commit('SET_S88',res.data)
     })
 }
+export const GET_S3 =({commit})=>{
+    axios.get('../src/assets/s3.json')
+    .then(res=>commit('SET_S3', res.data))
+}

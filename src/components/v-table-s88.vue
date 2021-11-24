@@ -141,9 +141,9 @@
    import {ref, computed} from 'vue'
 
    const store=useStore()
-   store.dispatch('GET_S88')
+//    store.dispatch('GET_S88')
    const s88=computed(()=>store.getters.YEAR_SERVICE('2022'))
-   console.log(s88.value)
+//    console.log(s88.value)
 </script>
 <style>
    .v-block-table-s88{
