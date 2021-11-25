@@ -18,16 +18,7 @@
         "totalMeetingsWE":4,
         "totalWE":200,
         "averageWE":50.00
-    },
-    {
-        "yearService":"2022",
-        "month":"10",
-        "totalMeetingsWD":4,
-        "totalWD":215,
-        "averageWD":53.75,
-        "totalMeetingsWE":4,
-        "totalWE":200,
-        "averageWE":50.00
     }
+   
    
 ]

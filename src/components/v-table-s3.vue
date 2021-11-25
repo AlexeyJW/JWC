@@ -78,21 +78,31 @@
    const tableData =computed(()=>store.getters.FILTER_GROUP(props.group, ''+yearNow, ''+monthNow))
    const wd=computed(()=>tableData.value.filter(el=>el.weekday=='weekdays'))
    const we=computed(()=>tableData.value.filter(el=>el.weekday=='weekend'))
+
    const averageWD=computed(()=>{
        let max=0
        wd.value.forEach(el=>{
            if(el.weekNumber>max) max=el.weekNumber
        })
-
-       return max!=0? (wd.value.reduce((sum, el)=>sum+el.total, 0)/max).toFixed(2): 0
-   })
+       if (max!=0) {
+           let num=(wd.value.reduce((sum, el)=>sum+el.total, 0)/max).toFixed(2)
+      
+           return  num
+       }
+       else return 0
+  }) 
   const averageWE=computed(()=>{
        let max=0
        we.value.forEach(el=>{
            if(el.weekNumber>max) max=el.weekNumber
        })
 
-       return max!=0? (we.value.reduce((sum, el)=>sum+el.total, 0)/max).toFixed(2): 0
+        if (max!=0) {
+           let num=(we.value.reduce((sum, el)=>sum+el.total, 0)/max).toFixed(2)
+       
+           return  num
+       }
+       else return 0
    })
        
 </script>

@@ -40,3 +40,5 @@ export const YEAR_SERVICE=(state)=>(yearService)=> {
 export const SET_S88=(state, getters)=>(yearService)=>{
        
 }
+export const GET_AVERAGE_S3_WD=(state)=>state.averageS3WD
+export const GET_AVERAGE_S3_WE=(state)=>state.averageS3WE

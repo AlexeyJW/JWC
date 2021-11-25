@@ -40,19 +40,19 @@
                    <td>November</td>
                     <td>{{s88?.find(el=>el.month=='10')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='10')?.totalWD}}</td>
-                   <td>{{s88?.find(el=>el.month=='10')?.averageWD.toFixed(2)}}</td>
+                   <td>{{s88?.find(el=>el.month=='10')?.averageWD}}</td>
                    <td>{{s88?.find(el=>el.month=='10')?.totalMeetingsWE}}</td>
                    <td>{{s88?.find(el=>el.month=='10')?.totalWE}}</td>
-                   <td>{{s88?.find(el=>el.month=='10')?.averageWE.toFixed(2)}}</td>
+                   <td>{{s88?.find(el=>el.month=='10')?.averageWE}}</td>
                </tr>
                <tr>
                    <td>December</td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                  <td>{{s88?.find(el=>el.month=='11')?.totalMeetingsWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='11')?.totalWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='11')?.averageWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='11')?.totalMeetingsWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='11')?.totalWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='11')?.averageWE}}</td>
                </tr>
                <tr>
                    <td>Junuary</td>
@@ -141,9 +141,9 @@
    import {ref, computed} from 'vue'
 
    const store=useStore()
-//    store.dispatch('GET_S88')
+
    const s88=computed(()=>store.getters.YEAR_SERVICE('2022'))
-//    console.log(s88.value)
+
 </script>
 <style>
    .v-block-table-s88{

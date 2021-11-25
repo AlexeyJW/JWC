@@ -25,8 +25,23 @@ export default{
     },
     SET_S88 (state, arr){
         arr.forEach(el=>state.s88.push(el))
-        
-
+    },
+    SET_S88_EL(state, el){
+        state.s88.push(el)
+    },
+    SET_AVERAGE_S3_WD (state, o){
+        console.log(o)
+        state.averageS3WD.push(o)
+    },
+    SET_AVERAGE_S3_WE (state,o){
+        console.log(o)
+        state.averageS3WE.push(o)
+    },
+    SET_IS_BUTTON_SEND_S3_FALSE(state){
+        state.isButtonSendS3=false
+    },
+    SET_IS_BUTTON_SEND_S3_TRUE(state){
+        state.isButtonSendS3=true
     }
     
 }

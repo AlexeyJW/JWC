@@ -2,7 +2,7 @@
     <div class="block-table">
         <div class="v-button-block">
             <h3><strong>General Meeting Report (S-3) {{props.title}}</strong></h3>
-            <v-button class="v-button-item" textButton="Send"/>
+            <v-button class="v-button-item" textButton="Send" @click="sendReport" v-show="store.state.isButtonSendS3"/>
            
         </div>
        
@@ -22,38 +22,38 @@
             <tbody class="v-tbody">
                 <tr>
                     <td>1</td>
-                    <td :class="{active:isAllReportsWD(1)}">{{arrWD.filter(el=>el.weekNumber==1).reduce((sum,{total})=>sum+total, 0)}}</td>
-                    <td :class="{active:isAllReportsWE(1)}">{{arrWE.filter(el=>el.weekNumber==1).reduce((sum,el)=>sum+el.total, 0)}}</td>
+                    <td :class="{active:isAllReportsWD(1)}">{{wd1}}</td>
+                    <td :class="{active:isAllReportsWE(1)}">{{we1}}</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td :class="{active:isAllReportsWD(2)}">{{arrWD.filter(el=>el.weekNumber==2).reduce((sum,{total})=>sum+total, 0)}}</td>
-                    <td :class="{active:isAllReportsWE(2)}">{{arrWE.filter(el=>el.weekNumber==2).reduce((sum,el)=>sum+el.total, 0)}}</td>
+                    <td :class="{active:isAllReportsWD(2)}">{{wd2}}</td>
+                    <td :class="{active:isAllReportsWE(2)}">{{we2}}</td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td :class="{active:isAllReportsWD(3)}">{{arrWD.filter(el=>el.weekNumber==3).reduce((sum,{total})=>sum+total, 0)}}</td>
-                    <td :class="{active:isAllReportsWE(3)}">{{arrWE.filter(el=>el.weekNumber==3).reduce((sum,el)=>sum+el.total, 0)}}</td>
+                    <td :class="{active:isAllReportsWD(3)}">{{wd3}}</td>
+                    <td :class="{active:isAllReportsWE(3)}">{{we3}}</td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td :class="{active:isAllReportsWD(4)}">{{arrWD.filter(el=>el.weekNumber==4).reduce((sum,{total})=>sum+total, 0)}}</td>
-                    <td :class="{active:isAllReportsWE(4)}">{{arrWE.filter(el=>el.weekNumber==4).reduce((sum,el)=>sum+el.total, 0)}}</td>
+                    <td :class="{active:isAllReportsWD(4)}">{{wd4}}</td>
+                    <td :class="{active:isAllReportsWE(4)}">{{we4}}</td>
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td :class="{active:isAllReportsWD(5)}">{{arrWD.filter(el=>el.weekNumber==5).reduce((sum,{total})=>sum+total, 0)}}</td>
-                    <td :class="{active:isAllReportsWE(5)}">{{arrWE.filter(el=>el.weekNumber==5).reduce((sum,el)=>sum+el.total, 0)}}</td>
+                    <td :class="{active:isAllReportsWD(5)}">{{wd5}}</td>
+                    <td :class="{active:isAllReportsWE(5)}">{{we5}}</td>
                 </tr>
                 <tr>
                     <td><strong>Total:</strong></td>
-                    <td><strong>{{arrWD.reduce((sum,{total})=>sum+total, 0)}}</strong></td>
-                    <td><strong>{{arrWE.reduce((sum,{total})=>sum+total, 0)}}</strong></td>
+                    <td><strong>{{totalWD}}</strong></td>
+                    <td><strong>{{totalWE}}</strong></td>
                 </tr>
                 <tr>
                     <td><strong>Average:</strong></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{avWD}}</td>
+                    <td>{{avWE}}</td>
                 </tr>
             </tbody>
         </table>
@@ -71,13 +71,12 @@
       
    })
   
-//    const groups=computed(()=>store.getters.TOTAL_GROUPS)
    
    //date now
    const dateNow=new Date()
    const monthNow=dateNow.getMonth()
    const yearNow=dateNow.getFullYear()
- 
+   const isButton=ref(true)
   
    const store=useStore()
    const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow, ''+monthNow))
@@ -89,7 +88,7 @@
        arrWD.value.forEach(el=>{
            if (el.weekNumber==week) all++
        })
-       console.log("all="+all)
+      
        if (all!=7) return true
        return false
    }
@@ -99,11 +98,57 @@
        arrWE.value.forEach(el=>{
            if (el.weekNumber==week) all++
        })
-       console.log("all="+all)
+      
        if (all!=7) return true
        return false
    }
-   
+
+//general data for table
+const wd1=computed(()=>arrWD.value.filter(el=>el.weekNumber==1).reduce((sum,{total})=>sum+total, 0))
+const wd2=computed(()=>arrWD.value.filter(el=>el.weekNumber==2).reduce((sum,{total})=>sum+total, 0))
+const wd3=computed(()=>arrWD.value.filter(el=>el.weekNumber==3).reduce((sum,{total})=>sum+total, 0))
+const wd4=computed(()=>arrWD.value.filter(el=>el.weekNumber==4).reduce((sum,{total})=>sum+total, 0))
+const wd5=computed(()=>arrWD.value.filter(el=>el.weekNumber==5).reduce((sum,{total})=>sum+total, 0))
+
+const we1=computed(()=>arrWE.value.filter(el=>el.weekNumber==1).reduce((sum,{total})=>sum+total, 0))
+const we2=computed(()=>arrWE.value.filter(el=>el.weekNumber==2).reduce((sum,{total})=>sum+total, 0))
+const we3=computed(()=>arrWE.value.filter(el=>el.weekNumber==3).reduce((sum,{total})=>sum+total, 0))
+const we4=computed(()=>arrWE.value.filter(el=>el.weekNumber==4).reduce((sum,{total})=>sum+total, 0))
+const we5=computed(()=>arrWE.value.filter(el=>el.weekNumber==5).reduce((sum,{total})=>sum+total, 0))
+
+const totalWD=computed(()=>arrWD.value.reduce((sum,{total})=>sum+total, 0))
+const totalWE=computed(()=>arrWE.value.reduce((sum,{total})=>sum+total, 0))
+
+const kvoWD=ref(0)
+const kvoWE=ref(0)
+
+const avWD=computed(()=>{
+  let arr=[wd1.value,wd2.value,wd3.value,wd4.value,wd5.value].filter(el=>el!=0)
+  kvoWD.value=arr.length
+  return kvoWD.value!=0? (totalWD.value/kvoWD.value).toFixed(2):0
+})
+const avWE=computed(()=>{
+  let arr=[we1.value,we2.value,we3.value,we4.value,we5.value].filter(el=>el!=0)
+  kvoWE.value=arr.length
+  return kvoWE.value!=0? (totalWE.value/kvoWE.value).toFixed(2):0
+})
+
+
+
+const sendReport=()=>{
+   let obj={
+        averageWD:avWD.value,
+        averageWE:avWE.value,
+        month:''+monthNow,
+        totalMeetingsWD:kvoWD.value,
+        totalMeetingsWE:kvoWE.value,
+        totalWD:totalWD.value,
+        totalWE:totalWE.value,
+        yearService:'2022'
+    }
+    store.commit('SET_S88_EL', obj)
+    store.commit('SET_IS_BUTTON_SEND_S3_FALSE')
+}
 </script>
 
 <style>

@@ -9,7 +9,10 @@ const state={
     groups:7,
     groupsData:[1,2,3,4,5,6,7],
     s3:[],
-    s88:[]
+    s88:[],
+    averageS3WD:[],
+    averageS3WE:[],
+    isButtonSendS3:true
     
 }
 
