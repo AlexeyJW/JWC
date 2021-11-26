@@ -221,7 +221,7 @@ const sendReport=()=>{
        color:black;
    }
    .active{
-       color:rgb(83, 155, 155);
+       color:#539b9b;
         
    }
 </style>

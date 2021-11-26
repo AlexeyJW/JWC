@@ -33,8 +33,6 @@ export const All_REPORTS =(state, getters)=>(year, month)=>{
 //s-88
 export const YEAR_SERVICE=(state)=>(yearService)=> {
        let arr=state.s88.filter((el)=>el.yearService==yearService)
-       console.log("getters")
-       console.log(arr)
        return arr
 }
 export const SET_S88=(state, getters)=>(yearService)=>{
