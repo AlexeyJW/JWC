@@ -1,5 +1,6 @@
 <template>
     <div class="v-nav-bar">
+        <h4 class="v-nav-bar-title">Congrigation Molodyozhnoje</h4>
         <ul class="nav-ul" >
             <li v-for="(i, index) in items" :key="index"
                 class="nav-li"             
@@ -31,19 +32,15 @@
     .v-nav-bar{
        display: flex;
        justify-content: center;
+       align-items:center;
        background:rgb(83, 155, 155);
     }
-    /* .nav-ul{
-        display:flex;
-        flex-direction:row;
-        background:white;
-    } */
-    /* .nav-li{
-        border:1px solid gray;
-        margin-right:10px;
-        padding:5px;
-
-    } */
+    .v-nav-bar-title{
+        justify-content:flex-start;
+        color:white;
+        font-family: 'Microsoft YaHei UI Light', sans-serif;
+        font-weight: lighter;
+    }
     .nav-li{
         display:inline-block;
        

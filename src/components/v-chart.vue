@@ -10,6 +10,10 @@
 import { BarChart, useBarChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
 import {ref, computed, defineProps} from 'vue'
+import {useStore} from 'vuex'
+
+const store=useStore()
+
 Chart.register(...registerables);
 const props=defineProps({
   data:{
@@ -18,14 +22,40 @@ const props=defineProps({
   }
 })
 
-const data = ref([30, 40, 60, 70, 85,115]);
-
+const dataArr = computed(()=>store.getters.YEAR_SERVICE('2022'))
+const data=computed(() =>{
+      let arr=[]
+      dataArr.value.forEach(el=>{
+             arr.push(el.averageWD)
+             arr.push(el.averageWE)
+      })
+      return arr
+})
+const labels=computed(()=>{
+       let arr=[]
+       dataArr.value.forEach(el=>{
+         arr.push(el.month)
+         arr.push(el.month)
+       })
+       return arr
+})
+const bg=computed(() =>{
+  let arr=[]
+  for (let i=0; i<dataArr.value.length; i++){
+    arr.push('#0079AF')
+    arr.push('#539b9b')
+  }
+  return arr
+})
+    
     const chartData = computed(() => ({
-      labels: ['September', 'October', 'November', 'December', 'January', 'February','Mach','April', 'May', 'June', 'July', 'August'],
+      
+      labels: labels.value,
       datasets: [
         {
+          label:'Total of attendees',
           data: data.value,
-          backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED','#77CEFF'],
+          backgroundColor: bg.value,
         },
       ],
     }));
@@ -43,14 +73,13 @@ const data = ref([30, 40, 60, 70, 85,115]);
 <style>
    .v-chart{
    
-      display: flex;
+       display: flex;
        flex-direction: column;
        justify-content: center;
-        border: 1px solid lightgray;
-        margin: 10px;
-        box-shadow: 0 0 8px 0 darkgray;
-        padding: 10px;
-        /* flex-basis:500px; */
-        width:600px;
+       border: 1px solid lightgray;
+       margin: 10px;
+       box-shadow: 0 0 8px 0 darkgray;
+       padding: 10px;
+       width:600px;
    }
 </style>
