@@ -22,8 +22,6 @@ const props=defineProps({
     default:[]
   }
 })
-const cM=convertMonth.convertMonth('10')
-console.log(cM)
 
 const dataArr = computed(()=>store.getters.YEAR_SERVICE('2022'))
 const data=computed(() =>{
