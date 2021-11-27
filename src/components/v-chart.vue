@@ -11,6 +11,7 @@ import { BarChart, useBarChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
 import {ref, computed, defineProps} from 'vue'
 import {useStore} from 'vuex'
+import * as convertMonth from '../modules/convertMonth'
 
 const store=useStore()
 
@@ -21,6 +22,8 @@ const props=defineProps({
     default:[]
   }
 })
+const cM=convertMonth.convertMonth('10')
+console.log(cM)
 
 const dataArr = computed(()=>store.getters.YEAR_SERVICE('2022'))
 const data=computed(() =>{
@@ -34,8 +37,8 @@ const data=computed(() =>{
 const labels=computed(()=>{
        let arr=[]
        dataArr.value.forEach(el=>{
-         arr.push(el.month)
-         arr.push(el.month)
+         arr.push(convertMonth.convertMonth(el.month)+' (будни)')
+         arr.push(convertMonth.convertMonth(el.month)+' (выходные)')
        })
        return arr
 })

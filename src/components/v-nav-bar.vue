@@ -43,26 +43,12 @@
     }
     .nav-li{
         display:inline-block;
-       
         margin-right:10px;
         padding:5px;
-        /* border: 1px solid lightgray; */
         border-bottom: 2px solid rgb(83, 155, 155);
-      
-       
-       
-       
-
+     
     }
-    /* .nav-li:hover{
       
-          border-bottom: 2px solid rgb(227, 241, 241);
-    } */
-     /* .nav-li:active{
-      
-          border-bottom: 2px solid rgb(227, 241, 241);
-    } */
-    
     .nav-img{
         width:30px;
         height:30px;
@@ -72,12 +58,10 @@
     }
     .nav-router{
         text-decoration: none;
-       
         color: white;
     }
     
     .router-link-exact-active{
-       
-         border-bottom: 2px solid rgb(227, 241, 241);
+        border-bottom: 2px solid rgb(227, 241, 241);
     }
 </style>
