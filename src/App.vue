@@ -1,10 +1,11 @@
 <script setup>
     import VNavBar from './components/v-nav-bar.vue'
-    import {onMounted} from 'vue'
+    import Auth from './views/Auth.vue'
+    import {onMounted, computed} from 'vue'
     import {useStore} from 'vuex'
 
     const store=useStore()
-
+    const isAuth=computed(()=>store.getters.GET_IS_AUTH)
     onMounted(()=>{
       store.dispatch('GET_S3')
       store.dispatch('GET_S88')
@@ -13,12 +14,16 @@
 
 <template>
     <div id="app">
-    <v-nav-bar/>
-    
-    <div>
+     <div v-if="isAuth">
+       <Auth/>  
+     </div> 
+     <div v-else>
+        <v-nav-bar/>
+        <div>
           <router-view/>
-         
-    </div>
+        </div>
+     </div>
+    
     </div>
 </template>
 

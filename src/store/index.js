@@ -12,7 +12,9 @@ const state={
     s88:[],
     averageS3WD:[],
     averageS3WE:[],
-    isButtonSendS3:true
+    isButtonSendS3:true,
+    isAuth:true,
+    vUser:''
     
 }
 

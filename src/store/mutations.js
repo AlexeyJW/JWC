@@ -42,6 +42,12 @@ export default{
     },
     SET_IS_BUTTON_SEND_S3_TRUE(state){
         state.isButtonSendS3=true
+    },
+    SET_IS_AUTH (state){
+        state.isAuth=!state.isAuth
+    },
+    SET_VUSER (state, user){
+        state.vUser=user
     }
     
 }

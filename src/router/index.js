@@ -5,6 +5,12 @@ import Auth from '../views/Auth.vue'
 import InputV from '../views/InputV.vue'
 const routes=[
     {
+        path:'/Auth',
+        name: 'Auth',
+        component: Auth
+    },
+
+    {
         path:'/',
         name: 'Home',
         component: Home
@@ -18,11 +24,6 @@ const routes=[
         path:'/InputV',
         name: 'InputV',
         component: InputV
-    },
-    {
-        path:'/Auth',
-        name: 'Auth',
-        component: Auth
     }
 ]
 const router= createRouter({
