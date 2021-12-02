@@ -17,6 +17,7 @@
     <div class="home-chart">
        <v-chart />
     </div>
+   
   </div>  
 </template>
 
@@ -26,27 +27,11 @@
     import VTableS88 from '../components/v-table-s88.vue'
     import VInput from '../components/v-input.vue'
     import VChart from '../components/v-chart.vue'
+   
 </script>
 
 <style scoped>
-/* .table-s3, .table-s88, .home-chart{
-        
-        display:flex;
-       
-        justify-content: center;
-      
-        align-items: stretch ;
-      
-}
-.v-button-home{
-    display:flex;
-    justify-content:center;
-}
-.input-block{
-    justify-content:center;
-    align-self:center;
-    
-} */
+
 .general-group{
      display:flex;
      flex-direction: column;

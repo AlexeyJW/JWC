@@ -75,7 +75,8 @@ const vDate=ref(null)
 const vTotal=ref(null)
 const Weekday=ref('')
 const WeekNumber=ref(null)
-const bd=computed(()=>store.getters.GET_S3(''+yearNow, ''+monthNow))
+
+const bd=computed(()=>store.getters.GET_S3(''+yearNow, monthNow))
 const isRecord=(obj)=>bd.value.find(el=>el.group==obj.group&& el.weekNumber==obj.weekNumber&& el.weekday==obj.weekday)
 
 
@@ -83,7 +84,7 @@ const isRecord=(obj)=>bd.value.find(el=>el.group==obj.group&& el.weekNumber==obj
 const sendObj=()=>{
 
        const obj={
-            month: (vDate.value.slice(5,7)-1).toString(),
+            month: Number(vDate.value.slice(5,7)-1),
             year: vDate.value.slice(0,4),
             yearService:'2022',
             weekday:Weekday.value,
@@ -134,13 +135,9 @@ const sendObj=()=>{
         justify-content:flex-end;
         align-items:flex-end;
         border-top:1px solid rgb(83, 155, 155);
-       
         border-bottom:1px solid rgb(83, 155, 155);
-       
-        /* margin-left:2px; */
         padding:3px;
-        /* background:rgb(231, 230, 230); */
-    }
+        }
    
     .v-input-content{
         display: flex;

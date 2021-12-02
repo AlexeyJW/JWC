@@ -23,7 +23,12 @@ export default{
     SET_S3 (state, arr){
         state.s3=[...arr]
     },
+    DEL_S88 (state){
+        console.log('DEL_S88')
+        state.s88=[]
+    },
     SET_S88 (state, arr){
+        console.log('Set_S88')
         arr.forEach(el=>state.s88.push(el))
     },
     SET_S88_EL(state, el){

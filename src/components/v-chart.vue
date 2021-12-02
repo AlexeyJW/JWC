@@ -23,7 +23,8 @@ const props=defineProps({
   }
 })
 
-const dataArr = computed(()=>store.getters.YEAR_SERVICE('2022'))
+const dataArr = computed(()=>store.getters.YEAR_SERVICE('2022').sort((a,b)=>a.month-b.month))
+ 
 const data=computed(() =>{
       let arr=[]
       dataArr.value.forEach(el=>{

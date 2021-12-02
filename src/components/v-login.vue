@@ -10,6 +10,7 @@
 
 <script setup>
 import {resGoogle} from '../modules/initFB.js'
+import {computed} from 'vue'
 // import {ref} from 'vue'
 // import {useRouter} from 'vue-router'
 import {useStore} from 'vuex'
@@ -20,9 +21,11 @@ const store=useStore()
  const logGoogle=()=>{
     resGoogle()
     .then((el)=>{
-        console.log(el)
+        // console.log(el)
         store.commit('SET_VUSER', el?.displayName)
         store.commit('SET_IS_AUTH')
+        // store.dispatch('FB_GET_S88')
+        store.dispatch('LISTEN_S88')
     }) 
     // console.log(user?.displayName??'no user')
     // vUser.value=user?.displayName

@@ -6,10 +6,7 @@
 
     const store=useStore()
     const isAuth=computed(()=>store.getters.GET_IS_AUTH)
-    onMounted(()=>{
-      store.dispatch('GET_S3')
-      store.dispatch('GET_S88')
-    })
+    
 </script>
 
 <template>

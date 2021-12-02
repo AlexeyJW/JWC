@@ -139,11 +139,10 @@
 <script setup>
    import {useStore} from 'vuex'
    import {ref, computed} from 'vue'
+   import {listenS88, listenChangeS88} from '../modules/initFB.js'
 
    const store=useStore()
-
    const s88=computed(()=>store.getters.YEAR_SERVICE('2022'))
-
 </script>
 <style>
    .v-block-table-s88{
@@ -154,7 +153,6 @@
         margin: 5px;
         box-shadow: 0 0 8px 0 darkgray;
         padding: 10px;
-        /* flex-basis:500px; */
         width:600px;
         
    }

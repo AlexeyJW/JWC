@@ -3,7 +3,7 @@
         <div class="v-button-block">
             <h3><strong>General Meeting Report (S-3) {{props.title}}</strong></h3>
             <v-button class="v-button-item" textButton="Send" @click="sendReport" v-show="store.state.isButtonSendS3"/>
-           
+            <v-button class="v-button-item" textButton="Modify" @click="modifyReport" v-show="!store.state.isButtonSendS3"/>
         </div>
        
         
@@ -65,6 +65,8 @@
    import {defineProps, computed, ref} from 'vue'
    import {useStore} from 'vuex'
    import vButton from './v-button.vue'
+   import {addS88} from '../modules/initFB.js'
+
    const props=defineProps({
        title:{type:String},
       
@@ -74,14 +76,14 @@
    
    //date now
    const dateNow=new Date()
-   const monthNow=dateNow.getMonth()
+   const monthNow=Number(dateNow.getMonth())
    const yearNow=dateNow.getFullYear()
    const isButton=ref(true)
   
    const store=useStore()
-   const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow, ''+monthNow))
-   const arrWD=computed(()=>store.getters.GET_S3(''+yearNow, ''+monthNow).filter(el=>el.weekday=='weekdays'))
-   const arrWE=computed(()=>store.getters.GET_S3(''+yearNow, ''+monthNow).filter(el=>el.weekday=='weekend'))
+   const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow, monthNow))
+   const arrWD=computed(()=>store.getters.GET_S3(''+yearNow, monthNow).filter(el=>el.weekday=='weekdays'))
+   const arrWE=computed(()=>store.getters.GET_S3(''+yearNow, monthNow).filter(el=>el.weekday=='weekend'))
    const allReports=ref(false)
    const isAllReportsWD=(week)=>{
        let all=0
@@ -134,20 +136,28 @@ const avWE=computed(()=>{
 })
 
 
-
-const sendReport=()=>{
-   let obj={
+const prepareTheReport=()=>{
+    let obj={
         averageWD:avWD.value,
         averageWE:avWE.value,
-        month:''+monthNow,
+        month:Number(monthNow),
         totalMeetingsWD:kvoWD.value,
         totalMeetingsWE:kvoWE.value,
         totalWD:totalWD.value,
         totalWE:totalWE.value,
         yearService:'2022'
     }
-    store.commit('SET_S88_EL', obj)
+    return obj
+}
+const sendReport=()=>{
+        
+    store.dispatch('ADD_S88', prepareTheReport())
     store.commit('SET_IS_BUTTON_SEND_S3_FALSE')
+}
+
+const modifyReport=()=>{
+   
+    store.dispatch('MODI_S88', prepareTheReport())
 }
 </script>
 
@@ -160,7 +170,6 @@ const sendReport=()=>{
         margin: 10px;
         box-shadow: 0 0 8px 0 darkgray;
         padding: 10px;
-        /* flex-basis:500px; */
         width:600px;
    }
    .v-button-block{
