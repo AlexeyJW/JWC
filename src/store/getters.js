@@ -5,16 +5,16 @@ export const TOTAL_GROUPS =state=>state.groups
 export const NUMBER_GROUPS=state=>state.groupsData
 //  table s3
 export const GET_S3=(state)=>(year, month)=>{
-       let arr= state.s3.filter((el)=>el.year==year)
-       return arr.filter((el)=>el.month==month)
+       let arr= state.s3.filter((el)=>el.data.year==year)
+       return arr.filter((el)=>el.data.month==month)
 }
 // filters for table s3
 
 export const FILTER_GROUP=(state, getters)=>(group, year, month)=>{
        console.log('filter_group')
        let arr=getters.GET_S3(year, month)
-       console.log(arr.filter((el)=>el.group==group))
-       return arr.filter((el)=>el.group==group)
+       console.log(arr.filter((el)=>el.data.group==group))
+       return arr.filter((el)=>el.data.group==group)
 }
 export const FILTER_ALL_GROUPS=(state, getters)=>(year, month)=>{
        
@@ -22,7 +22,7 @@ export const FILTER_ALL_GROUPS=(state, getters)=>(year, month)=>{
       
        let sum=0
       
-       arr.forEach((el)=>sum+=el.total)
+       arr.forEach((el)=>sum+=el.data.total)
        return sum 
 
 }
@@ -43,3 +43,5 @@ export const GET_AVERAGE_S3_WE=(state)=>state.averageS3WE
 
 export const GET_IS_AUTH=(state)=>state.isAuth
 export const GET_VUSER=(state)=>state.vUser
+export const GET_AVERAGE_S88_WD=(state)=>state.averageS88WD
+export const GET_AVERAGE_S88_WE=(state)=>state.averageS88WE

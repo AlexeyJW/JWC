@@ -6,12 +6,14 @@ import mutations from './mutations'
 const state={
     activePage:1,
     paginator:[],
-    groups:7,
-    groupsData:[1,2,3,4,5,6,7],
+    groups:2,
+    groupsData:[6,7],
     s3:[],
     s88:[],
     averageS3WD:[],
     averageS3WE:[],
+    averageS88WD:0,
+    averageS88WE:0,
     isButtonSendS3:true,
     isAuth:true,
     vUser:''

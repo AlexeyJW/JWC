@@ -56,81 +56,81 @@
                </tr>
                <tr>
                    <td>Junuary</td>
-                  <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                   <td>{{s88?.find(el=>el.month=='0')?.totalMeetingsWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='0')?.totalWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='0')?.averageWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='0')?.totalMeetingsWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='0')?.totalWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='0')?.averageWE}}</td>
                </tr>
                <tr>
                    <td>February</td>
-                  <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                   <td>{{s88?.find(el=>el.month=='1')?.totalMeetingsWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='1')?.totalWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='1')?.averageWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='1')?.totalMeetingsWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='1')?.totalWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='1')?.averageWE}}</td>
                </tr>
                <tr>
                    <td>Mach</td>
-                  <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                   <td>{{s88?.find(el=>el.month=='2')?.totalMeetingsWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='2')?.totalWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='2')?.averageWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='2')?.totalMeetingsWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='2')?.totalWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='2')?.averageWE}}</td>
                </tr>
                <tr>
                    <td>April</td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                   <td>{{s88?.find(el=>el.month=='3')?.totalMeetingsWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='3')?.totalWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='3')?.averageWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='3')?.totalMeetingsWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='3')?.totalWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='3')?.averageWE}}</td>
                </tr>
                <tr>
                    <td>May</td>
-                  <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                   <td>{{s88?.find(el=>el.month=='4')?.totalMeetingsWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='4')?.totalWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='4')?.averageWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='4')?.totalMeetingsWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='4')?.totalWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='4')?.averageWE}}</td>
                </tr>
                <tr>
                    <td>June</td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                   <td>{{s88?.find(el=>el.month=='5')?.totalMeetingsWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='5')?.totalWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='5')?.averageWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='5')?.totalMeetingsWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='5')?.totalWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='5')?.averageWE}}</td>
                </tr>
                <tr>
                    <td>July</td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                   <td>{{s88?.find(el=>el.month=='6')?.totalMeetingsWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='6')?.totalWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='6')?.averageWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='6')?.totalMeetingsWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='6')?.totalWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='6')?.averageWE}}</td>
                </tr>
                <tr>
                    <td>August</td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                   <td>{{s88?.find(el=>el.month=='7')?.totalMeetingsWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='7')?.totalWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='7')?.averageWD}}</td>
+                   <td>{{s88?.find(el=>el.month=='7')?.totalMeetingsWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='7')?.totalWE}}</td>
+                   <td>{{s88?.find(el=>el.month=='7')?.averageWE}}</td>
                </tr>
                <tr>
                    <td colspan="3"><strong>Average:</strong></td>
-                   <td></td>
+                   <td>{{averageWD.toFixed(2)}}</td>
                    <td colspan="2"><strong>Average:</strong></td>
-                   <td></td>
+                   <td>{{averageWE.toFixed(2)}}</td>
                </tr>
            </tbody>
        </table>
@@ -143,6 +143,8 @@
 
    const store=useStore()
    const s88=computed(()=>store.getters.YEAR_SERVICE('2022'))
+   const averageWD=computed(()=>store.getters.GET_AVERAGE_S88_WD)
+   const averageWE=computed(()=>store.getters.GET_AVERAGE_S88_WE)
 </script>
 <style>
    .v-block-table-s88{

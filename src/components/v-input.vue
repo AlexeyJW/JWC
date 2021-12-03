@@ -7,11 +7,11 @@
             <h5 class="v-input-label">Group:</h5>
             <select class="field-select" v-model="Group" id="group">
                 <option disabled selected>Choice group</option>
-                <option value="1">Group 1</option>
+                <!-- <option value="1">Group 1</option>
                 <option value="2">Group 2</option>
                 <option value="3">Group 3</option>
                 <option value="4">Group 4</option>
-                <option value="5">Group 5</option>
+                <option value="5">Group 5</option> -->
                 <option value="6">Group 6</option>
                 <option value="7">Group 7</option>
             </select>
@@ -53,7 +53,7 @@
      
      </div>
     </div>
-    <span class="v-span" v-if="isConfirm"><v-confirm  @pressedCancel="isConfirm=!isConfirm" @pressedOK="isConfirm=!isConfirm">Record already exists, Want to replace?</v-confirm></span>
+    <span class="v-span" v-if="isConfirm"><v-confirm  @pressedCancel="isConfirm=!isConfirm" @pressedOK="confirmPressedOK">Record already exists, Want to replace?</v-confirm></span>
      <div  :class="{activeoverflow: isConfirm}"></div>
 </template>
    
@@ -77,13 +77,10 @@ const Weekday=ref('')
 const WeekNumber=ref(null)
 
 const bd=computed(()=>store.getters.GET_S3(''+yearNow, monthNow))
-const isRecord=(obj)=>bd.value.find(el=>el.group==obj.group&& el.weekNumber==obj.weekNumber&& el.weekday==obj.weekday)
+const isRecord=(obj)=>bd.value.find(el=>el.data.group==obj.group&& el.data.weekNumber==obj.weekNumber&& el.data.weekday==obj.weekday)
 
-
-
-const sendObj=()=>{
-
-       const obj={
+const prepareTheObj=()=>{
+        const obj={
             month: Number(vDate.value.slice(5,7)-1),
             year: vDate.value.slice(0,4),
             yearService:'2022',
@@ -93,11 +90,25 @@ const sendObj=()=>{
             date:vDate.value,
             total:vTotal.value
         }
-    if (typeof isRecord(obj)!='object') store.commit('ADD_S3', obj)
+        return obj
+}
 
+const sendObj=()=>{
+     
+    let sendObj=prepareTheObj()   
+    // if (typeof isRecord(sendObj)!='object') store.commit('ADD_S3', sendObj)
+    if (typeof isRecord(sendObj)!='object') store.dispatch('ADD_S3', sendObj)
     else isConfirm.value=true
     
 }  
+const confirmPressedOK=()=>{
+      let sendObj=prepareTheObj()
+      let backRacord=null
+      backRacord=bd.value.find(el=>el.data.group==sendObj.group && el.data.weekNumber==sendObj.weekNumber && el.data.weekday==sendObj.weekday)
+      console.log("backRacord", backRacord.id)
+      store.dispatch('MODI_S3',{id:backRacord.id, obj:sendObj})
+      isConfirm.value=!isConfirm.value
+}
 </script>
    
 <style>

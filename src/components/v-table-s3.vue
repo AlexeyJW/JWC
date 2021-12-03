@@ -17,33 +17,33 @@
             <tbody class="v-tbody">
                 <tr>
                     <td>1</td>
-                    <td>{{wd.find((el)=>el.weekNumber==1)?.total}}</td>
-                    <td>{{we.find((el)=>el.weekNumber==1)?.total}}</td>
+                    <td>{{wd.find((el)=>el.data.weekNumber==1)?.data?.total}}</td>
+                    <td>{{we.find((el)=>el.data.weekNumber==1)?.data?.total}}</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                   <td>{{wd.find((el)=>el.weekNumber==2)?.total}}</td>
-                   <td>{{we.find((el)=>el.weekNumber==2)?.total}}</td>
+                   <td>{{wd.find((el)=>el.data.weekNumber==2)?.data?.total}}</td>
+                   <td>{{we.find((el)=>el.data.weekNumber==2)?.data?.total}}</td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>{{wd.find((el)=>el.weekNumber==3)?.total}}</td>
-                    <td>{{we.find((el)=>el.weekNumber==3)?.total}}</td>
+                    <td>{{wd.find((el)=>el.data.weekNumber==3)?.data?.total}}</td>
+                    <td>{{we.find((el)=>el.data.weekNumber==3)?.data?.total}}</td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td>{{wd.find((el)=>el.weekNumber==4)?.total}}</td>
-                    <td>{{we.find((el)=>el.weekNumber==4)?.total}}</td>
+                    <td>{{wd.find((el)=>el.data.weekNumber==4)?.data?.total}}</td>
+                    <td>{{we.find((el)=>el.data.weekNumber==4)?.data?.total}}</td>
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td>{{wd.find((el)=>el.weekNumber==5)?.total}}</td>
-                    <td>{{we.find((el)=>el.weekNumber==5)?.total}}</td>
+                    <td>{{wd.find((el)=>el.data.weekNumber==5)?.data?.total}}</td>
+                    <td>{{we.find((el)=>el.data.weekNumber==5)?.data?.total}}</td>
                 </tr>
                 <tr>
                     <td><strong>Total:</strong></td>
-                    <td><strong>{{wd.reduce((sum, el)=>sum+el.total, 0)}}</strong></td>
-                    <td><strong>{{we.reduce((sum, el)=>sum+el.total, 0)}}</strong></td>
+                    <td><strong>{{wd.reduce((sum, el)=>sum+el.data.total, 0)}}</strong></td>
+                    <td><strong>{{we.reduce((sum, el)=>sum+el.data.total, 0)}}</strong></td>
                 </tr>
                 <tr>
                     <td><strong>Average:</strong></td>
@@ -76,16 +76,16 @@
    const store=useStore()
    
    const tableData =computed(()=>store.getters.FILTER_GROUP(props.group, ''+yearNow, ''+monthNow))
-   const wd=computed(()=>tableData.value.filter(el=>el.weekday=='weekdays'))
-   const we=computed(()=>tableData.value.filter(el=>el.weekday=='weekend'))
+   const wd=computed(()=>tableData.value.filter(el=>el.data.weekday=='weekdays'))
+   const we=computed(()=>tableData.value.filter(el=>el.data.weekday=='weekend'))
 
    const averageWD=computed(()=>{
        let max=0
        wd.value.forEach(el=>{
-           if(el.weekNumber>max) max=el.weekNumber
+           if(el.data.weekNumber>max) max=el.data.weekNumber
        })
        if (max!=0) {
-           let num=(wd.value.reduce((sum, el)=>sum+el.total, 0)/max).toFixed(2)
+           let num=(wd.value.reduce((sum, el)=>sum+el.data.total, 0)/max).toFixed(2)
       
            return  num
        }
@@ -94,11 +94,11 @@
   const averageWE=computed(()=>{
        let max=0
        we.value.forEach(el=>{
-           if(el.weekNumber>max) max=el.weekNumber
+           if(el.data.weekNumber>max) max=el.data.weekNumber
        })
 
         if (max!=0) {
-           let num=(we.value.reduce((sum, el)=>sum+el.total, 0)/max).toFixed(2)
+           let num=(we.value.reduce((sum, el)=>sum+el.data.total, 0)/max).toFixed(2)
        
            return  num
        }

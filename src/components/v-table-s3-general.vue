@@ -82,44 +82,44 @@
   
    const store=useStore()
    const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow, monthNow))
-   const arrWD=computed(()=>store.getters.GET_S3(''+yearNow, monthNow).filter(el=>el.weekday=='weekdays'))
-   const arrWE=computed(()=>store.getters.GET_S3(''+yearNow, monthNow).filter(el=>el.weekday=='weekend'))
+   const arrWD=computed(()=>store.getters.GET_S3(''+yearNow, monthNow).filter(el=>el.data.weekday=='weekdays'))
+   const arrWE=computed(()=>store.getters.GET_S3(''+yearNow, monthNow).filter(el=>el.data.weekday=='weekend'))
    const allReports=ref(false)
    const isAllReportsWD=(week)=>{
        let all=0
        arrWD.value.forEach(el=>{
-           if (el.weekNumber==week) all++
+           if (el.data.weekNumber==week) all++
        })
       
-       if (all!=7) return true
+       if (all!=store.getters.TOTAL_GROUPS) return true
        return false
    }
 
     const isAllReportsWE=(week)=>{
        let all=0
        arrWE.value.forEach(el=>{
-           if (el.weekNumber==week) all++
+           if (el.data.weekNumber==week) all++
        })
       
-       if (all!=7) return true
+       if (all!=store.getters.TOTAL_GROUPS) return true
        return false
    }
 
 //general data for table
-const wd1=computed(()=>arrWD.value.filter(el=>el.weekNumber==1).reduce((sum,{total})=>sum+total, 0))
-const wd2=computed(()=>arrWD.value.filter(el=>el.weekNumber==2).reduce((sum,{total})=>sum+total, 0))
-const wd3=computed(()=>arrWD.value.filter(el=>el.weekNumber==3).reduce((sum,{total})=>sum+total, 0))
-const wd4=computed(()=>arrWD.value.filter(el=>el.weekNumber==4).reduce((sum,{total})=>sum+total, 0))
-const wd5=computed(()=>arrWD.value.filter(el=>el.weekNumber==5).reduce((sum,{total})=>sum+total, 0))
+const wd1=computed(()=>arrWD.value.filter(el=>el.data.weekNumber==1).reduce((sum, el)=>sum+el.data.total, 0))
+const wd2=computed(()=>arrWD.value.filter(el=>el.data.weekNumber==2).reduce((sum, el)=>sum+el.data.total, 0))
+const wd3=computed(()=>arrWD.value.filter(el=>el.data.weekNumber==3).reduce((sum, el)=>sum+el.data.total, 0))
+const wd4=computed(()=>arrWD.value.filter(el=>el.data.weekNumber==4).reduce((sum, el)=>sum+el.data.total, 0))
+const wd5=computed(()=>arrWD.value.filter(el=>el.data.weekNumber==5).reduce((sum, el)=>sum+el.data.total, 0))
 
-const we1=computed(()=>arrWE.value.filter(el=>el.weekNumber==1).reduce((sum,{total})=>sum+total, 0))
-const we2=computed(()=>arrWE.value.filter(el=>el.weekNumber==2).reduce((sum,{total})=>sum+total, 0))
-const we3=computed(()=>arrWE.value.filter(el=>el.weekNumber==3).reduce((sum,{total})=>sum+total, 0))
-const we4=computed(()=>arrWE.value.filter(el=>el.weekNumber==4).reduce((sum,{total})=>sum+total, 0))
-const we5=computed(()=>arrWE.value.filter(el=>el.weekNumber==5).reduce((sum,{total})=>sum+total, 0))
+const we1=computed(()=>arrWE.value.filter(el=>el.data.weekNumber==1).reduce((sum, el)=>sum+el.data.total, 0))
+const we2=computed(()=>arrWE.value.filter(el=>el.data.weekNumber==2).reduce((sum, el)=>sum+el.data.total, 0))
+const we3=computed(()=>arrWE.value.filter(el=>el.data.weekNumber==3).reduce((sum, el)=>sum+el.data.total, 0))
+const we4=computed(()=>arrWE.value.filter(el=>el.data.weekNumber==4).reduce((sum, el)=>sum+el.data.total, 0))
+const we5=computed(()=>arrWE.value.filter(el=>el.data.weekNumber==5).reduce((sum, el)=>sum+el.data.total, 0))
 
-const totalWD=computed(()=>arrWD.value.reduce((sum,{total})=>sum+total, 0))
-const totalWE=computed(()=>arrWE.value.reduce((sum,{total})=>sum+total, 0))
+const totalWD=computed(()=>arrWD.value.reduce((sum, el)=>sum+el.data.total, 0))
+const totalWE=computed(()=>arrWE.value.reduce((sum, el)=>sum+el.data.total, 0))
 
 const kvoWD=ref(0)
 const kvoWE=ref(0)
@@ -138,8 +138,8 @@ const avWE=computed(()=>{
 
 const prepareTheReport=()=>{
     let obj={
-        averageWD:avWD.value,
-        averageWE:avWE.value,
+        averageWD:Number(avWD.value),
+        averageWE:Number(avWE.value),
         month:Number(monthNow),
         totalMeetingsWD:kvoWD.value,
         totalMeetingsWE:kvoWE.value,
@@ -149,6 +149,15 @@ const prepareTheReport=()=>{
     }
     return obj
 }
+setTimeout(()=>{
+    let d=store.getters.YEAR_SERVICE('2022')
+    if(d.find(el=>el.month==Number(monthNow))){
+              console.log('YES!!!!!')
+              store.commit('SET_IS_BUTTON_SEND_S3_FALSE')
+          } 
+          }, 1000)
+
+
 const sendReport=()=>{
         
     store.dispatch('ADD_S88', prepareTheReport())

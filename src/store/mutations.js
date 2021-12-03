@@ -27,12 +27,34 @@ export default{
         console.log('DEL_S88')
         state.s88=[]
     },
+    DEL_S3 (state){
+        console.log('DEL_S3')
+        state.s83=[]
+    },
+
     SET_S88 (state, arr){
         console.log('Set_S88')
         arr.forEach(el=>state.s88.push(el))
     },
     SET_S88_EL(state, el){
         state.s88.push(el)
+    },
+    //
+    SET_S3_EL(state, el){
+        state.s3.push(el)
+    },
+    MODI_S3 (state, {id:id, obj:obj}){
+        console.log('MODI_S3')
+        const index=state.s3.findIndex(el=>el.id==id)
+        console.log("state.s3["+index+"]=", state.s3)
+        state.s3[index].data=obj
+    },
+    MODI_S88 (state, obj){
+        console.log('MODI_S88')
+        // need add compare year
+        const index=state.s88.findIndex(el=>el.month==obj.month && el.yearService==obj.yearService)
+        console.log("state.s88["+index+"]=", state.s88)
+        state.s88[index]=obj
     },
     SET_AVERAGE_S3_WD (state, o){
         console.log(o)
@@ -41,6 +63,13 @@ export default{
     SET_AVERAGE_S3_WE (state,o){
         console.log(o)
         state.averageS3WE.push(o)
+    },
+    SET_AVERAGE_S88_WD (state, el){
+        
+        state.averageS88WD=el
+    },
+    SET_AVERAGE_S88_WE (state, el){
+        state.averageS88WE=el
     },
     SET_IS_BUTTON_SEND_S3_FALSE(state){
         state.isButtonSendS3=false
