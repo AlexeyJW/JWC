@@ -90,8 +90,23 @@ export default{
     SET_IS_AUTH (state){
         state.isAuth=!state.isAuth
     },
-    SET_VUSER (state, user){
+    SET_VUSER (state, {name:user, email:email, group:group}){
         state.vUser=user
+        state.vUserEmail=email
+        state.vUserGroup=group
+    },
+    DESTROY_STATE (state){
+        console.log('DESTROY_STATE')
+        state.s3=[]
+        state.s88=[]
+        state.averageS3WD=[]
+        state.averageS3WE=[]
+        state.averageS88WD=0
+        state.averageS88WE=0
+        state.vUser=''
+        state.vUserEmail=''
+        state.vUserGroup=''
     }
+
     
 }

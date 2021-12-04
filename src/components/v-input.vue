@@ -39,7 +39,7 @@
         
         <div class="v-input-group">
             <h5 class="v-input-label">Date:</h5>
-            <input class="field-data" type="date" v-model="vDate"/>
+            <input class="field-data"  type="date" v-model="vDate"/>
         </div>
         <div class="v-input-group">
             <h5 class="v-input-label">Total:</h5>
@@ -47,13 +47,14 @@
         </div>
         <div class="v-input-group" id="right">
             <h5 class="v-input-label">Send Report:</h5>
-            <v-button class="field-button" textButton="Send" @click="sendObj"/>
+            <v-button class="field-button" textButton="Send"  @click="sendObj"/>
         </div>
         
      
      </div>
     </div>
     <span class="v-span" v-if="isConfirm"><v-confirm  @pressedCancel="isConfirm=!isConfirm" @pressedOK="confirmPressedOK">Record already exists, Want to replace?</v-confirm></span>
+    <span class="v-span" v-if="isConfirmForIsAll"><v-confirm  @pressedCancel="isConfirmForIsAll=!isConfirmForIsAll" @pressedOK="isConfirmForIsAll=!isConfirmForIsAll">Введите недостающие данные</v-confirm></span>
      <div  :class="{activeoverflow: isConfirm}"></div>
 </template>
    
@@ -70,8 +71,11 @@ const monthNow=dateNow.getMonth()
 //----------------------------------------
 
 const isConfirm=ref(false)
+const isConfirmForIsAll=ref(false)
+
 const Group=ref('')
 const vDate=ref(null)
+
 const vTotal=ref(null)
 const Weekday=ref('')
 const WeekNumber=ref(null)
@@ -92,14 +96,20 @@ const prepareTheObj=()=>{
         }
         return obj
 }
+const isAll=(obj)=>{
+    
+    if (Group.value==''|| WeekNumber.value==null || Weekday.value==''|| vDate.value==null||vTotal.value==null ) return false
+    else return true
+    }
 
 const sendObj=()=>{
-     
-    let sendObj=prepareTheObj()   
-    // if (typeof isRecord(sendObj)!='object') store.commit('ADD_S3', sendObj)
-    if (typeof isRecord(sendObj)!='object') store.dispatch('ADD_S3', sendObj)
-    else isConfirm.value=true
-    
+     if (!isAll(sendObj)) isConfirmForIsAll.value=true
+     else{
+        let sendObj=prepareTheObj()   
+        if (typeof isRecord(sendObj)!='object')
+            store.dispatch('ADD_S3', sendObj)
+        else isConfirm.value=true
+     }
 }  
 const confirmPressedOK=()=>{
       let sendObj=prepareTheObj()

@@ -1,8 +1,14 @@
 <template>
     <div class="v-auth">
-       <h2 class="v-auth-title"><img src="../assets/confirm.png" alt="logo google" class="v-auth-img-confirm"><strong>Добро пожаловать в учёт!</strong></h2>
-       
-       <h4 class="v-auth-title">Пожалуйста авторизуйтесь</h4>
+       <div class="v-auth-title">
+            <img src="../assets/images.png" class="v-auth-img-title">
+            <h2 class="v-auth-title"><strong>Добро пожаловать в учёт!</strong></h2>
+       </div>
+       <div class="v-auth-content">
+            <img src="../assets/confirm.png" alt="logo google" class="v-auth-img-confirm">
+            <h4 class="v-auth-title">Пожалуйста авторизуйтесь</h4>
+       </div>
+      
        <button class="v-auth-button" @click="logGoogle"><img src="../assets/google.png" alt="logo google" class="v-auth-img">GOOGLE</button>
        
     </div>
@@ -22,7 +28,7 @@ const store=useStore()
     resGoogle()
     .then((el)=>{
         // console.log(el)
-        store.commit('SET_VUSER', el?.displayName)
+        store.dispatch('GET_GROUP_USER', el?.email)
         store.commit('SET_IS_AUTH')
         // store.dispatch('FB_GET_S88')
         store.dispatch('LISTEN_S88')
@@ -47,16 +53,34 @@ const store=useStore()
         margin: 10px;
         box-shadow: 0 0 8px 0 darkgray;
         padding: 15px;
-        width:600px;
+        width:500px;
         font-family: 'Microsoft YaHei UI Light', sans-serif;
+        /* background-image: url(../assets/images.png); 
+        background-color:white; */
+        /*          фон в клеточку    */
+        background: linear-gradient( #bbb, transparent 1px), linear-gradient( 90deg, #bbb, transparent 1px);
+        background-size: 15px 15px;
+        background-position: center center;
+
+}
+.v-auth-img-title{
+    align-self:flex-start;
+    width:150px;
+    height:120px;
 }
 .v-auth-title{
     display: flex;
     flex-direction: row;
     align-items: center;
     padding:10px;
-    border-bottom:1px solid lightgray;
-
+    /* border-bottom:1px solid lightgray; */
+   
+}
+.v-auth-content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding:10px;
 }
 .v-auth-button{
     display: flex;

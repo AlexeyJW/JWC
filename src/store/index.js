@@ -16,7 +16,9 @@ const state={
     averageS88WE:0,
     isButtonSendS3:true,
     isAuth:true,
-    vUser:''
+    vUser:'',
+    vUserEmail:'',
+    vUserGroup:''
     
 }
 

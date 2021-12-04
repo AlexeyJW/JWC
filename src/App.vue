@@ -1,12 +1,14 @@
 <script setup>
     import VNavBar from './components/v-nav-bar.vue'
     import Auth from './views/Auth.vue'
-    import {onMounted, computed} from 'vue'
+    import {computed} from 'vue'
     import {useStore} from 'vuex'
 
     const store=useStore()
     const isAuth=computed(()=>store.getters.GET_IS_AUTH)
-    
+    // onDeactivated(()=>{
+    //  console.log("Goodbye!!")
+    // })
 </script>
 
 <template>
