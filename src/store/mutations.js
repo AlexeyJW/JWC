@@ -56,6 +56,16 @@ export default{
         console.log("state.s88["+index+"]=", state.s88)
         state.s88[index]=obj
     },
+    REMOVE_S88 (state, obj){
+        console.log('REMOVE_S88')
+        const index=state.s88.findIndex(el=>el.month==obj.month && el.yearService==obj.yearService)
+        state.s88.splice(index, 1)
+    },
+    REMOVE_S3 (state, id){
+        console.log('REMOVE_S3')
+        const index=state.s3.findIndex(el=>el.id==id)
+        state.s3[index].splice(index, 1)
+    },
     SET_AVERAGE_S3_WD (state, o){
         console.log(o)
         state.averageS3WD.push(o)

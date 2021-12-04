@@ -39,6 +39,7 @@ export function LISTEN_S88 ({commit}){
                 }
                 if (change.type==="removed"){
                     console.log("Removed", change.doc.data())
+                    commit ('REMOVE_S88', {yearService:change.doc.data().yearService, month:change.doc.data().month})
                 }
                 })
         })
@@ -101,6 +102,7 @@ export function LISTEN_S3 ({commit}){
             }
             if (change.type==="removed"){
                 console.log("Removed", change.doc.data())
+                commit('REMOVE_S3', change.doc.id)
             }
             })
     })
