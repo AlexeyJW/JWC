@@ -139,7 +139,7 @@
 <script setup>
    import {useStore} from 'vuex'
    import {ref, computed} from 'vue'
-   import {listenS88, listenChangeS88} from '../modules/initFB.js'
+//    import {listenS88, listenChangeS88} from '../modules/initFB.js'
 
    const store=useStore()
    const s88=computed(()=>store.getters.YEAR_SERVICE('2022'))

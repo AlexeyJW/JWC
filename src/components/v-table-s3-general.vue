@@ -65,7 +65,7 @@
    import {defineProps, computed, ref} from 'vue'
    import {useStore} from 'vuex'
    import vButton from './v-button.vue'
-   import {addS88} from '../modules/initFB.js'
+//    import {addS88} from '../modules/initFB.js'
 
    const props=defineProps({
        title:{type:String},

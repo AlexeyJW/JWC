@@ -1,6 +1,12 @@
 import axios from 'axios'
-import {s88Snap, db} from '../modules/initFB.js'
+import { db} from '../modules/initFB.js'
 import {collection, onSnapshot, query, where, addDoc, doc, getDocs, getDoc, updateDoc} from 'firebase/firestore'
+
+// listeners
+var unsubscribeS3=null
+var unsubscribeS88=null
+//_______________________________________
+
 export const GET_S88=({commit})=>{
     axios.get('../src/assets/s88.json')
     .then(res=>{
@@ -13,12 +19,12 @@ export const GET_S3 =({commit})=>{
     .then(res=>commit('SET_S3', res.data))
 }
 
-export async function FB_GET_S88({commit}){
- let arr= await s88Snap()
- console.log ('FB_GET_S88')
- console.log(arr)
- commit('SET_S88', arr)
-}
+// export async function FB_GET_S88({commit}){
+//  let arr= await s88Snap()
+//  console.log ('FB_GET_S88')
+//  console.log(arr)
+//  commit('SET_S88', arr)
+// }
 
 //_______________firebase/firestore_________________________________________
 //
@@ -26,7 +32,7 @@ export async function FB_GET_S88({commit}){
 // listen for s88___________________________________________________________
 export function LISTEN_S88 ({commit}){
             const q=query(collection(db, "s88"))
-            const unsubscribe=onSnapshot(q, snapshot=>{
+            unsubscribeS88=onSnapshot(q, snapshot=>{
                 snapshot.docChanges().forEach(change=>{
                 if (change.type==="added"){
                     console.log("Add", change.doc.data())
@@ -90,7 +96,7 @@ export async function AVERAGE_S88 ({commit}, yearService){
 // listen base collection s3____________________________________________
 export function LISTEN_S3 ({commit}){
         const q=query(collection(db, "s3"))
-        const unsubscribe=onSnapshot(q, snapshot=>{
+        unsubscribeS3=onSnapshot(q, snapshot=>{
             snapshot.docChanges().forEach(change=>{
             if (change.type==="added"){
                 console.log("Add", change.doc.data())
@@ -146,5 +152,6 @@ export async function GET_GROUP_USER({commit}, email){
 }
 export function UNSUBSCRIBE(ctx){
     console.log('unsubscribe')
-    // unsubscribe()
+    unsubscribeS3()
+    unsubscribeS88()
 }

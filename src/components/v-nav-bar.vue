@@ -38,10 +38,11 @@
    const logOut=()=>{
        store.commit('SET_IS_AUTH')
        // ещё нужно отключить слушателей баз s3, s88
-    //    store.dispatch('UNSUBSCRIBE')
+       store.commit('DESTROY_STATE')
+       store.dispatch('UNSUBSCRIBE')
        const r=resOut()
        console.log(r)
-       store.commit('DESTROY_STATE')
+      
        
    }
    

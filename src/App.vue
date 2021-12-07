@@ -29,6 +29,7 @@
 <style>
 *{
   text-decoration: none;
+  /* font-size: calc(25px+(40+40*0.7)*(100vw-320px)/1170); */
 }
 
 #app {
