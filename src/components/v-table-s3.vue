@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-   import {defineProps, computed, ref} from 'vue'
+   import {defineProps, computed} from 'vue'
    import {useStore} from 'vuex'
    const props=defineProps({
        title:{type:String},

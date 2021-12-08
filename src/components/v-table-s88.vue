@@ -138,7 +138,7 @@
 </template>
 <script setup>
    import {useStore} from 'vuex'
-   import {ref, computed} from 'vue'
+   import {computed} from 'vue'
 //    import {listenS88, listenChangeS88} from '../modules/initFB.js'
 
    const store=useStore()

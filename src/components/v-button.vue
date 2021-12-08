@@ -25,11 +25,7 @@ import {defineProps} from 'vue'
         border: 1px solid #888;
         width: 60px;
         height: 25px;
-        /* background:rgb(83, 155, 155); */
         color: white;
-        /* vertical-align:middle;
-        font-weight: lighter;
-        text-align: center; */
         font-family: 'Microsoft YaHei UI Light', sans-serif;
         font-size:15px;
          font-weight: lighter;

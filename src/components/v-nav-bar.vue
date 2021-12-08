@@ -60,8 +60,7 @@
        align-items:center;
        padding:10px;
        background:rgb(83, 155, 155);
-       /* width:100%; */
-      
+          
     }
     .v-nav-bar-title{
         justify-content:flex-start;
