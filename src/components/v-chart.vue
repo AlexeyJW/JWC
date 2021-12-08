@@ -79,9 +79,9 @@ const bg=computed(() =>{
        flex-direction: column;
        justify-content: center;
        border: 1px solid lightgray;
-       margin: 10px;
+       margin-top: 10px;
        box-shadow: 0 0 8px 0 darkgray;
        padding: 10px;
-       width:600px;
+       
    }
 </style>

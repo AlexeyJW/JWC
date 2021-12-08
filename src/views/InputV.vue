@@ -1,8 +1,8 @@
 <template>
-  <div class="v-input-group-number">
+  <!-- <div class="v-input-group-number"> -->
      <v-input/>
      <v-table-s3 :title="store.state.vUserGroup" :group="store.state.vUserGroup"/>
-  </div>
+  <!-- </div> -->
 </template>
 <script setup>
    import VInput from '../components/v-input.vue'
@@ -12,11 +12,11 @@
    const store=useStore()
 </script>
 <style>
-    .v-input-group-number{
+    /* .v-input-group-number{
        display:flex;
        flex-direction: column;
        align-items:center;
        justify-content: center;
        
-    }
+    } */
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="block-table">
+    <div class="block-table-general">
         <div class="v-button-block">
             <h3><strong>General Meeting Report (S-3) {{props.title}}</strong></h3>
             <v-button class="v-button-item" textButton="Send" @click="sendReport" v-show="store.state.isButtonSendS3"/>
@@ -171,15 +171,17 @@ const modifyReport=()=>{
 </script>
 
 <style>
-   .block-table{
+   .block-table-general{
        display: flex;
        flex-direction: column;
        justify-content: center;
-        border: 1px solid lightgray;
-        margin: 10px;
-        box-shadow: 0 0 8px 0 darkgray;
-        padding: 10px;
-        width:600px;
+       border: 1px solid lightgray;
+       margin-top: 10px;
+       margin-bottom: 10px;
+       box-shadow: 0 0 8px 0 darkgray;
+       padding: 10px;
+       /* max-width:600px; */
+      
    }
    .v-button-block{
        display:flex;
@@ -198,7 +200,7 @@ const modifyReport=()=>{
        border-spacing: 0;
        width:100%;
        overflow: hidden;
-        font-size: 12px;
+       /* font-size: 12px; */
        
 
    }

@@ -19,7 +19,7 @@
            </thead>
            <tbody>
                <tr>
-                   <td>September</td>
+                   <td id="v-table-s88-name-month">September</td>
                    <td>{{s88?.find(el=>el.month=='8')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='8')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='8')?.averageWD.toFixed(2)}}</td>
@@ -28,7 +28,7 @@
                    <td>{{s88?.find(el=>el.month=='8')?.averageWE.toFixed(2)}}</td>
                </tr>
                <tr>
-                   <td>October</td>
+                   <td id="v-table-s88-name-month">October</td>
                     <td>{{s88?.find(el=>el.month=='9')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='9')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='9')?.averageWD.toFixed(2)}}</td>
@@ -37,7 +37,7 @@
                    <td>{{s88?.find(el=>el.month=='9')?.averageWE.toFixed(2)}}</td>
                </tr>
                <tr>
-                   <td>November</td>
+                   <td id="v-table-s88-name-month">November</td>
                     <td>{{s88?.find(el=>el.month=='10')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='10')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='10')?.averageWD}}</td>
@@ -46,7 +46,7 @@
                    <td>{{s88?.find(el=>el.month=='10')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td>December</td>
+                   <td id="v-table-s88-name-month">December</td>
                   <td>{{s88?.find(el=>el.month=='11')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='11')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='11')?.averageWD}}</td>
@@ -55,7 +55,7 @@
                    <td>{{s88?.find(el=>el.month=='11')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td>Junuary</td>
+                   <td id="v-table-s88-name-month">Junuary</td>
                    <td>{{s88?.find(el=>el.month=='0')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='0')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='0')?.averageWD}}</td>
@@ -64,7 +64,7 @@
                    <td>{{s88?.find(el=>el.month=='0')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td>February</td>
+                   <td id="v-table-s88-name-month">February</td>
                    <td>{{s88?.find(el=>el.month=='1')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='1')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='1')?.averageWD}}</td>
@@ -73,7 +73,7 @@
                    <td>{{s88?.find(el=>el.month=='1')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td>Mach</td>
+                   <td id="v-table-s88-name-month">Mach</td>
                    <td>{{s88?.find(el=>el.month=='2')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='2')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='2')?.averageWD}}</td>
@@ -82,7 +82,7 @@
                    <td>{{s88?.find(el=>el.month=='2')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td>April</td>
+                   <td id="v-table-s88-name-month">April</td>
                    <td>{{s88?.find(el=>el.month=='3')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='3')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='3')?.averageWD}}</td>
@@ -91,7 +91,7 @@
                    <td>{{s88?.find(el=>el.month=='3')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td>May</td>
+                   <td id="v-table-s88-name-month">May</td>
                    <td>{{s88?.find(el=>el.month=='4')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='4')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='4')?.averageWD}}</td>
@@ -100,7 +100,7 @@
                    <td>{{s88?.find(el=>el.month=='4')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td>June</td>
+                   <td id="v-table-s88-name-month">June</td>
                    <td>{{s88?.find(el=>el.month=='5')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='5')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='5')?.averageWD}}</td>
@@ -109,7 +109,7 @@
                    <td>{{s88?.find(el=>el.month=='5')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td>July</td>
+                   <td id="v-table-s88-name-month">July</td>
                    <td>{{s88?.find(el=>el.month=='6')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='6')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='6')?.averageWD}}</td>
@@ -118,7 +118,7 @@
                    <td>{{s88?.find(el=>el.month=='6')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td>August</td>
+                   <td id="v-table-s88-name-month">August</td>
                    <td>{{s88?.find(el=>el.month=='7')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='7')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='7')?.averageWD}}</td>
@@ -152,23 +152,25 @@
        flex-direction: column;
        justify-content: center;
         border: 1px solid lightgray;
-        margin: 5px;
+        /* margin: 5px; */
         box-shadow: 0 0 8px 0 darkgray;
         padding: 10px;
-        width:600px;
+        /* max-width:600px; */
         
    }
      .v-table-s88{
        border-collapse: collapse;
        border-spacing: 0;
        width:100%;
+       
        overflow: hidden;
-       font-size: 12px;
+       /* font-size:auto; */
 
    }
    .v-table-s88 th, .v-table-s88 td{
        border:1px solid #888;
-       padding:10px;
+       /* padding:10px; */
+       padding:5px;
        text-align: center;
        vertical-align: middle;
        position:relative;

@@ -1,9 +1,9 @@
 <template>
-  <div class="all-group">
+  <!-- <div class="all-group"> -->
     <v-title :groupNumber="paginator" /> 
     <!-- <v-table-s3 :title="paginator"/> -->
     <v-wrapper-table :groups="paginator"/>
-  </div>
+  <!-- </div> -->
     <div class="pagination">
        <div v-for="i in pages" :key="i">
          
@@ -44,12 +44,12 @@ const pageClick=page=>{
 </script>
 
 <style>
- .all-group{
+ /* .all-group{
     display: flex;
     flex-direction: column;
     justify-content:center;
     align-items: center;
-  }
+  } */
   .pagination{
     display:flex;
     flex-direction:row;

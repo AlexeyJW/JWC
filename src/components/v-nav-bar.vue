@@ -12,7 +12,7 @@
             </li>    
             <li  class="nav-li nav-router logout" @click="logOut">Logout</li>
         </ul>
-        <div class="v-nav-bar-user">
+        <div class="v-nav-bar-user" @click="admin">
              <h4 class="user-name">{{store.state.vUser}}</h4>
              <h4 class="user-name">{{store.state.vUserEmail}}</h4>
              <h4 class="user-name">Group: {{store.state.vUserGroup}}</h4>
@@ -25,7 +25,9 @@
    import {ref, computed} from 'vue'
    import {useStore} from 'vuex'
    import {resOut} from '../modules/initFB.js'
+   import {useRouter} from 'vue-router'
 
+   const router=useRouter()
    const store=useStore()
    let isActive=ref(false)
 //    const user=computed(()=>store.getters.GET_VUSER)
@@ -45,15 +47,21 @@
       
        
    }
+   const admin=()=>{
+       router.push({name:'Admin'})
+   }
    
 </script>
 
 <style>
     .v-nav-bar{
        display: flex;
-       justify-content: center;
+       justify-content: space-between;
        align-items:center;
+       padding:10px;
        background:rgb(83, 155, 155);
+       /* width:100%; */
+      
     }
     .v-nav-bar-title{
         justify-content:flex-start;
@@ -69,10 +77,10 @@
      
     }
       
-    .nav-img{
+    /* .nav-img{
         width:30px;
         height:30px;
-    }
+    } */
     .auth{
         align-self: flex-end;
     }
@@ -87,13 +95,18 @@
     .v-nav-bar-user{
         display:flex;
         flex-direction:column;
-        font-size:10px;
+        font-size:9px;
+        
         color:white;
         /* font-family: 'Microsoft YaHei UI Light', sans-serif; */
         justify-content:center;
         align-items:flex-start;
-        height:70px
+        height:70px;
+        border:1px solid lightgrey;
         /* align-self:flex-end; */
+    }
+    .v-nav-bar-user:active{
+        border:1px solid orange;
     }
     .user-name{
         margin:2px;

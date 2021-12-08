@@ -1,24 +1,8 @@
 <template>
-   
-   <div class="general-group">
-    <v-input class="input-block"/>
-    <div class="table-s3">
-        
-        <v-table-s3-general :title="'All Groups'"/>
-        
-    </div>
-    
-       
-    
-    <div class="table-s88">
-        <v-table-s88/>
-        
-    </div>
-    <div class="home-chart">
-       <v-chart />
-    </div>
-   
-  </div>  
+    <v-input/>
+    <v-table-s3-general :title="'All Groups'"/>
+    <v-table-s88/>
+    <v-chart />
 </template>
 
 <script setup>
@@ -30,13 +14,4 @@
    
 </script>
 
-<style scoped>
-
-.general-group{
-     display:flex;
-     flex-direction: column;
-     align-items:center;
-     justify-content: center;
-}
-
-</style>
+<style></style>

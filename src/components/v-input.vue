@@ -3,7 +3,7 @@
        
         <div class="v-input-content">
         
-        <div class="v-input-group" id="left">
+        <div class="v-input-group">
             <h5 class="v-input-label">Group:</h5>
             <select class="field-select" v-model="Group" id="group">
                 <option disabled selected>Choice group</option>
@@ -29,7 +29,7 @@
         </div>
         <div class="v-input-group">
             <h5 class="v-input-label">WD/WE:</h5>
-            <select  class="field-weekday" name="weekday" v-model="Weekday" id="w">
+            <select  class="v-field-weekday" name="weekday" v-model="Weekday" id="w">
                 <option disabled selected>Choice</option>
                 <option value="weekdays">weekdays</option>
                 <option value="weekend">weekend</option>
@@ -43,9 +43,9 @@
         </div>
         <div class="v-input-group">
             <h5 class="v-input-label">Total:</h5>
-            <input class="field-input" type="number" placeholder="total" v-model="vTotal" id="total"/>
+            <input class="v-field-input" type="number" placeholder="total" v-model="vTotal" id="total"/>
         </div>
-        <div class="v-input-group" id="right">
+        <div class="v-input-group">
             <h5 class="v-input-label">Send Report:</h5>
             <v-button class="field-button" textButton="Send"  @click="sendObj"/>
         </div>
@@ -122,25 +122,16 @@ const confirmPressedOK=()=>{
 </script>
    
 <style>
-   #left{
-       border-left:1px solid rgb(83, 155, 155);
-       padding-left:10px;
-   }
-   #right{
-       border-right:1px solid rgb(83, 155, 155);
-       padding-right: 10px;
-   }
+   
     .v-input{
-        display: flex;
+        /* display: flex;
         flex-direction: row;
-        align-items: stretch;
+        align-items: stretch; */
         padding: 10px;
-        flex-direction:column;
+        /* flex-direction:column; */
         border:1px solid lightgray;
         box-shadow: 0 0 8px 0 darkgray;
         margin-top:10px;
-        width:600px;
-  
     }
      .v-input-label{
         align-self:flex-start;
@@ -155,28 +146,29 @@ const confirmPressedOK=()=>{
         flex-direction: column;
         justify-content:flex-end;
         align-items:flex-end;
-        border-top:1px solid rgb(83, 155, 155);
-        border-bottom:1px solid rgb(83, 155, 155);
-        padding:3px;
-        }
+    }
    
     .v-input-content{
         display: flex;
+        flex-wrap: wrap;
         flex-direction: row;
         align-items: stretch;
-        justify-content: center;
+        justify-content: space-between;
+        border:1px solid rgb(83, 155, 155);
+        padding:5px;
+        margin:5px;
        
     }
     .field-data, .field-select{
         margin-right:5px;
         top:-30;
     }
-    .field-input{
-        width:60px;
+    .v-field-input{
+        max-width:60px;
         margin-right:5px;
     }
-    .field-weekday{
-        width:100px;
+    .v-field-weekday{
+        max-width:100px;
     }
    
     .v-span{

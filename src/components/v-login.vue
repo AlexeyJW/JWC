@@ -16,29 +16,21 @@
 
 <script setup>
 import {resGoogle} from '../modules/initFB.js'
-import {computed} from 'vue'
-// import {ref} from 'vue'
-// import {useRouter} from 'vue-router'
 import {useStore} from 'vuex'
 const store=useStore()
-// const router=useRouter() 
 
-// let vUser=ref('')
- const logGoogle=()=>{
+const logGoogle=()=>{
     resGoogle()
     .then((el)=>{
-        // console.log(el)
+       
         store.dispatch('GET_GROUP_USER', el?.email)
         store.commit('SET_IS_AUTH')
-        // store.dispatch('FB_GET_S88')
+       
         store.dispatch('LISTEN_S88')
         store.dispatch('LISTEN_S3')
         store.dispatch('AVERAGE_S88', '2022')
-        // console.log("s3=", store.state.s3)
+      
     }) 
-    // console.log(user?.displayName??'no user')
-    // vUser.value=user?.displayName
-
 }
 
 </script>
@@ -53,11 +45,9 @@ const store=useStore()
         margin: 10px;
         box-shadow: 0 0 8px 0 darkgray;
         padding: 15px;
-        width:500px;
+        max-width:500px;
         font-family: 'Microsoft YaHei UI Light', sans-serif;
-        /* background-image: url(../assets/images.png); 
-        background-color:white; */
-        /*          фон в клеточку    */
+              /*          фон в клеточку    */
         background: linear-gradient( #bbb, transparent 1px), linear-gradient( 90deg, #bbb, transparent 1px);
         background-size: 15px 15px;
         background-position: center center;
@@ -73,8 +63,7 @@ const store=useStore()
     flex-direction: row;
     align-items: center;
     padding:10px;
-    /* border-bottom:1px solid lightgray; */
-   
+    
 }
 .v-auth-content{
     display: flex;

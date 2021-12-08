@@ -113,18 +113,19 @@
        flex-direction: column;
        justify-content: center;
         border: 1px solid lightgray;
-        margin: 10px;
+        margin-top: 10px;
+        padding:10px;
         box-shadow: 0 0 8px 0 darkgray;
-        padding: 10px;
-        /* flex-basis:500px; */
-        width:600px;
+        /* padding: 10px; */
+      
    }
    .v-table{
        border-collapse: collapse;
        border-spacing: 0;
+      
        width:100%;
        overflow: hidden;
-        font-size: 12px;
+        /* font-size: 12px; */
        
 
    }
