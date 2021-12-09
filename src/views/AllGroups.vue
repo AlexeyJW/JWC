@@ -1,9 +1,11 @@
 <template>
-  <!-- <div class="all-group"> -->
+    <div class="display-poster">
+        <v-poster />
+    </div>
     <v-title :groupNumber="paginator" /> 
-    <!-- <v-table-s3 :title="paginator"/> -->
+    
     <v-wrapper-table :groups="paginator"/>
-  <!-- </div> -->
+ 
     <div class="pagination">
        <div v-for="i in pages" :key="i">
          
@@ -23,6 +25,8 @@
    import VTableS3 from '../components/v-table-s3.vue';
    import VTitle from '../components/v-title.vue'
    import VWrapperTable from '../components/v-wrapper-table.vue'
+   import vPoster from '../components/v-poster.vue'
+   
    const store=useStore()
    const groupNumber=2
    let pageNumber=ref(store.getters.ACTIVE_PAGE)

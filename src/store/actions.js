@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { db} from '../modules/initFB.js'
+import { db, resOut} from '../modules/initFB.js'
 import {collection, onSnapshot, query, where, addDoc, doc, getDocs, getDoc, updateDoc} from 'firebase/firestore'
 
 // listeners
@@ -150,8 +150,12 @@ export async function GET_GROUP_USER({commit}, email){
       commit('SET_VUSER',{name:qdoc.data().name, email:qdoc.data().email, group:qdoc.data().group})
      })
 }
-export function UNSUBSCRIBE(ctx){
+export function UNSUBSCRIBE({commit}){
     console.log('unsubscribe')
     unsubscribeS3()
     unsubscribeS88()
+    commit('SET_IS_AUTH')
+    commit('DESTROY_STATE')
+    const r=resOut()
+    console.log(r)
 }

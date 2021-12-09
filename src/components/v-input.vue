@@ -154,7 +154,7 @@ const confirmPressedOK=()=>{
         flex-direction: row;
         align-items: stretch;
         justify-content: space-between;
-        border:1px solid rgb(83, 155, 155);
+        border:1px solid #539b9b;
         padding:5px;
         margin:5px;
        

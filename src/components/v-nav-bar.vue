@@ -12,6 +12,7 @@
             </li>    
             <li  class="nav-li nav-router logout" @click="logOut">Logout</li>
         </ul>
+        <img class="v-nav-bar-photo" :src="store.state.vUserPhoto"/>
         <div class="v-nav-bar-user" @click="admin">
              <h4 class="user-name">{{store.state.vUser}}</h4>
              <h4 class="user-name">{{store.state.vUserEmail}}</h4>
@@ -38,12 +39,11 @@
     //    {id:4, label:'Logout', path:'/Auth', choice: false}
    ]
    const logOut=()=>{
-       store.commit('SET_IS_AUTH')
-       // ещё нужно отключить слушателей баз s3, s88
-       store.commit('DESTROY_STATE')
+    //    store.commit('SET_IS_AUTH')
+    //    store.commit('DESTROY_STATE')
        store.dispatch('UNSUBSCRIBE')
-       const r=resOut()
-       console.log(r)
+    //    const r=resOut()
+    //    console.log(r)
       
        
    }
@@ -90,6 +90,12 @@
     
     .router-link-exact-active{
         border-bottom: 2px solid rgb(227, 241, 241);
+    }
+    .v-nav-bar-photo{
+         width: 4em;
+        height: 4em;
+        border: 1px solid lightgrey;
+        border-radius: 50%;
     }
     .v-nav-bar-user{
         display:flex;

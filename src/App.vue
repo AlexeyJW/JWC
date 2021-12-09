@@ -1,8 +1,11 @@
 <script setup>
     import VNavBar from './components/v-nav-bar.vue'
     import Auth from './views/Auth.vue'
+    import vSidebar from './components/v-sidebar.vue'
+    import vPoster from './components/v-poster.vue'
     import {computed} from 'vue'
     import {useStore} from 'vuex'
+    
 
     const store=useStore()
     const isAuth=computed(()=>store.getters.GET_IS_AUTH)
@@ -13,15 +16,27 @@
 
 <template>
     <div id="app">
-     <div v-if="isAuth">
-       <Auth/>  
-     </div> 
-     <div v-else>
-        <v-nav-bar/>
+      <div v-if="isAuth">
+         <Auth/>  
+      </div> 
+      <div v-else>
+         
+         <div class="display-nav-bar">
+            <v-nav-bar/>
+         </div>
+        <!-- <div class="display-poster">
+            <v-poster/>
+        </div> -->
+         <div class="display-sidebar">
+            <v-sidebar/>
+            
+         </div>
+       
         <div class="router-view">
-          <router-view/>
+        
+               <router-view/>
         </div>
-     </div>
+      </div>
     
     </div>
 </template>
@@ -33,7 +48,10 @@
   box-sizing:border-box;
    
 }
-
+body{
+  margin:0;
+  padding:0;
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -54,7 +72,9 @@
     
     width:1500px;
   }
- 
+  .display-sidebar, .display-poster{
+    display: none;
+  }
   .v-input,
   .v-block-table-s88, 
   .v-chart, 
@@ -86,7 +106,9 @@
     
     width:1140px;
   }
- 
+  .display-sidebar, .display-poster{
+    display: none;
+  }
   .v-input,
   .v-block-table-s88, 
   .v-chart, 
@@ -99,18 +121,21 @@
     width:800px;
   }
  
-  /* .v-table-s88, .v-table{
-    font-size:1rem;
-  }
-  
-  #v-table-s88-name-month{
-    font-size:2rem;
-  } */
+ 
 }
 /*______________________________992______________________________________________*/
 @media screen and (max-width:992px){
    #app{
      width:930px;
+     margin-top:0px;
+  }
+  .display-nav-bar {
+    display:none;
+  }
+  
+  .display-sidebar, .display-poster{
+    
+    display:block;
   }
   .v-input,
   .v-block-table-s88, 
@@ -119,9 +144,10 @@
   .block-table-general, 
   .block-table,
   .v-nav-bar,
-  .router-view{
+  .router-view,
+  .display-poster{
      width:600px;
-    
+     margin-left:20px;
   }
   .v-input-content{
   
@@ -144,6 +170,12 @@
    #app{
     width:710px;
   }
+  .display-nav-bar{
+    display:none;
+  }
+  .display-sidebar, .display-poster{
+    display:block;
+  }
   .table-s88,
   .v-block-table-s88,
   .v-chart,
@@ -152,7 +184,8 @@
   .table-s3,
   .v-input,
   .v-nav-bar,
-  .router-view{
+  .router-view,
+  .display-poster{
      width:600px;
   }
  
@@ -178,6 +211,12 @@
   #app{
      width:550px;
   }
+  .display-nav-bar{
+    display:none;
+  }
+  .display-sidebar, .display-poster{
+    display:block;
+  }
    .v-input,
   .v-block-table-s88, 
   .v-chart, 
@@ -185,7 +224,8 @@
   .block-table-general, 
   .block-table,
   .v-nav-bar,
-  .router-view{
+  .router-view,
+  .display-poster{
      width:550px;
     
   }
@@ -210,7 +250,13 @@
 
 @media screen and (max-width:520px) {
   #app{
-     width:500px;
+     width:470px;
+  }
+  .display-nav-bar{
+    display:none;
+  }
+  .display-sidebar, .display-poster{
+    display:block;
   }
    .v-input,
   .v-block-table-s88, 
@@ -219,8 +265,9 @@
   .block-table-general, 
   .block-table,
   .v-nav-bar,
-  .router-view{
-     width:500px;
+  .router-view,
+  .display-poster{
+     width:400px;
     
   }
   .v-input-content{
@@ -228,16 +275,16 @@
    flex-basis:50%;
   }
   .v-table td{
-    font-size:15px;
+    font-size:12px;
   }
   .v-table-s88 td{
-    font-size:12px;
+    font-size:10px;
   }
   .v-table-s88 th{
     font-size:10px;
   }
   #v-table-s88-name-month{
-    font-size:10px;
+    font-size:8px;
   } 
 }
 
@@ -246,6 +293,12 @@
     width:400px;
     margin:0px;
     padding:0px;
+  }
+  .display-nav-bar{
+    display:none;
+  }
+  .display-sidebar, .display-poster{
+    display:block;
   }
   
   .v-input-content{
@@ -261,20 +314,24 @@
   .block-table-general, 
   .block-table,
   .v-nav-bar,
-  .router-view{
-   width:400px;
+  .router-view,
+  .display-poster{
+   width:350px;
   }
   .v-table td{
-    font-size:15px;
+    font-size:12px;
+  }
+  .v-table th{
+    font-size:10px;
   }
   .v-table-s88 td{
-    font-size:10px;
+    font-size:8px;
   }
   .v-table-s88 th{
-    font-size:10px;
+    font-size:8px;
   }
   #v-table-s88-name-month{
-    font-size:10px;
+    font-size:8px;
   } 
 }
 

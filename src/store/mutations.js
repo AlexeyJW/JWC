@@ -106,6 +106,9 @@ export default{
         state.vUser=''
         state.vUserEmail=''
         state.vUserGroup=''
+    },
+    SET_USER_PHOTO (state, url){
+        state.vUserPhoto=url
     }
 
     

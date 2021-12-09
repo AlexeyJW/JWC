@@ -1,0 +1,133 @@
+<template>
+   <div class="sidebar" :style="{width:sidebarWidth}">
+      <h2>
+          <span v-if="collapsed">
+              <br/>
+              <div>J</div>
+              <div>W</div>
+              <div>C</div>
+          </span>
+          <span v-else>JWC</span>
+      </h2>
+      <v-sidebar-links to='/' icon="fas fa-home">Home</v-sidebar-links> 
+      <v-sidebar-links to='/InputV' icon="fas fa-chart-bar">Input</v-sidebar-links> 
+      <v-sidebar-links to='/AllGroups' icon="fas fa-users">All Groups</v-sidebar-links> 
+      <v-sidebar-links to='/Admin' icon="fas fa-lock">Admin</v-sidebar-links> 
+      <br/> 
+       <div v-if="!collapsed" class="v-sidebar-user" >
+             <img class="v-photo" :src="store.state.vUserPhoto"/>
+             <h4 class="user-name">{{store.state.vUser}}</h4>
+             <h4 class="user-name">{{store.state.vUserEmail}}</h4>
+             <h4 class="user-name">Group: {{store.state.vUserGroup}}</h4>
+            
+        </div>
+       <br/>
+       <br/>
+       <div class="v-logout" @click="logOut">
+          <i class="fas fa-door-open" ></i>
+       </div>
+            
+       
+       <span
+          class="collapse-icon"
+          :class="{'rotate-180':collapsed}"
+          @click="toggleSidebar">
+             <i class="fas fa-align-justify" />  
+        </span>
+   </div>
+</template>
+
+<script setup>
+import vSidebarLinks from './v-sidebar-links.vue'
+import {collapsed, toggleSidebar, sidebarWidth} from '../store'
+import {resOut} from '../modules/initFB.js'
+import {useStore} from 'vuex'
+import {useRouter} from 'vue-router'
+    const props=defineProps({
+
+    })
+const store=useStore()
+const router=useRouter()
+ const logOut=()=>{
+    //    store.commit('SET_IS_AUTH')
+       
+    //    store.commit('DESTROY_STATE')
+       store.dispatch('UNSUBSCRIBE')
+    //    const r=resOut()
+    //    console.log(r)
+        router.push({name:'Home'})
+       
+   }
+// console.log("toggleSidebar=", collapsed.value)
+</script>
+
+<style>
+:root{
+    --sidebar-bg-color:#539b9b;
+    --sidebar-item-hover:#9bb1a5;
+    --sidebar-item-active:#478568;
+}
+</style>
+<style scoped>
+   .sidebar{
+       /* margin-top:10px; */
+       /* margin-right:10px; */
+       color: white;
+       background-color: var(--sidebar-bg-color);
+       float: left;
+       position: fixed;
+       z-index:1;
+       top:0;
+       bottom:0;
+       /* padding: 0.5em; */
+
+       transition: 0.3ms ease;
+
+       display: flex;
+       flex-direction:column;
+
+
+       
+
+   }
+   .v-sidebar-user{
+        border-top:1px solid lightgrey;
+        display:flex;
+        flex-direction:column;
+        font-size:9px;
+        padding:5px;
+        color:white;
+        /* font-family: 'Microsoft YaHei UI Light', sans-serif; */
+        justify-content:center;
+        align-items:flex-start;
+        height:100px;
+   }
+   .v-photo{
+        align-self:center;
+        width: 5em;
+        height: 5em;
+        border: 1px solid lightgrey;
+        border-radius: 50%;
+        margin-bottom:5px;  
+   }
+   .v-logout{
+        margin: 0.1em 0;
+        padding: 0.4em;
+        border:1px solid lightgrey;
+       
+
+   }
+   .collapse-icon{
+       position: absolute;
+       /* bottom:0; */
+       top:0;
+       padding:0.75em;
+       color:lightgray;
+       transition: 0.2s linear;
+     
+   }
+   .rotate-180{
+       transform: rotate(180deg);
+       transition: 0.2s linear;
+   }
+</style>

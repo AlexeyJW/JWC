@@ -22,8 +22,9 @@ const store=useStore()
 const logGoogle=()=>{
     resGoogle()
     .then((el)=>{
-       
+        
         store.dispatch('GET_GROUP_USER', el?.email)
+        store.commit('SET_USER_PHOTO', el?.reloadUserInfo.photoUrl)
         store.commit('SET_IS_AUTH')
        
         store.dispatch('LISTEN_S88')
