@@ -1,13 +1,14 @@
 <template>
-    <div>
-        Admin
-        
+    <div class="display-poster">
+        <v-poster />
     </div>
+    <v-admin/>
 </template>
 
 <script setup>
-import vSidebar from '../components/v-sidebar.vue'
-import { sidebarWidth } from '../store';
+import vPoster from '../components/v-poster.vue'
+import vAdmin from '../components/v-admin.vue'
+
 </script>
 
 <style>

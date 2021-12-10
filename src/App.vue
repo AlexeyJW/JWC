@@ -147,7 +147,7 @@ body{
   .router-view,
   .display-poster{
      width:600px;
-     margin-left:20px;
+     /* margin-left:20px; */
   }
   .v-input-content{
   
@@ -168,7 +168,7 @@ body{
 }
 @media screen and (max-width:767px) {
    #app{
-    width:710px;
+    width:620px;
   }
   .display-nav-bar{
     display:none;
@@ -209,7 +209,7 @@ body{
 }
 @media screen and (max-width:576px) {
   #app{
-     width:550px;
+     width:570px;
   }
   .display-nav-bar{
     display:none;
@@ -250,7 +250,7 @@ body{
 
 @media screen and (max-width:520px) {
   #app{
-     width:470px;
+     width:420px;
   }
   .display-nav-bar{
     display:none;
@@ -290,7 +290,7 @@ body{
 
 @media screen and (max-width:420px) {
   #app{
-    width:400px;
+    width:370px;
     margin:0px;
     padding:0px;
   }

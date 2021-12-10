@@ -38,7 +38,7 @@
         
         
         <div class="v-input-group">
-            <h5 class="v-input-label">Date:</h5>
+            <h5 class="v-input-label">Date meeting:</h5>
             <input class="field-data"  type="date" v-model="vDate"/>
         </div>
         <div class="v-input-group">

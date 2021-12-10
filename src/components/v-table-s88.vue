@@ -128,9 +128,9 @@
                </tr>
                <tr>
                    <td colspan="3"><strong>Average:</strong></td>
-                   <td>{{averageWD.toFixed(2)}}</td>
+                   <td>{{s88.length !=0 ? (averageWD/s88.length).toFixed(2) : 0}}</td>
                    <td colspan="2"><strong>Average:</strong></td>
-                   <td>{{averageWE.toFixed(2)}}</td>
+                   <td>{{s88.length !=0 ? (averageWE/s88.length).toFixed(2) : 0}}</td>
                </tr>
            </tbody>
        </table>

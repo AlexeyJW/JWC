@@ -92,8 +92,8 @@
         border-bottom: 2px solid rgb(227, 241, 241);
     }
     .v-nav-bar-photo{
-         width: 4em;
-        height: 4em;
+         width: 3em;
+        height: 3em;
         border: 1px solid lightgrey;
         border-radius: 50%;
     }

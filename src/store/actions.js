@@ -5,6 +5,7 @@ import {collection, onSnapshot, query, where, addDoc, doc, getDocs, getDoc, upda
 // listeners
 var unsubscribeS3=null
 var unsubscribeS88=null
+var unsubscribeAllGroups=null
 //_______________________________________
 
 export const GET_S88=({commit})=>{
@@ -150,10 +151,36 @@ export async function GET_GROUP_USER({commit}, email){
       commit('SET_VUSER',{name:qdoc.data().name, email:qdoc.data().email, group:qdoc.data().group})
      })
 }
+export function CHANGE_TOTAL_GROUPS ({commit}, total){
+    updateDoc(doc(db, 'groupAll', "ZuNYyo1fBGPEhFAW3VLU"), {groupAll:total})
+    .then(()=>console.log('Success'))
+    .catch(()=>console.log('error'))
+}
+export function GET_TOTAL_GROUPS({commit}){
+    const q=query(collection(db, "groupAll"))
+    unsubscribeAllGroups=onSnapshot(q, snapshot=>{
+        snapshot.docChanges().forEach(change=>{
+        if (change.type==="added"){
+            console.log("Add", change.doc.data())
+            commit('SET_TOTAL_GROUPS', change.doc.data().groupAll)
+        }
+        if (change.type==="modified"){
+            console.log("Modified",change.doc.id, change.doc.data().groupAll)
+            commit('SET_TOTAL_GROUPS', change.doc.data())
+          
+        }
+        if (change.type==="removed"){
+            console.log("Removed", change.doc.data())
+           
+        }
+        })
+})
+}
 export function UNSUBSCRIBE({commit}){
     console.log('unsubscribe')
     unsubscribeS3()
     unsubscribeS88()
+    unsubscribeAllGroups()
     commit('SET_IS_AUTH')
     commit('DESTROY_STATE')
     const r=resOut()

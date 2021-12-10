@@ -41,19 +41,22 @@ const isActive=computed(()=>route.path==props.to)
        font-weight: 400;
        user-select: none;
 
-       margin: 0.1em 0;
+       margin: 0.5em 0;
        padding: 0.4em;
        border-radius: 0.25em;
        height: 1.5em;
 
-       color:white;
+       color: var(--sidebar-icon-color);
        text-decoration: none;
    }
    .link:hover{
-       background: var(--sidebar-item-hover);
+       /* background: var(--sidebar-item-hover);
+       padding:5px; */
+       color: var(--sidebar-item-hover)
    }
    .link:active{
        background: var(--sidebar-item-active);
+       
    }
    .link .icon{
        flex-shrink: 0;

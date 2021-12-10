@@ -45,3 +45,4 @@ export const GET_IS_AUTH=(state)=>state.isAuth
 export const GET_VUSER=(state)=>state.vUser
 export const GET_AVERAGE_S88_WD=(state)=>state.averageS88WD
 export const GET_AVERAGE_S88_WE=(state)=>state.averageS88WE
+export const GET_TOTAL_GROUPS=(state)=>state.groups

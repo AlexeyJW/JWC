@@ -3,9 +3,9 @@
       <h2>
           <span v-if="collapsed">
               <br/>
-              <div>J</div>
+              <!-- <div>J</div>
               <div>W</div>
-              <div>C</div>
+              <div>C</div> -->
           </span>
           <span v-else>JWC</span>
       </h2>
@@ -16,9 +16,13 @@
       <br/> 
        <div v-if="!collapsed" class="v-sidebar-user" >
              <img class="v-photo" :src="store.state.vUserPhoto"/>
-             <h4 class="user-name">{{store.state.vUser}}</h4>
-             <h4 class="user-name">{{store.state.vUserEmail}}</h4>
-             <h4 class="user-name">Group: {{store.state.vUserGroup}}</h4>
+             <div class="v-sidebar-user-text">
+                 <h4 class="user-name">{{store.state.vUser}}</h4>
+                 <h4 class="user-name">{{store.state.vUserEmail}}</h4>
+                 <h4 class="user-name">Group: {{store.state.vUserGroup}}</h4>
+             </div>
+             
+             
             
         </div>
        <br/>
@@ -64,18 +68,22 @@ const router=useRouter()
 <style>
 :root{
     --sidebar-bg-color:#539b9b;
-    --sidebar-item-hover:#9bb1a5;
-    --sidebar-item-active:#478568;
+    --sidebar-item-color:white;
+    --sidebar-item-hover:white;
+    --sidebar-item-active:#73e2d0;
+    /* --sidebar-icon-color:#0079AF; */
+    --sidebar-icon-color: rgb(71, 74, 75);
 }
 </style>
 <style scoped>
    .sidebar{
        /* margin-top:10px; */
        /* margin-right:10px; */
-       color: white;
+       color:var(--sidebar-item-color);
        background-color: var(--sidebar-bg-color);
-       float: left;
+       /* float: left; */
        position: fixed;
+       opacity:0.8;
        z-index:1;
        top:0;
        bottom:0;
@@ -90,16 +98,20 @@ const router=useRouter()
        
 
    }
+   .fas{
+       color:var(--sidebar-icon-color)
+   }
    .v-sidebar-user{
         border-top:1px solid lightgrey;
+        border-bottom:1px solid lightgrey;
         display:flex;
-        flex-direction:column;
+        flex-direction:row;
         font-size:9px;
         padding:5px;
         color:white;
         /* font-family: 'Microsoft YaHei UI Light', sans-serif; */
         justify-content:center;
-        align-items:flex-start;
+        align-items:center;
         height:100px;
    }
    .v-photo{
@@ -110,11 +122,19 @@ const router=useRouter()
         border-radius: 50%;
         margin-bottom:5px;  
    }
+   .v-sidebar-user-text{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+
+   }
+  
    .v-logout{
         margin: 0.1em 0;
         padding: 0.4em;
-        border:1px solid lightgrey;
-       
+        /* border:1px solid lightgrey; */
+        color:var(--sidebar-icon-color);
+        align-self:flex-start;
 
    }
    .collapse-icon{
@@ -122,7 +142,7 @@ const router=useRouter()
        /* bottom:0; */
        top:0;
        padding:0.75em;
-       color:lightgray;
+       color: var(--sidebar-icon-color);
        transition: 0.2s linear;
      
    }

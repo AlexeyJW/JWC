@@ -108,8 +108,13 @@ export default{
         state.vUserGroup=''
     },
     SET_USER_PHOTO (state, url){
+        console.log('set_user_photo', url)
         state.vUserPhoto=url
+    },
+    SET_TOTAL_GROUPS(state, total){
+        state.groups=total
+        //требуется доработка
+        for(let i=0;i<total; i++) state.groupsData.push(i+1)
     }
-
     
 }
