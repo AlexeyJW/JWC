@@ -6,11 +6,15 @@
                     General Meeting Report (S-3) 
                     {{props.title}}. 
                     Month:
-                    <button class="v-button-month-back">
+                    <button class="v-button-month-back" 
+                       v-if="isButtonBack"
+                       @click="monthBack">
                          <i class="fas fa-angle-left"/>
                     </button>
                     {{convertMonth(monthNow)}}
-                     <button class="v-button-month-back">
+                     <button class="v-button-month-back"
+                       v-if="!isButtonBack"
+                       @click="monthToNow">
                          <i class="fas fa-angle-right"/>
                     </button>
                 </strong>
@@ -78,7 +82,7 @@
    import {defineProps, computed, ref} from 'vue'
    import {useStore} from 'vuex'
    import vButton from './v-button.vue'
-   import {convertMonth} from '../modules/convertMonth'
+   import {convertMonth, isServiceYear} from '../modules/convertMonth'
 //    import {addS88} from '../modules/initFB.js'
 
    const props=defineProps({
@@ -90,14 +94,17 @@
    
    //date now
    const dateNow=new Date()
-   const monthNow=Number(dateNow.getMonth())
-   const yearNow=dateNow.getFullYear()
+   const monthNow=ref(Number(dateNow.getMonth()))
+   const yearNow=ref(dateNow.getFullYear())
+   const serviceYear=ref(isServiceYear(yearNow.value, monthNow.value))
+
+
    const isButton=ref(true)
   
    const store=useStore()
-   const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow, monthNow))
-   const arrWD=computed(()=>store.getters.GET_S3(''+yearNow, monthNow).filter(el=>el.data.weekday=='weekdays'))
-   const arrWE=computed(()=>store.getters.GET_S3(''+yearNow, monthNow).filter(el=>el.data.weekday=='weekend'))
+   const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow.value, monthNow.value))
+   const arrWD=computed(()=>store.getters.GET_S3(''+yearNow.value, monthNow.value).filter(el=>el.data.weekday=='weekdays'))
+   const arrWE=computed(()=>store.getters.GET_S3(''+yearNow.value, monthNow.value).filter(el=>el.data.weekday=='weekend'))
    const allReports=ref(false)
    const isAllReportsWD=(week)=>{
        let all=0
@@ -154,18 +161,18 @@ const prepareTheReport=()=>{
     let obj={
         averageWD:Number(avWD.value),
         averageWE:Number(avWE.value),
-        month:Number(monthNow),
+        month:Number(monthNow.value),
         totalMeetingsWD:kvoWD.value,
         totalMeetingsWE:kvoWE.value,
         totalWD:totalWD.value,
         totalWE:totalWE.value,
-        yearService:'2022'
+        yearService:serviceYear.value
     }
     return obj
 }
 setTimeout(()=>{
     let d=store.getters.YEAR_SERVICE('2022')
-    if(d.find(el=>el.month==Number(monthNow))){
+    if(d.find(el=>el.month==Number(monthNow.value))){
               console.log('YES!!!!!')
               store.commit('SET_IS_BUTTON_SEND_S3_FALSE')
           } 
@@ -182,6 +189,36 @@ const modifyReport=()=>{
    
     store.dispatch('MODI_S88', prepareTheReport())
 }
+
+//Button back
+//заморочка с месяцами и годами
+
+const isButtonBack=ref(true)
+const monthBack=()=>{
+   if (monthNow.value==0)
+      {
+         monthNow.value=11
+         yearNow.value-=1
+         
+      }else {
+          monthNow.value-=1
+      }
+   serviceYear.value=isServiceYear(yearNow.value, monthNow.value)
+   isButtonBack.value=!isButtonBack.value
+}
+const monthToNow=()=>{
+   if (monthNow.value==11)
+      {
+         monthNow.value=0
+         yearNow.value+=1
+         
+      }else {
+          monthNow.value+=1
+      }
+   serviceYear.value=isServiceYear(yearNow.value, monthNow.value)
+   isButtonBack.value=!isButtonBack.value
+}
+
 </script>
 
 <style>

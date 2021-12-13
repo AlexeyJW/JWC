@@ -18,3 +18,12 @@ export const convertMonth=(numberMonth)=>{
     return month
        
 }
+export const isServiceYear=( year, month)=>{
+   let serviceYear=null
+   if (month<9) {
+       serviceYear=year
+   }else {
+       serviceYear=year+1
+   } 
+   return serviceYear  
+}
