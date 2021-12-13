@@ -17,12 +17,14 @@
 <script setup>
 import {resGoogle} from '../modules/initFB.js'
 import {useStore} from 'vuex'
+import {useRouter} from 'vue-router'
 const store=useStore()
-
+const router=useRouter()
 const logGoogle=()=>{
     resGoogle()
     .then((el)=>{
-        
+        console.log(el)
+        if (el!=undefined) {
         store.dispatch('GET_GROUP_USER', el?.email)
         // store.commit('SET_USER_PHOTO', el?.reloadUserInfo.photoUrl)
         store.commit('SET_USER_PHOTO', el?.photoURL.toString())
@@ -31,8 +33,9 @@ const logGoogle=()=>{
         store.dispatch('LISTEN_S88')
         store.dispatch('LISTEN_S3')
         store.dispatch('AVERAGE_S88', '2022')
-      
-    }) 
+        }else router.push({name:'Home'})
+    })
+   
 }
 
 </script>

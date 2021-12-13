@@ -90,10 +90,11 @@ export default{
     SET_IS_AUTH (state){
         state.isAuth=!state.isAuth
     },
-    SET_VUSER (state, {name:user, email:email, group:group}){
+    SET_VUSER (state, {name:user, email:email, group:group, role:role}){
         state.vUser=user
         state.vUserEmail=email
         state.vUserGroup=group
+        state.vUserRole=role
     },
     DESTROY_STATE (state){
         console.log('DESTROY_STATE')
@@ -113,8 +114,11 @@ export default{
     },
     SET_TOTAL_GROUPS(state, total){
         state.groups=total
-        //требуется доработка
-        for(let i=0;i<total; i++) state.groupsData.push(i+1)
+        
+    },
+    SET_NAME_GROUPS (state, arr){
+        state.groupsData=[]
+        state.groupsData=[...arr]
     }
     
 }

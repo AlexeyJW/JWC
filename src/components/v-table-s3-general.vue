@@ -1,7 +1,20 @@
 <template>
     <div class="block-table-general">
         <div class="v-button-block">
-            <h3><strong>General Meeting Report (S-3) {{props.title}}</strong></h3>
+            <h3>
+                <strong>
+                    General Meeting Report (S-3) 
+                    {{props.title}}. 
+                    Month:
+                    <button class="v-button-month-back">
+                         <i class="fas fa-angle-left"/>
+                    </button>
+                    {{convertMonth(monthNow)}}
+                     <button class="v-button-month-back">
+                         <i class="fas fa-angle-right"/>
+                    </button>
+                </strong>
+            </h3>
             <v-button class="v-button-item" textButton="Send" @click="sendReport" v-show="store.state.isButtonSendS3"/>
             <v-button class="v-button-item" textButton="Modify" @click="modifyReport" v-show="!store.state.isButtonSendS3"/>
         </div>
@@ -65,6 +78,7 @@
    import {defineProps, computed, ref} from 'vue'
    import {useStore} from 'vuex'
    import vButton from './v-button.vue'
+   import {convertMonth} from '../modules/convertMonth'
 //    import {addS88} from '../modules/initFB.js'
 
    const props=defineProps({
@@ -191,6 +205,11 @@ const modifyReport=()=>{
   
       
        
+   }
+   .v-button-month-back{
+       background:var(--sidebar-bg-color);
+       margin:5px;
+       color:white;
    }
    .v-button-item{
        margin-left: 20px;

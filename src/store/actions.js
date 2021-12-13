@@ -148,14 +148,10 @@ export async function GET_GROUP_USER({commit}, email){
     const qSnapshot=await getDocs(q)
     qSnapshot.forEach(qdoc=>{
       console.log("qdoc=",qdoc.data())
-      commit('SET_VUSER',{name:qdoc.data().name, email:qdoc.data().email, group:qdoc.data().group})
+      commit('SET_VUSER',{name:qdoc.data().name, email:qdoc.data().email, group:qdoc.data().group, role:qdoc.data().role})
      })
 }
-export function CHANGE_TOTAL_GROUPS ({commit}, total){
-    updateDoc(doc(db, 'groupAll', "ZuNYyo1fBGPEhFAW3VLU"), {groupAll:total})
-    .then(()=>console.log('Success'))
-    .catch(()=>console.log('error'))
-}
+
 export function GET_TOTAL_GROUPS({commit}){
     const q=query(collection(db, "groupAll"))
     unsubscribeAllGroups=onSnapshot(q, snapshot=>{
@@ -163,11 +159,12 @@ export function GET_TOTAL_GROUPS({commit}){
         if (change.type==="added"){
             console.log("Add", change.doc.data())
             commit('SET_TOTAL_GROUPS', change.doc.data().groupAll)
+            commit('SET_NAME_GROUPS', change.doc.data().nameGroups)
         }
         if (change.type==="modified"){
             console.log("Modified",change.doc.id, change.doc.data().groupAll)
             commit('SET_TOTAL_GROUPS', change.doc.data())
-          
+            commit('SET_NAME_GROUPS', change.doc.data().nameGroups)
         }
         if (change.type==="removed"){
             console.log("Removed", change.doc.data())
@@ -176,6 +173,13 @@ export function GET_TOTAL_GROUPS({commit}){
         })
 })
 }
+export function CHANGE_DATA_GROUPS ({commit}, {groupAll, nameGroups}){
+    console.log("action change")
+    updateDoc(doc(db, 'groupAll', "ZuNYyo1fBGPEhFAW3VLU"), {groupAll:groupAll, nameGroups:nameGroups})
+    .then(()=>console.log('Success'))
+    .catch(()=>console.log('error'))
+}
+
 export function UNSUBSCRIBE({commit}){
     console.log('unsubscribe')
     unsubscribeS3()

@@ -12,7 +12,7 @@
             </li>    
             <li  class="nav-li nav-router logout" @click="logOut">Logout</li>
         </ul>
-        <img class="v-nav-bar-photo" :src="store.state.vUserPhoto"/>
+        <img class="v-nav-bar-photo" :src="avatar" alt="avatar"/>
         <div class="v-nav-bar-user" @click="admin">
              <h4 class="user-name">{{store.state.vUser}}</h4>
              <h4 class="user-name">{{store.state.vUserEmail}}</h4>
@@ -32,8 +32,11 @@
    const store=useStore()
    let isActive=ref(false)
 //    const user=computed(()=>store.getters.GET_VUSER)
+   const avatar=computed(()=>store.state.vUserPhoto)
+   const role =computed(()=>store.state.vUserRole)
+
    const items=[
-       {id:1, label:'Input', path:'/InputV',choice: false,}, 
+       {id:1, label:'Input', path:'/InputV',choice: false}, 
        {id:2, label:'General', path:'/',choice: false}, 
        {id:3, label:'All Groups', path:'/AllGroups', choice: false}
     //    {id:4, label:'Logout', path:'/Auth', choice: false}
@@ -41,14 +44,19 @@
    const logOut=()=>{
     //    store.commit('SET_IS_AUTH')
     //    store.commit('DESTROY_STATE')
+       router.push({name:'Home'})
        store.dispatch('UNSUBSCRIBE')
+      
     //    const r=resOut()
     //    console.log(r)
       
        
    }
    const admin=()=>{
-       router.push({name:'Admin'})
+       
+       if (role.value ==='admin')
+            router.push({name:'Admin'})
+       else console.log("Отказано")
    }
    
 </script>

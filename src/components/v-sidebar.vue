@@ -12,7 +12,10 @@
       <v-sidebar-links to='/' icon="fas fa-home">Home</v-sidebar-links> 
       <v-sidebar-links to='/InputV' icon="fas fa-chart-bar">Input</v-sidebar-links> 
       <v-sidebar-links to='/AllGroups' icon="fas fa-users">All Groups</v-sidebar-links> 
-      <v-sidebar-links to='/Admin' icon="fas fa-lock">Admin</v-sidebar-links> 
+      <div v-if="role=='admin'">
+          <v-sidebar-links to='/Admin' icon="fas fa-lock">Admin</v-sidebar-links> 
+      </div>
+      
       <br/> 
        <div v-if="!collapsed" class="v-sidebar-user" >
              <img class="v-photo" :src="store.state.vUserPhoto"/>
@@ -45,6 +48,7 @@
 import vSidebarLinks from './v-sidebar-links.vue'
 import {collapsed, toggleSidebar, sidebarWidth} from '../store'
 import {resOut} from '../modules/initFB.js'
+import {computed} from 'vue'
 import {useStore} from 'vuex'
 import {useRouter} from 'vue-router'
     const props=defineProps({
@@ -52,6 +56,7 @@ import {useRouter} from 'vue-router'
     })
 const store=useStore()
 const router=useRouter()
+const role=computed(()=>store.state.vUserRole)
  const logOut=()=>{
     //    store.commit('SET_IS_AUTH')
        
