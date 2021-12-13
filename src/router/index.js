@@ -4,6 +4,10 @@ import AllGroups from '../views/AllGroups.vue'
 import Auth from '../views/Auth.vue'
 import InputV from '../views/InputV.vue'
 import Admin from '../views/Admin.vue'
+import store from '../store/index'
+
+var role=''
+
 const routes=[
     {
         path:'/Auth',
@@ -29,7 +33,16 @@ const routes=[
     {
         path:'/Admin',
         name: 'Admin',
-        component: Admin
+        component: Admin,
+        beforeEnter: (to, from)=>{
+                
+          role=store.state.vUserRole
+          if(role!='admin'){
+            return false
+            // to.name.push({})
+          } 
+          else return true  
+        }
     }
 ]
 const router= createRouter({

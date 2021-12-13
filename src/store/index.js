@@ -28,7 +28,8 @@ const state={
     vUser:'',
     vUserEmail:'',
     vUserGroup:'',
-    vUserPhoto:''
+    vUserPhoto:'',
+    vUserRole:''
     
 }
 
