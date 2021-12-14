@@ -29,7 +29,8 @@ const state={
     vUserEmail:'',
     vUserGroup:'',
     vUserPhoto:'',
-    vUserRole:''
+    vUserRole:'',
+    usersForAdmin:[]
     
 }
 

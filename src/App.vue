@@ -3,6 +3,7 @@
     import Auth from './views/Auth.vue'
     import vSidebar from './components/v-sidebar.vue'
     import vPoster from './components/v-poster.vue'
+    import {toggleSidebar, collapsed} from './store'
     import {computed} from 'vue'
     import {useStore} from 'vuex'
     
@@ -32,7 +33,7 @@
             
          </div>
        
-        <div class="router-view">
+        <div class="router-view" @click="collapsed=true">
         
                <router-view/>
         </div>
@@ -225,7 +226,8 @@ body{
   .block-table,
   .v-nav-bar,
   .router-view,
-  .display-poster{
+  .display-poster,
+  .v-admin-users{
      width:550px;
     
   }
@@ -266,7 +268,8 @@ body{
   .block-table,
   .v-nav-bar,
   .router-view,
-  .display-poster{
+  .display-poster,
+  .v-admin-users{
      width:400px;
     
   }
@@ -280,7 +283,7 @@ body{
   .v-table-s88 td{
     font-size:10px;
   }
-  .v-table-s88 th{
+  .v-table-s88 th, .v-admin-users{
     font-size:10px;
   }
   #v-table-s88-name-month{
@@ -315,7 +318,9 @@ body{
   .block-table,
   .v-nav-bar,
   .router-view,
-  .display-poster{
+  .display-poster,
+  .v-admin-users,
+  .v-table{
    width:350px;
   }
   .v-table td{
@@ -324,7 +329,7 @@ body{
   .v-table th{
     font-size:10px;
   }
-  .v-table-s88 td{
+  .v-table-s88 td, .v-admin-users{
     font-size:8px;
   }
   .v-table-s88 th{

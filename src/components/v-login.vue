@@ -32,6 +32,7 @@ const logGoogle=()=>{
         store.dispatch('GET_TOTAL_GROUPS')
         store.dispatch('LISTEN_S88')
         store.dispatch('LISTEN_S3')
+        store.dispatch('LISTEN_USERS_FOR_ADMIN')
         store.dispatch('AVERAGE_S88', '2022')
         }else router.push({name:'Home'})
     })

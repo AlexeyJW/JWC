@@ -56,6 +56,11 @@ export default{
         console.log("state.s88["+index+"]=", state.s88)
         state.s88[index]=obj
     },
+    MODI_USER_ADMIN (state, obj){
+        console.log('MODI_User_admin')
+        const index=state.usersForAdmin.findIndex(el=>el.id==obj.id)
+        state.usersForAdmin[index]=obj
+    },
     REMOVE_S88 (state, obj){
         console.log('REMOVE_S88')
         const index=state.s88.findIndex(el=>el.month==obj.month && el.yearService==obj.yearService)
@@ -65,6 +70,11 @@ export default{
         console.log('REMOVE_S3')
         const index=state.s3.findIndex(el=>el.id==id)
         state.s3[index].splice(index, 1)
+    },
+    REMOVE_USER_ADMIN (state, id){
+        console.log('REMOVE_USER_ADMIN')
+        const index=state.usersForAdmin.findIndex(el=>el.id==id)
+        state.usersForAdmin[index].splice(index, 1)
     },
     SET_AVERAGE_S3_WD (state, o){
         console.log(o)
@@ -95,6 +105,9 @@ export default{
         state.vUserEmail=email
         state.vUserGroup=group
         state.vUserRole=role
+    },
+    SET_USERS_FOR_ADMIN (state, obj){
+        state.usersForAdmin.push(obj)
     },
     DESTROY_STATE (state){
         console.log('DESTROY_STATE')

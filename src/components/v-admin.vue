@@ -14,8 +14,38 @@
             <input class="v-admin-input" type="text" v-model="newNameGroups"/>
             <v-button class="v-admin-group-button" textButton="Change" @click="isConfirmAdmin=true"/>
         </div>
-        <div class="v-admin-analytics">analytics</div>
-      </div><!--    v-admin-backend  -->  
+        <div class="v-admin-analytics">
+            <h3 class="v-admin-analytics-title">Analytics</h3>
+
+        </div><!-- End Analytics  -->
+        <div class="v-admin-users">
+            <h3 class="v-admin-users-title">Users</h3>
+            <table class="v-table">
+                <thead>
+                    <th class="v-admin-users-table-head">#</th>
+                    <th class="v-admin-users-table-head">Name</th>
+                    <th class="v-admin-users-table-head">Group</th>
+                    <th class="v-admin-users-table-head">Email</th>
+                    <th class="v-admin-users-table-head">Root</th>
+                    <th class="v-admin-users-table-head">Change</th>
+                </thead>
+                <tbody class="v-admin-users-table-body">
+                    <tr v-for="userTable in usersTable" 
+                    :key="userTable.id">
+                       <td>{{nomPP+=1}}</td>
+                       <td>{{userTable.name}}</td>
+                       <td>{{userTable.group}}</td>
+                       <td>{{userTable.email}}</td>
+                       <td>{{userTable.role}}</td>
+                       <td><v-button
+                             textButton="Change"
+                             @click="changeUserTable(userTable.id)"/></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div><!-- End Users  -->
+      </div><!--   End v-admin-backend  -->  
         <span class="v-span-admin" v-if="isConfirmAdmin">
             <v-confirm @pressedCancel="isConfirmAdmin=!isConfirmAdmin"
                        @pressedOK="changeGroups">
@@ -62,6 +92,10 @@ const changeGroups=()=>{
     }
     isConfirmAdmin.value=false
 }
+
+const usersTable=computed(()=>store.state.usersForAdmin)
+const nomPP=0
+const changeUserTable=(userId)=>{console.log(userId)}
 
 </script>
 
@@ -130,4 +164,14 @@ const changeGroups=()=>{
       border: 1px solid lightgray;
       padding:10px;
   }
+  .v-admin-users{
+      display:flex;
+      flex-direction:column;
+      margin:10px;
+      flex-basis:100%;
+      border: 1px solid lightgray;
+      padding:5px;
+     
+  }
+ 
 </style>

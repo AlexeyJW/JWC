@@ -6,6 +6,7 @@ import {collection, onSnapshot, query, where, addDoc, doc, getDocs, getDoc, upda
 var unsubscribeS3=null
 var unsubscribeS88=null
 var unsubscribeAllGroups=null
+var unsubscribeUsers=null
 //_______________________________________
 
 export const GET_S88=({commit})=>{
@@ -180,11 +181,71 @@ export function CHANGE_DATA_GROUPS ({commit}, {groupAll, nameGroups}){
     .catch(()=>console.log('error'))
 }
 
+export function LISTEN_USERS_FOR_ADMIN ({commit}){
+    const q=query(collection(db, "users"))
+    unsubscribeUsers=onSnapshot(q, snapshot=>{
+        snapshot.docChanges().forEach(change=>{
+        if (change.type==="added"){
+            console.log("Add", change.doc.data())
+            commit('SET_USERS_FOR_ADMIN',
+             {id:change.doc.id,
+             name:change.doc.data().name,
+             group:change.doc.data().group,
+             email:change.doc.data().email,
+             role:change.doc.data().role
+             })
+        }
+        if (change.type==="modified"){
+            console.log("Modified",change.doc.id, change.doc.data())
+            commit('MODI_USER_ADMIN',
+               {id:change.doc.id,
+                name:change.doc.data().name,
+                group:change.doc.data().group,
+                email:change.doc.data().email,
+                role:change.doc.data().role
+               })
+        }
+        if (change.type==="removed"){
+            console.log("Removed", change.doc.data())
+            commit('REMOVE_USER_ADMIN', change.doc.id)
+        }
+        })
+})
+}
+//add a document to the collection s3__________________________________
+export async function ADD_USER(ctx, obj){
+console.log("action ADD_S3")
+console.log("obj=", obj)
+        try {
+            const docRef = await addDoc(collection(db, "s3"), obj)
+        
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+}
+//modify a document in the collection s3_______________________________
+export async function MODI_USER (ctx, {id:id, obj:obj}){
+console.log("action MODI", obj.month)
+// const q=query(collection (db, "s3"),where('month','==',obj.month))
+// const qSnapshot=await getDocs(q)
+// qSnapshot.forEach(qdoc=>{
+    // console.log(qdoc.id)
+    
+    // updateDoc(doc(db, 's3',qdoc.id), obj)
+    updateDoc(doc(db, 's3', id), obj)
+    .then(()=>console.log('Success'))
+    .catch(()=>console.log('error'))
+// })
+}
+
+
 export function UNSUBSCRIBE({commit}){
     console.log('unsubscribe')
     unsubscribeS3()
     unsubscribeS88()
     unsubscribeAllGroups()
+    unsubscribeUsers()
     commit('SET_IS_AUTH')
     commit('DESTROY_STATE')
     const r=resOut()
