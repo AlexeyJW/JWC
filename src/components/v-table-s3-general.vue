@@ -5,8 +5,15 @@
                 <strong>
                     General Meeting Report (S-3) 
                     {{props.title}}. 
-                    Month:
-                    <button class="v-button-month-back" 
+                   
+                   
+                </strong>
+            </h3>
+            <v-button class="v-button-item" textButton="Send" @click="sendReport" v-show="isSend"/>
+            <v-button class="v-button-item" textButton="Modify" @click="modifyReport" v-show="!isSend"/>
+        </div>
+        <div class="v-button-block">
+             <button class="v-button-month-back" 
                        v-if="isButtonBack"
                        @click="monthBack">
                          <i class="fas fa-angle-left"/>
@@ -16,11 +23,7 @@
                        v-if="!isButtonBack"
                        @click="monthToNow">
                          <i class="fas fa-angle-right"/>
-                    </button>
-                </strong>
-            </h3>
-            <v-button class="v-button-item" textButton="Send" @click="sendReport" v-show="store.state.isButtonSendS3"/>
-            <v-button class="v-button-item" textButton="Modify" @click="modifyReport" v-show="!store.state.isButtonSendS3"/>
+              </button>
         </div>
        
         
@@ -102,6 +105,7 @@
    const isButton=ref(true)
   
    const store=useStore()
+   const isSend=computed(()=>store.state.isButtonSendS3)
    const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow.value, monthNow.value))
    const arrWD=computed(()=>store.getters.GET_S3(''+yearNow.value, monthNow.value).filter(el=>el.data.weekday=='weekdays'))
    const arrWE=computed(()=>store.getters.GET_S3(''+yearNow.value, monthNow.value).filter(el=>el.data.weekday=='weekend'))

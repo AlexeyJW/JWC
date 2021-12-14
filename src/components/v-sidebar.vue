@@ -13,7 +13,7 @@
       <v-sidebar-links to='/InputV' icon="fas fa-chart-bar">Input</v-sidebar-links> 
       <v-sidebar-links to='/AllGroups' icon="fas fa-users">All Groups</v-sidebar-links> 
       <div v-if="role=='admin'">
-          <v-sidebar-links to='/Admin' icon="fas fa-lock">Admin</v-sidebar-links> 
+          <v-sidebar-links to='/Admin' icon="fas fa-file-signature">Admin</v-sidebar-links> 
       </div>
       
       <br/> 
@@ -39,7 +39,7 @@
           class="collapse-icon"
           :class="{'rotate-180':collapsed}"
           @click="toggleSidebar">
-             <i class="fas fa-align-justify" />  
+             <i class="fas fa-bars" />  
         </span>
    </div>
 </template>
