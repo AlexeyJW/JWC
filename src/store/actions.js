@@ -214,29 +214,25 @@ export function LISTEN_USERS_FOR_ADMIN ({commit}){
 }
 //add a document to the collection s3__________________________________
 export async function ADD_USER(ctx, obj){
-console.log("action ADD_S3")
-console.log("obj=", obj)
+
         try {
-            const docRef = await addDoc(collection(db, "s3"), obj)
+            const docRef = await addDoc(collection(db, "users"), obj)
         
             console.log("Document written with ID: ", docRef.id);
         } catch (e) {
             console.error("Error adding document: ", e);
         }
 }
-//modify a document in the collection s3_______________________________
-export async function MODI_USER (ctx, {id:id, obj:obj}){
-console.log("action MODI", obj.month)
-// const q=query(collection (db, "s3"),where('month','==',obj.month))
-// const qSnapshot=await getDocs(q)
-// qSnapshot.forEach(qdoc=>{
-    // console.log(qdoc.id)
-    
-    // updateDoc(doc(db, 's3',qdoc.id), obj)
-    updateDoc(doc(db, 's3', id), obj)
+//modify a document in the collection users _____________________________
+export async function MODI_USER (ctx, obj){
+console.log("action MODI", obj.id)
+    updateDoc(doc(db, 'users', obj.id),
+     {name:obj.name,
+      group:obj.group,
+      email:obj.email,
+      role:obj.role})
     .then(()=>console.log('Success'))
     .catch(()=>console.log('error'))
-// })
 }
 
 

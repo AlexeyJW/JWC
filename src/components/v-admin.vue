@@ -22,7 +22,7 @@
             <h3 class="v-admin-users-title">Users</h3>
             <table class="v-table">
                 <thead>
-                    <th class="v-admin-users-table-head">#</th>
+                   
                     <th class="v-admin-users-table-head">Name</th>
                     <th class="v-admin-users-table-head">Group</th>
                     <th class="v-admin-users-table-head">Email</th>
@@ -32,18 +32,34 @@
                 <tbody class="v-admin-users-table-body">
                     <tr v-for="userTable in usersTable" 
                     :key="userTable.id">
-                       <td>{{nomPP+=1}}</td>
+                     
                        <td>{{userTable.name}}</td>
                        <td>{{userTable.group}}</td>
                        <td>{{userTable.email}}</td>
                        <td>{{userTable.role}}</td>
                        <td><v-button
                              textButton="Change"
-                             @click="changeUserTable(userTable.id)"/></td>
+                             @click="changeUserTable(userTable)"/></td>
 
                     </tr>
                 </tbody>
             </table>
+            <span class="v-span-admin-input" v-if="isChangeUser">
+                <div class="v-span-admin-input-block">
+                    <form
+                      class="v-form-change-user"
+                      @submit.prevent>
+                        <input  type="text" v-model="newNameUser" >
+                        <input class="v-form-num-group" type="number" v-model="newGroupUser">
+                        <input type="text" v-model="newEmailUser">
+                        <input class="v-form-role" type="text" v-model="newRoleUser">
+                        <input class="v-form-button-submit" type="submit" @click="changeDataUser">
+                        <button class="v-form-button-cancel" @click="isChangeUser=!isChangeUser">Отмена</button>
+                    </form>
+                </div>
+                
+            </span>
+            <v-button textButton="Add"/>
         </div><!-- End Users  -->
       </div><!--   End v-admin-backend  -->  
         <span class="v-span-admin" v-if="isConfirmAdmin">
@@ -92,11 +108,37 @@ const changeGroups=()=>{
     }
     isConfirmAdmin.value=false
 }
-
+// users
 const usersTable=computed(()=>store.state.usersForAdmin)
-const nomPP=0
-const changeUserTable=(userId)=>{console.log(userId)}
 
+let userId=null
+const isChangeUser=ref(false)
+const newNameUser=ref('')
+const newGroupUser=ref(null)
+const newEmailUser=ref('')
+const newRoleUser=ref('')
+
+const changeUserTable=(event)=>{
+    userId=event.id
+    newNameUser.value=event.name
+    newGroupUser.value=event.group 
+    newEmailUser.value=event.email
+    newRoleUser.value=event.role
+
+    isChangeUser.value=true
+    }
+const changeDataUser=()=>{
+    let obj={
+        id:userId,
+        name:newNameUser.value,
+        group:newGroupUser.value, 
+        email:newEmailUser.value,
+        role:newRoleUser.value
+    }
+    
+    isChangeUser.value=false
+    store.dispatch('MODI_USER', obj)
+}
 </script>
 
 <style>
@@ -173,5 +215,40 @@ const changeUserTable=(userId)=>{console.log(userId)}
       padding:5px;
      
   }
- 
+ .v-span-admin-input{
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+        border: 1px solid lightgray;
+        /* margin-top: 10px; */
+        padding:10px;
+        box-shadow: 0 0 8px 0 darkgray;
+
+      border: 1px solid lightgray;
+      background: white;
+      position:absolute;
+      /* top:300px;  */
+      left:auto;
+      z-index:999999;
+ }
+ .v-span-admin-input-block{
+     display:flex;
+      flex-direction: row;
+      flex-wrap:wrap;
+      border: 1px solid lightgray;
+ }
+ .v-form-num-group{
+     width:30px;
+ }
+ .v-form-role{
+    width:50px;
+ }
+ .v-form-button-submit{
+     background:rgb(253, 166, 66);
+
+ }
+ .v-form-button-cancel{
+     background:var(--sidebar-bg-color);
+     color: white;
+ }
 </style>

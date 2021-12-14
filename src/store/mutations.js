@@ -120,6 +120,9 @@ export default{
         state.vUser=''
         state.vUserEmail=''
         state.vUserGroup=''
+        state.vUserPhoto=''
+        state.vUserRole=''
+        state.usersForAdmin=[]
     },
     SET_USER_PHOTO (state, url){
         console.log('set_user_photo', url)
