@@ -37,9 +37,17 @@
                        <td>{{userTable.group}}</td>
                        <td>{{userTable.email}}</td>
                        <td>{{userTable.role}}</td>
-                       <td><v-button
-                             textButton="Change"
-                             @click="changeUserTable(userTable)"/></td>
+                       <td>
+                           <button class="admin-user-button-change"
+                               @click="changeUserTable(userTable)">
+                               <i class="fas fa-download"/>
+                           </button>
+                           <button class="admin-user-button-delete"
+                                @click="removeUserTable(userTable.id)">
+                                <i class="fas fa-trash"/>
+                           </button>
+                          
+                        </td>
 
                     </tr>
                 </tbody>
@@ -59,7 +67,30 @@
                 </div>
                 
             </span>
-            <v-button textButton="Add"/>
+            <span class="v-span-admin" v-if="isConfirmUserRemove">
+            <v-confirm @pressedCancel="isConfirmUserRemove=!isConfirmUserRemove"
+                       @pressedOK="removeDataUser">
+                       Вы уверены?
+            </v-confirm>
+             </span>
+            <br/>
+            <v-button class="v-admin-users-add" textButton="Add" @click="addUser"/>
+             <span class="v-span-admin-input" v-if="isAddUser">
+                <div class="v-span-admin-input-block">
+                    <form
+                      class="v-form-change-user"
+                      @submit.prevent>
+                        <input  type="text" v-model="newNameUser" >
+                        <input class="v-form-num-group" type="number" v-model="newGroupUser">
+                        <input type="text" v-model="newEmailUser">
+                        <input class="v-form-role" type="text" v-model="newRoleUser">
+                        <input class="v-form-button-submit" type="submit" @click="addDataUser">
+                        <button class="v-form-button-cancel" @click="isAddUser=!isAddUser">Отмена</button>
+                    </form>
+                </div>
+                
+            </span>
+            
         </div><!-- End Users  -->
       </div><!--   End v-admin-backend  -->  
         <span class="v-span-admin" v-if="isConfirmAdmin">
@@ -74,6 +105,8 @@
                        Количество групп и количество имен групп не совпадает!!!
             </v-confirm>
         </span>
+        
+       
      </div> <!--v-admin -->
 </template>
 
@@ -139,6 +172,42 @@ const changeDataUser=()=>{
     isChangeUser.value=false
     store.dispatch('MODI_USER', obj)
 }
+const isConfirmUserRemove=ref(false)
+
+let removeIdUser=ref('')
+const removeUserTable=(event)=>{
+    console.log("event=",event)
+    removeIdUser.value=event
+    isConfirmUserRemove.value=true
+}
+const removeDataUser=()=>{
+     store.dispatch("REMOVE_USER", removeIdUser.value)
+     isConfirmUserRemove.value=false
+     removeIdUser.value=''
+}
+const isAddUser=ref(false)
+const addUser=()=>{
+   
+    newNameUser.value=''
+    newGroupUser.value=null 
+    newEmailUser.value=''
+    newRoleUser.value=''
+
+    isAddUser.value=true
+}
+
+const addDataUser=()=>{
+    let obj={
+       
+        name:newNameUser.value,
+        group:newGroupUser.value, 
+        email:newEmailUser.value,
+        role:newRoleUser.value
+    }
+     isAddUser.value=false
+     store.dispatch('ADD_USER', obj)
+}
+// logEvent(analytics, 'notification_received');
 </script>
 
 <style>
@@ -194,7 +263,7 @@ const changeDataUser=()=>{
   }
   .v-span-admin{
          position:absolute;
-         top:150px; 
+         top:auto; 
          
          left:30%;
          z-index:999999;
@@ -250,5 +319,22 @@ const changeDataUser=()=>{
  .v-form-button-cancel{
      background:var(--sidebar-bg-color);
      color: white;
+ }
+ .admin-user-button-change{
+     padding:5px;
+     margin:2px;
+     border:1px solid grey;
+     background:var(--sidebar-bg-color);
+     color: white;
+ }
+ .admin-user-button-delete{
+     margin:2px;
+     padding:5px;
+     border:1px solid grey;
+     background:red;
+     color: white;
+ }
+ .v-admin-users-add{
+     align-self:flex-end;
  }
 </style>

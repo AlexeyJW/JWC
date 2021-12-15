@@ -74,7 +74,7 @@ export default{
     REMOVE_USER_ADMIN (state, id){
         console.log('REMOVE_USER_ADMIN')
         const index=state.usersForAdmin.findIndex(el=>el.id==id)
-        state.usersForAdmin[index].splice(index, 1)
+        state.usersForAdmin.splice(index, 1)
     },
     SET_AVERAGE_S3_WD (state, o){
         console.log(o)

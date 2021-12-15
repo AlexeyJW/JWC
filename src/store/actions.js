@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { db, resOut} from '../modules/initFB.js'
-import {collection, onSnapshot, query, where, addDoc, doc, getDocs, getDoc, updateDoc} from 'firebase/firestore'
+import {collection, onSnapshot, query, where, addDoc, doc, getDocs, getDoc, updateDoc, deleteDoc} from 'firebase/firestore'
 
 // listeners
 var unsubscribeS3=null
@@ -234,7 +234,11 @@ console.log("action MODI", obj.id)
     .then(()=>console.log('Success'))
     .catch(()=>console.log('error'))
 }
-
+export async function REMOVE_USER (ctx, id){
+    console.log("id=", id)
+    await deleteDoc(doc(db, "users", id));
+}
+   
 
 export function UNSUBSCRIBE({commit}){
     console.log('unsubscribe')

@@ -8,6 +8,7 @@
     <v-table-s3-general :title="'All Groups'"/>
     <v-table-s88/>
     <v-chart />
+    <v-chart-line/>
 </template>
 
 <script setup>
@@ -17,6 +18,8 @@
     import VInput from '../components/v-input.vue'
     import VChart from '../components/v-chart.vue'
     import vPoster from '../components/v-poster.vue'
+    import VChartLine from '../components/v-chart-line.vue'
+     
 </script>
 
 <style></style>
