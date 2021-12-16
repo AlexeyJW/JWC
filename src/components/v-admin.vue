@@ -1,6 +1,6 @@
 <template>
     
-    <div class="v-admin">
+    <div class="v-block-table-s88">
       <h3 class="v-admin-title">Admin page</h3>
       <div class="v-admin-backend">  
         <div class="v-admin-groups">
@@ -20,7 +20,7 @@
         </div><!-- End Analytics  -->
         <div class="v-admin-users">
             <h3 class="v-admin-users-title">Users</h3>
-            <table class="v-table">
+            <table class="v-table-s88">
                 <thead>
                    
                     <th class="v-admin-users-table-head">Name</th>
