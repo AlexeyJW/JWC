@@ -1,6 +1,6 @@
 <template>
     <div class='v-poster'>
-        <h2>Congrigation Molodyojnoye</h2>
+        <h2>Собрание: "Молодёжное"</h2>
     </div>
 </template>
 

@@ -1,15 +1,15 @@
 <template>
     <div class="block-table">
         <div>
-            <h3><strong>General Meeting Report (S-3) {{props.title}}</strong></h3>
+            <h3><strong>Отчёт о посещаемости (S-3) {{props.title}}</strong></h3>
         </div>
         <div>
         <table class="v-table">
             <thead class="v-thead">
                 <tr>
-                    <th>Week</th>
-                    <th>Weekdays</th>
-                    <th>Weekend</th>
+                    <th>Неделя</th>
+                    <th>Будни</th>
+                    <th>Выходные</th>
                     
                 </tr>
                
@@ -41,12 +41,12 @@
                     <td>{{we.find((el)=>el.data.weekNumber==5)?.data?.total}}</td>
                 </tr>
                 <tr>
-                    <td><strong>Total:</strong></td>
+                    <td><strong>Всего:</strong></td>
                     <td><strong>{{wd.reduce((sum, el)=>sum+el.data.total, 0)}}</strong></td>
                     <td><strong>{{we.reduce((sum, el)=>sum+el.data.total, 0)}}</strong></td>
                 </tr>
                 <tr>
-                    <td><strong>Average:</strong></td>
+                    <td><strong>Среднее:</strong></td>
                     <td><strong>{{averageWD}}</strong></td>
                     <td><strong>{{averageWE}}</strong></td>
                 </tr>

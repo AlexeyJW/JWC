@@ -1,25 +1,25 @@
 <template>
    <div class="v-block-table-s88">
-       <h3><strong>General Meeting Report (S-88)</strong></h3>
+       <h3><strong>Общий отчёт о посещении встреч (S-88)</strong></h3>
        <table class="v-table-s88">
            <thead>
                <tr>
-                   <th rowspan="2">Year 2022</th>
-                   <th colspan="3">Weekdays</th>
-                   <th colspan="3">Weekend</th>
+                   <th rowspan="2">{{serviceYear}}</th>
+                   <th colspan="3">Будни</th>
+                   <th colspan="3">Выходные</th>
                 </tr>
                 <tr>
-                   <th>Total meetings</th>
-                   <th>Total attendees</th>
-                   <th>Average in week</th>
-                    <th>Total meetings</th>
-                   <th>Total attendees</th>
-                   <th>Average in week</th>
+                   <th>Всего встреч</th>
+                   <th>Всего присут.</th>
+                   <th>Среднее в неделю</th>
+                   <th>Всего встреч</th>
+                   <th>Всего присут.</th>
+                   <th>Среднее в неделю</th>
                </tr>
            </thead>
            <tbody>
                <tr>
-                   <td id="v-table-s88-name-month">September</td>
+                   <td id="v-table-s88-name-month">Сентябрь</td>
                    <td>{{s88?.find(el=>el.month=='8')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='8')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='8')?.averageWD.toFixed(2)}}</td>
@@ -28,7 +28,7 @@
                    <td>{{s88?.find(el=>el.month=='8')?.averageWE.toFixed(2)}}</td>
                </tr>
                <tr>
-                   <td id="v-table-s88-name-month">October</td>
+                   <td id="v-table-s88-name-month">Октябрь</td>
                     <td>{{s88?.find(el=>el.month=='9')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='9')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='9')?.averageWD.toFixed(2)}}</td>
@@ -37,7 +37,7 @@
                    <td>{{s88?.find(el=>el.month=='9')?.averageWE.toFixed(2)}}</td>
                </tr>
                <tr>
-                   <td id="v-table-s88-name-month">November</td>
+                   <td id="v-table-s88-name-month">Ноябрь</td>
                     <td>{{s88?.find(el=>el.month=='10')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='10')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='10')?.averageWD}}</td>
@@ -46,7 +46,7 @@
                    <td>{{s88?.find(el=>el.month=='10')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td id="v-table-s88-name-month">December</td>
+                   <td id="v-table-s88-name-month">Декабрь</td>
                   <td>{{s88?.find(el=>el.month=='11')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='11')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='11')?.averageWD}}</td>
@@ -55,7 +55,7 @@
                    <td>{{s88?.find(el=>el.month=='11')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td id="v-table-s88-name-month">Junuary</td>
+                   <td id="v-table-s88-name-month">Январь</td>
                    <td>{{s88?.find(el=>el.month=='0')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='0')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='0')?.averageWD}}</td>
@@ -64,7 +64,7 @@
                    <td>{{s88?.find(el=>el.month=='0')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td id="v-table-s88-name-month">February</td>
+                   <td id="v-table-s88-name-month">Февраль</td>
                    <td>{{s88?.find(el=>el.month=='1')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='1')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='1')?.averageWD}}</td>
@@ -73,7 +73,7 @@
                    <td>{{s88?.find(el=>el.month=='1')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td id="v-table-s88-name-month">Mach</td>
+                   <td id="v-table-s88-name-month">Март</td>
                    <td>{{s88?.find(el=>el.month=='2')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='2')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='2')?.averageWD}}</td>
@@ -82,7 +82,7 @@
                    <td>{{s88?.find(el=>el.month=='2')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td id="v-table-s88-name-month">April</td>
+                   <td id="v-table-s88-name-month">Апрель</td>
                    <td>{{s88?.find(el=>el.month=='3')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='3')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='3')?.averageWD}}</td>
@@ -91,7 +91,7 @@
                    <td>{{s88?.find(el=>el.month=='3')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td id="v-table-s88-name-month">May</td>
+                   <td id="v-table-s88-name-month">Май</td>
                    <td>{{s88?.find(el=>el.month=='4')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='4')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='4')?.averageWD}}</td>
@@ -100,7 +100,7 @@
                    <td>{{s88?.find(el=>el.month=='4')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td id="v-table-s88-name-month">June</td>
+                   <td id="v-table-s88-name-month">Июнь</td>
                    <td>{{s88?.find(el=>el.month=='5')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='5')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='5')?.averageWD}}</td>
@@ -109,7 +109,7 @@
                    <td>{{s88?.find(el=>el.month=='5')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td id="v-table-s88-name-month">July</td>
+                   <td id="v-table-s88-name-month">Июль</td>
                    <td>{{s88?.find(el=>el.month=='6')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='6')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='6')?.averageWD}}</td>
@@ -118,7 +118,7 @@
                    <td>{{s88?.find(el=>el.month=='6')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td id="v-table-s88-name-month">August</td>
+                   <td id="v-table-s88-name-month">Август</td>
                    <td>{{s88?.find(el=>el.month=='7')?.totalMeetingsWD}}</td>
                    <td>{{s88?.find(el=>el.month=='7')?.totalWD}}</td>
                    <td>{{s88?.find(el=>el.month=='7')?.averageWD}}</td>
@@ -127,9 +127,9 @@
                    <td>{{s88?.find(el=>el.month=='7')?.averageWE}}</td>
                </tr>
                <tr>
-                   <td colspan="3"><strong>Average:</strong></td>
+                   <td colspan="3"><strong>Среднее:</strong></td>
                    <td>{{s88.length !=0 ? (averageWD/s88.length).toFixed(2) : 0}}</td>
-                   <td colspan="2"><strong>Average:</strong></td>
+                   <td colspan="2"><strong>Среднее:</strong></td>
                    <td>{{s88.length !=0 ? (averageWE/s88.length).toFixed(2) : 0}}</td>
                </tr>
            </tbody>
@@ -138,11 +138,12 @@
 </template>
 <script setup>
    import {useStore} from 'vuex'
-   import {computed} from 'vue'
+   import {computed, ref} from 'vue'
+   import {isServiceYear} from '../modules/convertMonth.js'
 //    import {listenS88, listenChangeS88} from '../modules/initFB.js'
-
+   const serviceYear=ref(isServiceYear(new Date().getFullYear(), new Date().getMonth()))
    const store=useStore()
-   const s88=computed(()=>store.getters.YEAR_SERVICE('2022'))
+   const s88=computed(()=>store.getters.YEAR_SERVICE(serviceYear.value))
    const averageWD=computed(()=>store.getters.GET_AVERAGE_S88_WD)
    const averageWE=computed(()=>store.getters.GET_AVERAGE_S88_WE)
 </script>

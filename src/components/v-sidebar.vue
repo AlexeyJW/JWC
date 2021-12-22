@@ -9,9 +9,9 @@
           </span>
           <span v-else>JWC</span>
       </h2>
-      <v-sidebar-links to='/' icon="fas fa-home">Home</v-sidebar-links> 
-      <v-sidebar-links to='/InputV' icon="fas fa-chart-bar">Input</v-sidebar-links> 
-      <v-sidebar-links to='/AllGroups' icon="fas fa-users">All Groups</v-sidebar-links> 
+      <v-sidebar-links to='/' icon="fas fa-home">Главная</v-sidebar-links> 
+      <v-sidebar-links to='/InputV' icon="fas fa-chart-bar">Ввод отчёта</v-sidebar-links> 
+      <v-sidebar-links to='/AllGroups' icon="fas fa-users">Все группы</v-sidebar-links> 
       <div v-if="role=='admin'">
           <v-sidebar-links to='/Admin' icon="fas fa-file-signature">Admin</v-sidebar-links> 
       </div>
@@ -22,7 +22,7 @@
              <div class="v-sidebar-user-text">
                  <h4 class="user-name">{{store.state.vUser}}</h4>
                  <h4 class="user-name">{{store.state.vUserEmail}}</h4>
-                 <h4 class="user-name">Group: {{store.state.vUserGroup}}</h4>
+                 <h4 class="user-name">Группа: {{store.state.vUserGroup}}</h4>
              </div>
              
              
@@ -74,7 +74,7 @@ const role=computed(()=>store.state.vUserRole)
 :root{
     --sidebar-bg-color:#539b9b;
     --sidebar-item-color:white;
-    --sidebar-item-hover:white;
+    --sidebar-item-hover:#ce6f16;
     --sidebar-item-active:#73e2d0;
     /* --sidebar-icon-color:#0079AF; */
     --sidebar-icon-color: rgb(71, 74, 75);
@@ -88,7 +88,7 @@ const role=computed(()=>store.state.vUserRole)
        background-color: var(--sidebar-bg-color);
        /* float: left; */
        position: fixed;
-       opacity:0.8;
+       opacity:0.9;
        z-index:1;
        top:0;
        bottom:0;
@@ -137,6 +137,7 @@ const role=computed(()=>store.state.vUserRole)
    .v-logout{
         margin: 0.1em 0;
         padding: 0.4em;
+        font-size:21px;
         /* border:1px solid lightgrey; */
         color:var(--sidebar-icon-color);
         align-self:flex-start;

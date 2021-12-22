@@ -35,7 +35,7 @@ const isActive=computed(()=>route.path==props.to)
    .link{
        display: flex;
        align-items: center;
-
+       font-size:21px;
        cursor: pointer;
        position:relative;
        font-weight: 400;

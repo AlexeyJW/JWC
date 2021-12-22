@@ -3,8 +3,8 @@
         <div class="v-button-block">
             <h3>
                 <strong>
-                    General Meeting Report (S-3) 
-                    {{props.title}}. 
+                   Общий отчёт о посещаемости встреч (S-3) 
+                    <!-- {{props.title}}.  -->
                    
                    
                 </strong>
@@ -32,9 +32,9 @@
         <table class="v-table">
             <thead class="v-thead">
                 <tr>
-                    <th>Week</th>
-                    <th>Weekdays</th>
-                    <th>Weekend</th>
+                    <th>Неделя</th>
+                    <th>Будни</th>
+                    <th>Выходные</th>
                     
                 </tr>
                
@@ -66,12 +66,12 @@
                     <td :class="{active:isAllReportsWE(5)}">{{we5}}</td>
                 </tr>
                 <tr>
-                    <td><strong>Total:</strong></td>
+                    <td><strong>Всего:</strong></td>
                     <td><strong>{{totalWD}}</strong></td>
                     <td><strong>{{totalWE}}</strong></td>
                 </tr>
                 <tr>
-                    <td><strong>Average:</strong></td>
+                    <td><strong>Среднее:</strong></td>
                     <td>{{avWD}}</td>
                     <td>{{avWE}}</td>
                 </tr>

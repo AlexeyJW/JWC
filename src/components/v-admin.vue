@@ -82,7 +82,7 @@
                       @submit.prevent>
                         <input  type="text" v-model="newNameUser" >
                         <input class="v-form-num-group" type="number" v-model="newGroupUser">
-                        <input type="text" v-model="newEmailUser">
+                        <input type="text" v-model.trim="newEmailUser">
                         <input class="v-form-role" type="text" v-model="newRoleUser">
                         <input class="v-form-button-submit" type="submit" @click="addDataUser">
                         <button class="v-form-button-cancel" @click="isAddUser=!isAddUser">Отмена</button>
@@ -147,7 +147,7 @@ const usersTable=computed(()=>store.state.usersForAdmin)
 let userId=null
 const isChangeUser=ref(false)
 const newNameUser=ref('')
-const newGroupUser=ref(null)
+const newGroupUser=ref('')
 const newEmailUser=ref('')
 const newRoleUser=ref('')
 
@@ -164,7 +164,7 @@ const changeDataUser=()=>{
     let obj={
         id:userId,
         name:newNameUser.value,
-        group:newGroupUser.value, 
+        group:newGroupUser.value.toString(), 
         email:newEmailUser.value,
         role:newRoleUser.value
     }
@@ -200,7 +200,7 @@ const addDataUser=()=>{
     let obj={
        
         name:newNameUser.value,
-        group:newGroupUser.value, 
+        group:newGroupUser.value.toString(), 
         email:newEmailUser.value,
         role:newRoleUser.value
     }

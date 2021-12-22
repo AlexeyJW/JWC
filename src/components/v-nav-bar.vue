@@ -1,6 +1,6 @@
 <template>
     <div class="v-nav-bar">
-        <h4 class="v-nav-bar-title">Congrigation Molodyozhnoje</h4>
+        <h4 class="v-nav-bar-title">Собрание: "Молодёжное"</h4>
         <ul class="nav-ul" >
             <li v-for="(i, index) in items" :key="index"
                 class="nav-li"             
@@ -10,13 +10,13 @@
                 {{i.label}}
             </router-link>
             </li>    
-            <li  class="nav-li nav-router logout" @click="logOut">Logout</li>
+            <li  class="nav-li nav-router logout" @click="logOut">Выйти</li>
         </ul>
         <img class="v-nav-bar-photo" :src="avatar" alt="avatar"/>
         <div class="v-nav-bar-user" @click="admin">
              <h4 class="user-name">{{store.state.vUser}}</h4>
              <h4 class="user-name">{{store.state.vUserEmail}}</h4>
-             <h4 class="user-name">Group: {{store.state.vUserGroup}}</h4>
+             <h4 class="user-name">Группа: {{store.state.vUserGroup}}</h4>
         </div>
        
     </div>
@@ -36,9 +36,9 @@
    const role =computed(()=>store.state.vUserRole)
 
    const items=[
-       {id:1, label:'Input', path:'/InputV',choice: false}, 
-       {id:2, label:'General', path:'/',choice: false}, 
-       {id:3, label:'All Groups', path:'/AllGroups', choice: false}
+       {id:1, label:'Ввод', path:'/InputV',choice: false}, 
+       {id:2, label:'Главная', path:'/',choice: false}, 
+       {id:3, label:'Все группы', path:'/AllGroups', choice: false}
     //    {id:4, label:'Logout', path:'/Auth', choice: false}
    ]
    const logOut=()=>{

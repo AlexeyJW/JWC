@@ -278,7 +278,7 @@ body{
    flex-basis:50%;
   }
   .v-table td{
-    font-size:12px;
+    font-size:15px;
   }
   .v-table-s88 td{
     font-size:10px;
