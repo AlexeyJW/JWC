@@ -4,20 +4,21 @@
         <div class="v-input-content">
         
         <div class="v-input-group">
-            <h5 class="v-input-label">Group:</h5>
+            <h5 class="v-input-label">Группа:</h5>
             <select class="field-select" v-model="Group" id="group">
-                <option disabled selected>Choice group</option>
+                <option disabled selected>Выбери номер</option>
                 <!-- <option value="1">Group 1</option>
                 <option value="2">Group 2</option>
                 <option value="3">Group 3</option>
                 <option value="4">Group 4</option>
                 <option value="5">Group 5</option> -->
-                <option value="6">Group 6</option>
-                <option value="7">Group 7</option>
+                <!-- <option value="6">Group 6</option>
+                <option value="7">Group 7</option> -->
+                <option v-for="i in groupsData" :key="i" :value="i">{{i}}</option>
             </select>
         </div>
         <div class="v-input-group">
-            <h5 class="v-input-label">Week:</h5>
+            <h5 class="v-input-label">Неделя:</h5>
             <select class="field-week-number" v-model="WeekNumber" name='Week' id="week">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -28,32 +29,32 @@
             </select>
         </div>
         <div class="v-input-group">
-            <h5 class="v-input-label">WD/WE:</h5>
+            <h5 class="v-input-label">Будн./Вых.:</h5>
             <select  class="v-field-weekday" name="weekday" v-model="Weekday" id="w">
-                <option disabled selected>Choice</option>
-                <option value="weekdays">weekdays</option>
-                <option value="weekend">weekend</option>
+                <option disabled selected>Выбери:</option>
+                <option value="weekdays">Будни</option>
+                <option value="weekend">Выходные</option>
             </select>
         </div>
         
         
         <div class="v-input-group">
-            <h5 class="v-input-label">Date meeting:</h5>
+            <h5 class="v-input-label">Дата встречи:</h5>
             <input class="field-data"  type="date" v-model="vDate"/>
         </div>
         <div class="v-input-group">
-            <h5 class="v-input-label">Total:</h5>
-            <input class="v-field-input" type="number" placeholder="total" v-model="vTotal" id="total"/>
+            <h5 class="v-input-label">Всего:</h5>
+            <input class="v-field-input" type="number" placeholder="число" v-model="vTotal" id="total"/>
         </div>
         <div class="v-input-group">
-            <h5 class="v-input-label">Send Report:</h5>
+            <h5 class="v-input-label">Отправить:</h5>
             <v-button class="field-button" textButton="Send"  @click="sendObj"/>
         </div>
         
      
      </div>
     </div>
-    <span class="v-span" v-if="isConfirm"><v-confirm  @pressedCancel="isConfirm=!isConfirm" @pressedOK="confirmPressedOK">Record already exists, Want to replace?</v-confirm></span>
+    <span class="v-span" v-if="isConfirm"><v-confirm  @pressedCancel="isConfirm=!isConfirm" @pressedOK="confirmPressedOK">Уже есть запись, хотите её заменить?</v-confirm></span>
     <span class="v-span" v-if="isConfirmForIsAll"><v-confirm  @pressedCancel="isConfirmForIsAll=!isConfirmForIsAll" @pressedOK="isConfirmForIsAll=!isConfirmForIsAll">Введите недостающие данные</v-confirm></span>
      <div  :class="{activeoverflow: isConfirm}"></div>
 </template>
@@ -74,6 +75,7 @@ const isConfirm=ref(false)
 const isConfirmForIsAll=ref(false)
 
 const Group=ref('')
+const groupsData=computed(()=>store.state.groupsData)
 const vDate=ref(null)
 
 const vTotal=ref(null)
@@ -173,7 +175,7 @@ const confirmPressedOK=()=>{
    
     .v-span{
          position:absolute;
-         top:150px; 
+         top:auto; 
          left:auto;
          z-index:999999;
     }
