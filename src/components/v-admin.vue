@@ -263,9 +263,9 @@ const addDataUser=()=>{
   }
   .v-span-admin{
          position:absolute;
-         top:auto; 
-         
-         left:30%;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
          z-index:999999;
     }
   .v-admin-analytics{

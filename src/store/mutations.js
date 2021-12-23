@@ -67,9 +67,12 @@ export default{
         state.s88.splice(index, 1)
     },
     REMOVE_S3 (state, id){
+        console.log("remove_s3 id=", id)
         console.log('REMOVE_S3')
         const index=state.s3.findIndex(el=>el.id==id)
-        state.s3[index].splice(index, 1)
+        console.log(state.s3)
+        console.log("index=", index)
+        state.s3.splice(index, 1)
     },
     REMOVE_USER_ADMIN (state, id){
         console.log('REMOVE_USER_ADMIN')

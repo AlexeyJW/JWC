@@ -9,11 +9,11 @@
           </span>
           <span v-else>JWC</span>
       </h2>
-      <v-sidebar-links to='/' icon="fas fa-home">Главная</v-sidebar-links> 
-      <v-sidebar-links to='/InputV' icon="fas fa-chart-bar">Ввод отчёта</v-sidebar-links> 
+      <v-sidebar-links to='/' icon="fas fa-chart-bar">Главная</v-sidebar-links> 
+      <v-sidebar-links to='/InputV' icon="fas fa-file-signature">Ввод отчёта</v-sidebar-links> 
       <v-sidebar-links to='/AllGroups' icon="fas fa-users">Все группы</v-sidebar-links> 
       <div v-if="role=='admin'">
-          <v-sidebar-links to='/Admin' icon="fas fa-file-signature">Admin</v-sidebar-links> 
+          <v-sidebar-links to='/Admin' icon="fas fa-download">Admin</v-sidebar-links> 
       </div>
       
       <br/> 

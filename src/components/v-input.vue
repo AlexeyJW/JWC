@@ -62,13 +62,17 @@
 <script setup>
 import VButton from './v-button.vue'
 import vConfirm from './v-confirm.vue'
+import {isCorrectMonth, isServiceYear, isCorrectYearAndMonth} from '../modules/convertMonth.js'
 import {ref, computed} from 'vue'
 import {useStore} from 'vuex'
 const store=useStore()
 //----------Date Now----------------------
 const dateNow=new Date()
 const yearNow=dateNow.getFullYear()
-const monthNow=dateNow.getMonth()
+let monthNow=dateNow.getMonth()
+// const sundayArr=sundayMonth(yearNow, monthNow)
+const serviceYear=isServiceYear(yearNow)
+
 //----------------------------------------
 
 const isConfirm=ref(false)
@@ -86,10 +90,11 @@ const bd=computed(()=>store.getters.GET_S3(''+yearNow, monthNow))
 const isRecord=(obj)=>bd.value.find(el=>el.data.group==obj.group&& el.data.weekNumber==obj.weekNumber&& el.data.weekday==obj.weekday)
 
 const prepareTheObj=()=>{
+        let o=isCorrectYearAndMonth(Number(vDate.value.slice(0,4)), Number(vDate.value.slice(5,7)-1)-isCorrectMonth(new Date(vDate.value)))
         const obj={
-            month: Number(vDate.value.slice(5,7)-1),
-            year: vDate.value.slice(0,4),
-            yearService:'2022',
+            month: o?.month,
+            year: (o?.year).toString(),
+            yearService:serviceYear,
             weekday:Weekday.value,
             weekNumber:WeekNumber.value,
             group:Group.value,
@@ -175,10 +180,12 @@ const confirmPressedOK=()=>{
    
     .v-span{
          position:absolute;
-         top:auto; 
-         left:auto;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
          z-index:999999;
     }
+   
    .activeoverflow{
         position: absolute;
         top: 0;
