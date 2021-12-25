@@ -5,15 +5,8 @@
         
         <div class="v-input-group">
             <h5 class="v-input-label">Группа:</h5>
-            <select class="field-select" v-model="Group" id="group">
+            <select ref="selectRoot" class="field-select" v-model="Group" >
                 <option disabled selected>Выбери номер</option>
-                <!-- <option value="1">Group 1</option>
-                <option value="2">Group 2</option>
-                <option value="3">Group 3</option>
-                <option value="4">Group 4</option>
-                <option value="5">Group 5</option> -->
-                <!-- <option value="6">Group 6</option>
-                <option value="7">Group 7</option> -->
                 <option v-for="i in groupsData" :key="i" :value="i">{{i}}</option>
             </select>
         </div>
@@ -63,7 +56,7 @@
 import VButton from './v-button.vue'
 import vConfirm from './v-confirm.vue'
 import {isCorrectMonth, isServiceYear, isCorrectYearAndMonth} from '../modules/convertMonth.js'
-import {ref, computed} from 'vue'
+import {ref, computed, watchEffect} from 'vue'
 import {useStore} from 'vuex'
 const store=useStore()
 //----------Date Now----------------------
@@ -77,14 +70,25 @@ const serviceYear=isServiceYear(yearNow)
 
 const isConfirm=ref(false)
 const isConfirmForIsAll=ref(false)
-
 const Group=ref('')
-const groupsData=computed(()=>store.state.groupsData)
-const vDate=ref(null)
+const selectRoot=ref(null)
+const groupsData=computed(()=>store.getters.GET_NAME_GROUPS)
 
+const groupUser=computed(()=>store.getters.GET_VUSER_GROUP)
+
+watchEffect(()=>{
+    Group.value=groupUser.value
+    
+})
+
+
+let initDate=''+yearNow+"-"+(monthNow+1)+"-"+dateNow.getDate()
+const vDate=ref(initDate)
+console.log(initDate)
 const vTotal=ref(null)
-const Weekday=ref('')
+const Weekday=ref(dateNow.getDay()==0?'weekend':'weekdays')
 const WeekNumber=ref(null)
+
 
 const bd=computed(()=>store.getters.GET_S3(''+yearNow, monthNow))
 const isRecord=(obj)=>bd.value.find(el=>el.data.group==obj.group&& el.data.weekNumber==obj.weekNumber&& el.data.weekday==obj.weekday)

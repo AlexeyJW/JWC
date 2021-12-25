@@ -48,3 +48,4 @@ export const GET_AVERAGE_S88_WE=(state)=>state.averageS88WE
 export const GET_TOTAL_GROUPS=(state)=>state.groups
 export const GET_NAME_GROUPS=(state)=>state.groupsData
 export const GET_VUSER_ROLE=(state)=>state.vUserRole
+export const GET_VUSER_GROUP=(state)=>state.vUserGroup

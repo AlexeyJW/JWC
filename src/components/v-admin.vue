@@ -265,15 +265,16 @@ const addDataUser=()=>{
          position:absolute;
          top: 50%;
          left: 50%;
+         font-size:15px;
          transform: translate(-50%, -50%);
          z-index:999999;
     }
   .v-admin-analytics{
-      display:flex;
+      /* display:flex;
       margin:10px;
       flex-basis:43%;
       border: 1px solid lightgray;
-      padding:10px;
+      padding:10px; */
   }
   .v-admin-users{
       display:flex;

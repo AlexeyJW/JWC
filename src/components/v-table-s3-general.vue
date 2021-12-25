@@ -9,8 +9,11 @@
                    
                 </strong>
             </h3>
-            <v-button class="v-button-item" textButton="Send" @click="sendReport" v-show="isSend"/>
-            <v-button class="v-button-item" textButton="Modify" @click="modifyReport" v-show="!isSend"/>
+            <div v-if="store.getters.GET_VUSER_ROLE=='admin'">
+                <v-button class="v-button-item" textButton="Send" @click="sendReport" v-show="isSend"/>
+                <v-button class="v-button-item" textButton="Modify" @click="modifyReport" v-show="!isSend"/>
+            </div>
+            
         </div>
         <div class="v-button-block">
              <button class="v-button-month-back" 
