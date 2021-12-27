@@ -7,8 +7,9 @@
     
     <v-table-s3-general :title="'All Groups'"/>
     <v-table-s88/>
-    <v-chart />
+   
     <v-chart-line/>
+     <v-chart />
 </template>
 
 <script setup>

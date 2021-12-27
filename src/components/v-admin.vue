@@ -80,10 +80,10 @@
                     <form
                       class="v-form-change-user"
                       @submit.prevent>
-                        <input  type="text" v-model="newNameUser" >
-                        <input class="v-form-num-group" type="number" v-model="newGroupUser">
-                        <input type="text" v-model.trim="newEmailUser">
-                        <input class="v-form-role" type="text" v-model="newRoleUser">
+                        <input  type="text" v-model="newNameUser" placeholder="имя">
+                        <input class="v-form-num-group" type="number" v-model="newGroupUser" placeholder="группа">
+                        <input type="text" v-model.trim="newEmailUser" placeholder="email">
+                        <input class="v-form-role" type="text" v-model="newRoleUser" placeholder="роль">
                         <input class="v-form-button-submit" type="submit" @click="addDataUser">
                         <button class="v-form-button-cancel" @click="isAddUser=!isAddUser">Отмена</button>
                     </form>

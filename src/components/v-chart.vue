@@ -55,7 +55,7 @@ const bg=computed(() =>{
       labels: labels.value,
       datasets: [
         {
-          label:'Total of attendees',
+          label:'Число присутствующих',
           data: data.value,
           backgroundColor: bg.value,
         },

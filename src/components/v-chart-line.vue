@@ -25,19 +25,30 @@ const props=defineProps({
 
 const dataArr = computed(()=>store.getters.YEAR_SERVICE('2022').sort((a,b)=>a.month-b.month))
  
-const data=computed(() =>{
+const dataWD=computed(() =>{
       let arr=[]
       dataArr.value.forEach(el=>{
              arr.push(el.averageWD)
+            
+      })
+      return arr
+})
+const dataWE=computed(() =>{
+      let arr=[]
+      dataArr.value.forEach(el=>{
+            
              arr.push(el.averageWE)
       })
       return arr
 })
+
+
+
 const labels=computed(()=>{
        let arr=[]
        dataArr.value.forEach(el=>{
-         arr.push(convertMonth.convertMonth(el.month)+' (будни)')
-         arr.push(convertMonth.convertMonth(el.month)+' (выходные)')
+         arr.push(convertMonth.convertMonth(el.month))
+         
        })
        return arr
 })
@@ -55,10 +66,16 @@ const bg=computed(() =>{
       labels: labels.value,
       datasets: [
         {
-          label:'Total of attendees',
-          data: data.value,
+          label:'Будни',
+          data: dataWD.value,
           backgroundColor: bg.value,
-          borderColor:"lightblue"
+          borderColor:'#0079AF'
+        },
+        {
+          label:'Выходные',
+          data: dataWE.value,
+          backgroundColor: bg.value,
+          borderColor:'#539b9b'
         },
       ],
     }));
