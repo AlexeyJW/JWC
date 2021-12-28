@@ -10,32 +10,67 @@
        </div>
       
        <button class="v-auth-button" @click="logGoogle"><img src="../assets/google.png" alt="logo google" class="v-auth-img">GOOGLE</button>
+       <span class="v-span" v-if="isRegister">
+           <div class="v-span-alert">
+               <h2>Вы не зарегистрированы, обратитесь к админу!</h2>
+           </div>
+       </span>
        
     </div>
 </template>
 
 <script setup>
-import {resGoogle} from '../modules/initFB.js'
+import {resGoogle, token, resOut} from '../modules/initFB.js'
 import {useStore} from 'vuex'
 import {useRouter} from 'vue-router'
+import {ref} from 'vue'
 const store=useStore()
 const router=useRouter()
+let isRegister=ref(false)
+let r=false
+
+console.log("token=", token)
 const logGoogle=()=>{
     resGoogle()
     .then((el)=>{
-        console.log(el)
-        if (el!=undefined) {
-        store.dispatch('GET_GROUP_USER', el?.email)
+        console.log("el=",el)
+      
+       
+        const permission=store.dispatch('GET_GROUP_USER', el?.email)
+        
+         
+        console.log("permission=", permission)
+    
+        // 
+        permission.then(
+            result=>{
+                if(result=='ok'){
+                    store.commit('SET_USER_PHOTO', el?.photoURL.toString())
+                    store.commit('SET_IS_AUTH')
+                    store.dispatch('GET_TOTAL_GROUPS')
+                    store.dispatch('LISTEN_S88')
+                    store.dispatch('LISTEN_S3')
+                    store.dispatch('LISTEN_USERS_FOR_ADMIN')
+                    store.dispatch('AVERAGE_S88', '2022')
+                }else{
+                    isRegister.value=true
+                    el=null
+                    resOut()
+                }
+               },
+            error=>{
+                console.log(error)
+                 
+            }
+        )
+        
         // store.commit('SET_USER_PHOTO', el?.reloadUserInfo.photoUrl)
-        store.commit('SET_USER_PHOTO', el?.photoURL.toString())
-        store.commit('SET_IS_AUTH')
-        store.dispatch('GET_TOTAL_GROUPS')
-        store.dispatch('LISTEN_S88')
-        store.dispatch('LISTEN_S3')
-        store.dispatch('LISTEN_USERS_FOR_ADMIN')
-        store.dispatch('AVERAGE_S88', '2022')
-        }else router.push({name:'Auth'})
-    })
+        
+            // router.push({name:'Auth'})
+           
+           
+            
+        })
    
 }
 
@@ -96,6 +131,19 @@ const logGoogle=()=>{
 .v-auth-img-confirm{
     width:100px;
     height:100px;
+}
+.v-span-alert{
+    background: white;
+    border: 1px solid lightgray;
+    margin-top: 10px;
+    padding:10px;
+    box-shadow: 0 0 8px 0 darkgray;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    /* font-size:15px; */
+    transform: translate(-50%, -50%);
+    z-index:999999;
 }
 
 </style>

@@ -146,11 +146,17 @@ export async function MODI_S3 (ctx, {id:id, obj:obj}){
 //________User________________________
 export async function GET_GROUP_USER({commit}, email){
     const q=query(collection (db, "users"), where('email', '==', email))
+    try{
     const qSnapshot=await getDocs(q)
     qSnapshot.forEach(qdoc=>{
       console.log("qdoc=",qdoc.data())
       commit('SET_VUSER',{name:qdoc.data().name, email:qdoc.data().email, group:qdoc.data().group, role:qdoc.data().role})
      })
+     return 'ok'
+    }catch(err){
+        console.log("ERROR!!!!!! "+err.code)
+        return err.code
+    }
 }
 
 export function GET_TOTAL_GROUPS({commit}){
