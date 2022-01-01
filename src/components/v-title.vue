@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3><strong>Group {{groupNumber}}</strong></h3>
+        <h4><strong>Группы: {{groupNumber}}</strong></h4>
     </div>
 </template>
 

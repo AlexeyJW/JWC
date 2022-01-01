@@ -65,20 +65,24 @@
        title:{type:String},
        group:{type:String,
               default:'6'
-              }
-            
+              },
+       year:{type:Number},
+       month:{type:Number}
+      
    })
 
+   //props
+   console.log("props=", props.year,'-', props.month)
+
   
-     
    //date now
-   const dateNow=new Date()
-   const monthNow=dateNow.getMonth()
-   const yearNow=dateNow.getFullYear()
+//    const dateNow=new Date()
+//    const monthNow=dateNow.getMonth()
+//    const yearNow=dateNow.getFullYear()
   
    const store=useStore()
    
-   const tableData =computed(()=>store.getters.FILTER_GROUP(props.group, ''+yearNow, ''+monthNow))
+   const tableData =computed(()=>store.getters.FILTER_GROUP(props.group, ''+props.year, ''+props.month))
    const wd=computed(()=>tableData.value.filter(el=>el.data.weekday=='weekdays'))
    const we=computed(()=>tableData.value.filter(el=>el.data.weekday=='weekend'))
 
