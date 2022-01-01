@@ -86,7 +86,7 @@ let initDate=''+yearNow+"-"+((monthNow+1)<10?"0"+(monthNow+1):(monthNow+1))+"-"+
 const vDate=ref(initDate)
 console.log(initDate)
 const vTotal=ref(null)
-const Weekday=ref(dateNow.getDay()==0?'weekend':'weekdays')
+const Weekday=ref((dateNow.getDay()==0||dateNow.getDay()==6)?'weekend':'weekdays')
 const WeekNumber=ref(null)
 
 
