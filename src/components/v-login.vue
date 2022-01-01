@@ -12,7 +12,7 @@
        <button class="v-auth-button" @click="logGoogle"><img src="../assets/google.png" alt="logo google" class="v-auth-img">GOOGLE</button>
        <span class="v-span" v-if="isRegister">
            <div class="v-span-alert">
-               <h2>Вы не зарегистрированы, обратитесь к админу!</h2>
+               <h2>Вы не зарегистрированы, обратитесь к администратору!</h2>
            </div>
        </span>
        
@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import {resGoogle, token, resOut} from '../modules/initFB.js'
+import {resGoogle, resOut} from '../modules/initFB.js'
 import {useStore} from 'vuex'
 import {useRouter} from 'vue-router'
 import {ref} from 'vue'
@@ -28,20 +28,11 @@ const store=useStore()
 const router=useRouter()
 let isRegister=ref(false)
 let r=false
-
-console.log("token=", token)
 const logGoogle=()=>{
     resGoogle()
     .then((el)=>{
         console.log("el=",el)
-      
-       
         const permission=store.dispatch('GET_GROUP_USER', el?.email)
-        
-         
-        console.log("permission=", permission)
-    
-        // 
         permission.then(
             result=>{
                 if(result=='ok'){
@@ -63,13 +54,7 @@ const logGoogle=()=>{
                  
             }
         )
-        
-        // store.commit('SET_USER_PHOTO', el?.reloadUserInfo.photoUrl)
-        
-            // router.push({name:'Auth'})
-           
-           
-            
+                    
         })
    
 }

@@ -82,7 +82,7 @@ watchEffect(()=>{
 })
 
 
-let initDate=''+yearNow+"-"+(monthNow+1)+"-"+dateNow.getDate()
+let initDate=''+yearNow+"-"+((monthNow+1)<10?"0"+(monthNow+1):(monthNow+1))+"-"+(dateNow.getDate()<10?"0"+dateNow.getDate():dateNow.getDate())
 const vDate=ref(initDate)
 console.log(initDate)
 const vTotal=ref(null)
