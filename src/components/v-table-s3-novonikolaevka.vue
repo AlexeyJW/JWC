@@ -103,23 +103,15 @@
    const monthNow=ref(Number(dateNow.getMonth()))
    const yearNow=ref(dateNow.getFullYear())
    const serviceYear=ref(isServiceYear(yearNow.value, monthNow.value))
-   
-   const store=useStore()
-// Переключатель кнопки Send / Modify
-   const buttonSendModify=(yearS, month)=>{
-       if(store.state.s88.find(el=>el.month==month && el.yearService==yearS))
-           store.commit('SET_IS_BUTTON_SEND_S3_FALSE')
-       else
-          store.commit('SET_IS_BUTTON_SEND_S3_TRUE')
-   }
-   buttonSendModify(serviceYear.value, monthNow.value)
+
+
    const isButton=ref(true)
   
-  
+   const store=useStore()
    const isSend=computed(()=>store.state.isButtonSendS3)
    const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow.value, monthNow.value))
-   const arrWD=computed(()=>store.getters.GET_S3(''+yearNow.value, monthNow.value).filter(el=>el.data.weekday=='weekdays'))
-   const arrWE=computed(()=>store.getters.GET_S3(''+yearNow.value, monthNow.value).filter(el=>el.data.weekday=='weekend'))
+   const arrWD=computed(()=>store.getters.GET_S3(''+yearNow.value, monthNow.value).filter(el=>el.data.weekday=='weekdays' && (el.data.group=='6' || el.data.group=='7')))
+   const arrWE=computed(()=>store.getters.GET_S3(''+yearNow.value, monthNow.value).filter(el=>el.data.weekday=='weekend' && (el.data.group=='6' || el.data.group=='7')))
    const allReports=ref(false)
    const isAllReportsWD=(week)=>{
        let all=0
@@ -219,9 +211,7 @@ const monthBack=()=>{
           monthNow.value-=1
       }
    serviceYear.value=isServiceYear(yearNow.value, monthNow.value)
-   buttonSendModify(serviceYear.value, monthNow.value)
    isButtonBack.value=!isButtonBack.value
-
 }
 const monthToNow=()=>{
    if (monthNow.value==11)
@@ -233,7 +223,6 @@ const monthToNow=()=>{
           monthNow.value+=1
       }
    serviceYear.value=isServiceYear(yearNow.value, monthNow.value)
-   buttonSendModify(serviceYear.value, monthNow.value)
    isButtonBack.value=!isButtonBack.value
 }
 

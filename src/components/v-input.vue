@@ -59,12 +59,14 @@ import {isCorrectMonth, isServiceYear, isCorrectYearAndMonth} from '../modules/c
 import {ref, computed, watchEffect} from 'vue'
 import {useStore} from 'vuex'
 const store=useStore()
+
+
 //----------Date Now----------------------
 const dateNow=new Date()
 const yearNow=dateNow.getFullYear()
 let monthNow=dateNow.getMonth()
 // const sundayArr=sundayMonth(yearNow, monthNow)
-const serviceYear=isServiceYear(yearNow)
+const serviceYear=isServiceYear(yearNow, monthNow)
 
 //----------------------------------------
 
@@ -81,7 +83,7 @@ watchEffect(()=>{
     
 })
 
-
+//Вводим данные в поля инпутов при открытии (инициализируем поля)
 let initDate=''+yearNow+"-"+((monthNow+1)<10?"0"+(monthNow+1):(monthNow+1))+"-"+(dateNow.getDate()<10?"0"+dateNow.getDate():dateNow.getDate())
 const vDate=ref(initDate)
 console.log(initDate)
@@ -89,9 +91,33 @@ const vTotal=ref(null)
 const Weekday=ref((dateNow.getDay()==0||dateNow.getDay()==6)?'weekend':'weekdays')
 const WeekNumber=ref(null)
 
-
-const bd=computed(()=>store.getters.GET_S3(''+yearNow, monthNow))
-const isRecord=(obj)=>bd.value.find(el=>el.data.group==obj.group&& el.data.weekNumber==obj.weekNumber&& el.data.weekday==obj.weekday)
+// создаю переменную для выборки месячной проверки
+let bd=null
+// функция проверки, есть ли уже запись на выбранную встречу
+// старый вариант - есть ошибка с датами выборки- нужно выбирать по vDate
+// const isRecord=(obj)=>{
+//     let yearBd=yearNow
+//     let monthBd=monthNow
+//     if (monthNow==0 && isCorrectMonth(new Date(vDate.value))==1) //!!!!! 
+//         {
+//             yearBd-=1
+//             monthBd=11
+//         }
+//     else if(isCorrectMonth(new Date(vDate.value))==1)
+//         {
+//             monthBd-=1
+//         }
+//     bd=store.getters.GET_S3(''+yearBd, monthBd)
+//     console.log("bd=", bd)
+//     return bd.find(el=>el.data.group==obj.group&& el.data.weekNumber==obj.weekNumber&& el.data.weekday==obj.weekday)
+// }
+// новый вариант
+const isRecord=(obj)=>{
+  bd=null
+  bd=store.getters.GET_S3(vDate.value.slice(0,4), vDate.value.slice(5,7)-1 )
+  console.log("isRecord bd=",bd)
+  return bd.find(el=>el.data.group==obj.group && el.data.weekNumber==obj.weekNumber&& el.data.weekday==obj.weekday)
+}
 
 const prepareTheObj=()=>{
         let o=isCorrectYearAndMonth(Number(vDate.value.slice(0,4)), Number(vDate.value.slice(5,7)-1)-isCorrectMonth(new Date(vDate.value)))
@@ -107,25 +133,31 @@ const prepareTheObj=()=>{
         }
         return obj
 }
-const isAll=(obj)=>{
-    
+// const isAll=(obj)=>{
+const isAll=()=>{    
     if (Group.value==''|| WeekNumber.value==null || Weekday.value==''|| vDate.value==null||vTotal.value==null ) return false
     else return true
     }
 
 const sendObj=()=>{
-     if (!isAll(sendObj)) isConfirmForIsAll.value=true
+     if (!isAll()) isConfirmForIsAll.value=true
      else{
         let sendObj=prepareTheObj()   
-        if (typeof isRecord(sendObj)!='object')
-            store.dispatch('ADD_S3', sendObj)
-        else isConfirm.value=true
+        if (typeof isRecord(sendObj)!='object'){
+             console.log("sendObj=",sendObj)
+             store.dispatch('ADD_S3', sendObj)
+        }
+        else {
+        //  console.log("sendObj typeof isRecord=", typeof isRecord())
+         isConfirm.value=true
+        }
      }
 }  
 const confirmPressedOK=()=>{
       let sendObj=prepareTheObj()
       let backRacord=null
-      backRacord=bd.value.find(el=>el.data.group==sendObj.group && el.data.weekNumber==sendObj.weekNumber && el.data.weekday==sendObj.weekday)
+      console.log("confirmPessedOK  bd=", bd)
+      backRacord=bd.find(el=>el.data.group==sendObj.group && el.data.weekNumber==sendObj.weekNumber && el.data.weekday==sendObj.weekday)
       console.log("backRacord", backRacord.id)
       store.dispatch('MODI_S3',{id:backRacord.id, obj:sendObj})
       isConfirm.value=!isConfirm.value

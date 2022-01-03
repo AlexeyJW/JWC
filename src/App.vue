@@ -7,7 +7,7 @@
     import {computed} from 'vue'
     import {useStore} from 'vuex'
     
-
+    const dd=new Date()
     const store=useStore()
     const isAuth=computed(()=>store.getters.GET_IS_AUTH)
     // onDeactivated(()=>{

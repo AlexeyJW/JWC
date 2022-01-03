@@ -38,7 +38,8 @@
    const items=[
        {id:1, label:'Ввод', path:'/InputV',choice: false}, 
        {id:2, label:'Главная', path:'/',choice: false}, 
-       {id:3, label:'Все группы', path:'/AllGroups', choice: false}
+       {id:3, label:'Все группы', path:'/AllGroups', choice: false},
+       {id:4, label:'Новониколаевка', path:'/Novonikolaevka', choice: false}
     //    {id:4, label:'Logout', path:'/Auth', choice: false}
    ]
    const logOut=()=>{
