@@ -22,8 +22,8 @@ const props=defineProps({
     default:[]
   }
 })
-
-const dataArr = computed(()=>store.getters.YEAR_SERVICE('2022').sort((a,b)=>a.month-b.month))
+const serviceYear=ref(convertMonth.isServiceYear(new Date().getFullYear(), new Date().getMonth()))
+const dataArr = computed(()=>store.getters.YEAR_SERVICE_N(serviceYear.value).sort((a,b)=>a.month-b.month))
  
 const dataWD=computed(() =>{
       let arr=[]

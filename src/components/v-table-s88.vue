@@ -128,9 +128,9 @@
                </tr>
                <tr>
                    <td colspan="3"><strong>Среднее:</strong></td>
-                   <td>{{s88.length !=0 ? (averageWD/s88.length).toFixed(2) : 0}}</td>
+                   <td>{{averageWD}}</td>
                    <td colspan="2"><strong>Среднее:</strong></td>
-                   <td>{{s88.length !=0 ? (averageWE/s88.length).toFixed(2) : 0}}</td>
+                   <td>{{averageWE}}</td>
                </tr>
            </tbody>
        </table>

@@ -7,12 +7,13 @@ var unsubscribeS3=null
 var unsubscribeS88=null
 var unsubscribeAllGroups=null
 var unsubscribeUsers=null
+var unsubscribeS88N=null
 //_______________________________________
 
 export const GET_S88=({commit})=>{
     axios.get('../src/assets/s88.json')
     .then(res=>{
-        console.log(res.data)
+        // console.log(res.data)
         commit('SET_S88',res.data)
     })
 }
@@ -37,16 +38,16 @@ export function LISTEN_S88 ({commit}){
             unsubscribeS88=onSnapshot(q, snapshot=>{
                 snapshot.docChanges().forEach(change=>{
                 if (change.type==="added"){
-                    console.log("Add", change.doc.data())
+                    // console.log("Add", change.doc.data())
                     commit('SET_S88_EL', change.doc.data())
                 }
                 if (change.type==="modified"){
-                    console.log("Modified",change.doc.id, change.doc.data())
+                    // console.log("Modified",change.doc.id, change.doc.data())
                     commit('MODI_S88', change.doc.data())
                   
                 }
                 if (change.type==="removed"){
-                    console.log("Removed", change.doc.data())
+                    // console.log("Removed", change.doc.data())
                     commit ('REMOVE_S88', {yearService:change.doc.data().yearService, month:change.doc.data().month})
                 }
                 })
@@ -55,11 +56,11 @@ export function LISTEN_S88 ({commit}){
 // add to base collection s88_________________________________________
 export async function ADD_S88(ctx, obj){
     console.log("action ADD_S88")
-    console.log("obj=", obj)
+    // console.log("obj=", obj)
             try {
                 const docRef = await addDoc(collection(db, "s88"), obj)
             
-                console.log("Document written with ID: ", docRef.id);
+                // console.log("Document written with ID: ", docRef.id);
             } catch (e) {
                 console.error("Error adding document: ", e);
             }
@@ -67,7 +68,7 @@ export async function ADD_S88(ctx, obj){
 
 //modified to base collection s88______________________________________
 export async function MODI_S88 (ctx, obj){
-    console.log("action MODI", obj.month)
+    // console.log("action MODI", obj.month)
     const q=query(collection (db, "s88"),where('month','==',obj.month), where('yearService', '==', obj.yearService))
     const qSnapshot=await getDocs(q)
     qSnapshot.forEach(qdoc=>{
@@ -84,32 +85,112 @@ export async function AVERAGE_S88 ({commit}, yearService){
     console.log("action AVERAGE_S88")
     let averageWD=0
     let averageWE=0
+    let i=0
     const q=query(collection (db, "s88"), where('yearService', '==', yearService))
     const qSnapshot=await getDocs(q)
     qSnapshot.forEach(qdoc=>{
-      console.log("qdoc=",qdoc.data())
-      averageWD+=Number(qdoc.data().averageWD)
-      averageWE+=Number(qdoc.data().averageWE)
+    //   console.log("qdoc=",qdoc.data())
+      averageWD+=qdoc.data().averageWD
+      averageWE+=qdoc.data().averageWE
+      i++
      })
-    console.log("averageS88=",averageWD, averageWE)
-    commit('SET_AVERAGE_S88_WD', averageWD)
-    commit('SET_AVERAGE_S88_WE', averageWE)
+    // console.log("averageS88=",averageWD, averageWE)
+    if(i>0){
+        commit('SET_AVERAGE_S88_WD', averageWD/i)
+        commit('SET_AVERAGE_S88_WE', averageWE/i)
+    } else{
+        commit('SET_AVERAGE_S88_WD', averageWD)
+        commit('SET_AVERAGE_S88_WE', averageWE)
+    }
 }
+//-------------End s-88-General--------------------
+// ------------s-88-Novonikolaevka------------------
+export function LISTEN_S88_N ({commit}){
+    const q=query(collection(db, "s88n"))
+    unsubscribeS88N=onSnapshot(q, snapshot=>{
+        snapshot.docChanges().forEach(change=>{
+        if (change.type==="added"){
+            // console.log("Add", change.doc.data())
+            commit('SET_S88_N_EL', change.doc.data())
+        }
+        if (change.type==="modified"){
+            // console.log("Modified",change.doc.id, change.doc.data())
+            commit('MODI_S88_N', change.doc.data())
+          
+        }
+        if (change.type==="removed"){
+            // console.log("Removed", change.doc.data())
+            commit ('REMOVE_S88_N', {yearService:change.doc.data().yearService, month:change.doc.data().month})
+        }
+        })
+})
+}
+// add to base collection s88_________________________________________
+export async function ADD_S88_N(ctx, obj){
+console.log("action ADD_S88_N")
+// console.log("obj=", obj)
+    try {
+        const docRef = await addDoc(collection(db, "s88n"), obj)
+    
+        // console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+}
+
+//modified to base collection s88______________________________________
+export async function MODI_S88_N (ctx, obj){
+// console.log("action MODI", obj.month)
+const q=query(collection (db, "s88n"),where('month','==',obj.month), where('yearService', '==', obj.yearService))
+const qSnapshot=await getDocs(q)
+qSnapshot.forEach(qdoc=>{
+console.log(qdoc.id)
+updateDoc(doc(db, 's88n',qdoc.id), obj)
+.then(()=>console.log('Success'))
+.catch(()=>console.log('error'))
+})
+}
+//remove a document in the collection s88_______________________________
+//...
+//average S88___________________________________________________________
+export async function AVERAGE_S88_N ({commit}, yearService){
+console.log("action AVERAGE_S88_N")
+let averageWD=0
+let averageWE=0
+let i=0
+const q=query(collection (db, "s88n"), where('yearService', '==', yearService))
+const qSnapshot=await getDocs(q)
+qSnapshot.forEach(qdoc=>{
+//   console.log("qdoc=",qdoc.data())
+averageWD+=qdoc.data().averageWD
+averageWE+=qdoc.data().averageWE
+i++
+})
+// console.log("averageS88=",averageWD, averageWE)
+if(i>0){
+commit('SET_AVERAGE_S88_N_WD', averageWD/i)
+commit('SET_AVERAGE_S88_N_WE', averageWE/i)
+} else{
+commit('SET_AVERAGE_S88_N_WD', averageWD)
+commit('SET_AVERAGE_S88_N_WE', averageWE)
+}
+}
+//----------End s-88- Novonikolaevka----------------
 // listen base collection s3____________________________________________
 export function LISTEN_S3 ({commit}){
         const q=query(collection(db, "s3"))
         unsubscribeS3=onSnapshot(q, snapshot=>{
             snapshot.docChanges().forEach(change=>{
             if (change.type==="added"){
-                console.log("Add", change.doc.data())
+                // console.log("Add", change.doc.data())
                 commit('SET_S3_EL', {id:change.doc.id, data:change.doc.data()})
             }
             if (change.type==="modified"){
-                console.log("Modified",change.doc.id, change.doc.data())
+                // console.log("Modified",change.doc.id, change.doc.data())
                 commit('MODI_S3',{id:change.doc.id, obj:change.doc.data()})
             }
             if (change.type==="removed"){
-                console.log("Removed", change.doc.data())
+                // console.log("Removed", change.doc.data())
                 commit('REMOVE_S3', change.doc.id)
             }
             })
@@ -118,7 +199,7 @@ export function LISTEN_S3 ({commit}){
 //add a document to the collection s3__________________________________
 export async function ADD_S3(ctx, obj){
     console.log("action ADD_S3")
-    console.log("obj=", obj)
+    // console.log("obj=", obj)
             try {
                 const docRef = await addDoc(collection(db, "s3"), obj)
             
@@ -129,7 +210,7 @@ export async function ADD_S3(ctx, obj){
 }
 //modify a document in the collection s3_______________________________
 export async function MODI_S3 (ctx, {id:id, obj:obj}){
-    console.log("action MODI", obj.month)
+    // console.log("action MODI", obj.month)
     // const q=query(collection (db, "s3"),where('month','==',obj.month))
     // const qSnapshot=await getDocs(q)
     // qSnapshot.forEach(qdoc=>{
@@ -149,7 +230,7 @@ export async function GET_GROUP_USER({commit}, email){
     try{
     const qSnapshot=await getDocs(q)
     qSnapshot.forEach(qdoc=>{
-      console.log("qdoc=",qdoc.data())
+    //   console.log("qdoc=",qdoc.data())
       commit('SET_VUSER',{name:qdoc.data().name, email:qdoc.data().email, group:qdoc.data().group, role:qdoc.data().role})
      })
      return 'ok'
@@ -164,12 +245,12 @@ export function GET_TOTAL_GROUPS({commit}){
     unsubscribeAllGroups=onSnapshot(q, snapshot=>{
         snapshot.docChanges().forEach(change=>{
         if (change.type==="added"){
-            console.log("Add", change.doc.data())
+            // console.log("Add", change.doc.data())
             commit('SET_TOTAL_GROUPS', change.doc.data().groupAll)
             commit('SET_NAME_GROUPS', change.doc.data().nameGroups)
         }
         if (change.type==="modified"){
-            console.log("Modified",change.doc.id, change.doc.data().groupAll)
+            // console.log("Modified",change.doc.id, change.doc.data().groupAll)
             commit('SET_TOTAL_GROUPS', change.doc.data())
             commit('SET_NAME_GROUPS', change.doc.data().nameGroups)
         }
@@ -192,7 +273,7 @@ export function LISTEN_USERS_FOR_ADMIN ({commit}){
     unsubscribeUsers=onSnapshot(q, snapshot=>{
         snapshot.docChanges().forEach(change=>{
         if (change.type==="added"){
-            console.log("Add", change.doc.data())
+            // console.log("Add", change.doc.data())
             commit('SET_USERS_FOR_ADMIN',
              {id:change.doc.id,
              name:change.doc.data().name,
@@ -202,7 +283,7 @@ export function LISTEN_USERS_FOR_ADMIN ({commit}){
              })
         }
         if (change.type==="modified"){
-            console.log("Modified",change.doc.id, change.doc.data())
+            // console.log("Modified",change.doc.id, change.doc.data())
             commit('MODI_USER_ADMIN',
                {id:change.doc.id,
                 name:change.doc.data().name,
@@ -212,7 +293,7 @@ export function LISTEN_USERS_FOR_ADMIN ({commit}){
                })
         }
         if (change.type==="removed"){
-            console.log("Removed", change.doc.data())
+            // console.log("Removed", change.doc.data())
             commit('REMOVE_USER_ADMIN', change.doc.id)
         }
         })
@@ -241,7 +322,7 @@ console.log("action MODI", obj.id)
     .catch(()=>console.log('error'))
 }
 export async function REMOVE_USER (ctx, id){
-    console.log("id=", id)
+    // console.log("id=", id)
     await deleteDoc(doc(db, "users", id));
 }
    
@@ -252,8 +333,9 @@ export function UNSUBSCRIBE({commit}){
     unsubscribeS88()
     unsubscribeAllGroups()
     unsubscribeUsers()
+    unsubscribeS88N()
     commit('SET_IS_AUTH')
     commit('DESTROY_STATE')
     const r=resOut()
-    console.log(r)
+    // console.log(r)
 }

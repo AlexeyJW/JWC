@@ -28,7 +28,7 @@ export const isServiceYear=( year, month)=>{
    return serviceYear  
 }
 export const isCorrectYearAndMonth=(y, m)=>{
-    console.log("is correct Year: y=", y, "m=", m)
+    // console.log("is correct Year: y=", y, "m=", m)
     let obj={
              year: y,
              month: m
@@ -37,7 +37,7 @@ export const isCorrectYearAndMonth=(y, m)=>{
         obj.month=11
         obj.year=y-1
     }
-    console.log("obj in correct=", obj)
+    // console.log("obj in correct=", obj)
     return obj    
     
 }

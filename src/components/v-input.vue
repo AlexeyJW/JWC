@@ -86,7 +86,7 @@ watchEffect(()=>{
 //Вводим данные в поля инпутов при открытии (инициализируем поля)
 let initDate=''+yearNow+"-"+((monthNow+1)<10?"0"+(monthNow+1):(monthNow+1))+"-"+(dateNow.getDate()<10?"0"+dateNow.getDate():dateNow.getDate())
 const vDate=ref(initDate)
-console.log(initDate)
+// console.log(initDate)
 const vTotal=ref(null)
 const Weekday=ref((dateNow.getDay()==0||dateNow.getDay()==6)?'weekend':'weekdays')
 const WeekNumber=ref(null)
@@ -115,7 +115,7 @@ let bd=null
 const isRecord=(obj)=>{
   bd=null
   bd=store.getters.GET_S3(vDate.value.slice(0,4), vDate.value.slice(5,7)-1 )
-  console.log("isRecord bd=",bd)
+//   console.log("isRecord bd=",bd)
   return bd.find(el=>el.data.group==obj.group && el.data.weekNumber==obj.weekNumber&& el.data.weekday==obj.weekday)
 }
 
@@ -144,7 +144,7 @@ const sendObj=()=>{
      else{
         let sendObj=prepareTheObj()   
         if (typeof isRecord(sendObj)!='object'){
-             console.log("sendObj=",sendObj)
+            //  console.log("sendObj=",sendObj)
              store.dispatch('ADD_S3', sendObj)
         }
         else {
@@ -156,9 +156,9 @@ const sendObj=()=>{
 const confirmPressedOK=()=>{
       let sendObj=prepareTheObj()
       let backRacord=null
-      console.log("confirmPessedOK  bd=", bd)
+    //   console.log("confirmPessedOK  bd=", bd)
       backRacord=bd.find(el=>el.data.group==sendObj.group && el.data.weekNumber==sendObj.weekNumber && el.data.weekday==sendObj.weekday)
-      console.log("backRacord", backRacord.id)
+    //   console.log("backRacord", backRacord.id)
       store.dispatch('MODI_S3',{id:backRacord.id, obj:sendObj})
       isConfirm.value=!isConfirm.value
 }

@@ -21,6 +21,7 @@
 
 <script setup>
 import {resGoogle, resOut} from '../modules/initFB.js'
+import {isServiceYear} from '../modules/convertMonth.js'
 import {useStore} from 'vuex'
 import {useRouter} from 'vue-router'
 import {ref} from 'vue'
@@ -28,10 +29,14 @@ const store=useStore()
 const router=useRouter()
 let isRegister=ref(false)
 let r=false
+const dateNow=new Date()
+const yearNow=dateNow.getFullYear()
+const monthNow=dateNow.getMonth()
+const yearService=isServiceYear(yearNow, monthNow)
 const logGoogle=()=>{
     resGoogle()
     .then((el)=>{
-        console.log("el=",el)
+        // console.log("el=",el)
         const permission=store.dispatch('GET_GROUP_USER', el?.email)
         permission.then(
             result=>{
@@ -40,9 +45,11 @@ const logGoogle=()=>{
                     store.commit('SET_IS_AUTH')
                     store.dispatch('GET_TOTAL_GROUPS')
                     store.dispatch('LISTEN_S88')
+                    store.dispatch('LISTEN_S88_N')
                     store.dispatch('LISTEN_S3')
                     store.dispatch('LISTEN_USERS_FOR_ADMIN')
-                    store.dispatch('AVERAGE_S88', '2022')
+                    store.dispatch('AVERAGE_S88', yearService)
+                    store.dispatch('AVERAGE_S88_N',yearService)
                 }else{
                     isRegister.value=true
                     el=null

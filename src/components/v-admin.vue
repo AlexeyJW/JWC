@@ -128,11 +128,11 @@ const newTotalGroups=ref(0)
 const newNameGroups=ref('')
 
 
-console.log(analytics)
+// console.log(analytics)
 
 const changeGroups=()=>{
     let arr=newNameGroups.value.split(",")
-    console.log("arr=", arr)
+    // console.log("arr=", arr)
     if (newTotalGroups.value >=2) {
          if(arr.length==newTotalGroups.value) 
          
@@ -176,7 +176,7 @@ const isConfirmUserRemove=ref(false)
 
 let removeIdUser=ref('')
 const removeUserTable=(event)=>{
-    console.log("event=",event)
+    // console.log("event=",event)
     removeIdUser.value=event
     isConfirmUserRemove.value=true
 }

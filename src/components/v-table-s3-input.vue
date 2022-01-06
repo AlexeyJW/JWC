@@ -72,7 +72,7 @@
    })
 
    //props
-   console.log("props=", props.year,'-', props.month)
+//    console.log("props=", props.year,'-', props.month)
 
   
    //date now

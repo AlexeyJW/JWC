@@ -188,7 +188,7 @@ const prepareTheReport=()=>{
 setTimeout(()=>{
     let d=store.getters.YEAR_SERVICE('2022')
     if(d.find(el=>el.month==Number(monthNow.value))){
-              console.log('YES!!!!!')
+            //   console.log('YES!!!!!')
               store.commit('SET_IS_BUTTON_SEND_S3_FALSE')
           } 
           }, 1000)
