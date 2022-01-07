@@ -48,7 +48,7 @@ export const GET_AVERAGE_S3_WD=(state)=>state.averageS3WD
 export const GET_AVERAGE_S3_WE=(state)=>state.averageS3WE
 
 export const GET_IS_AUTH=(state)=>state.isAuth
-export const GET_VUSER=(state)=>state.vUser
+
 export const GET_AVERAGE_S88_WD=(state)=>state.averageS88WD
 export const GET_AVERAGE_S88_WE=(state)=>state.averageS88WE
 export const GET_AVERAGE_S88_N_WD=(state)=>state.averageS88NWD
@@ -57,3 +57,4 @@ export const GET_TOTAL_GROUPS=(state)=>state.groups
 export const GET_NAME_GROUPS=(state)=>state.groupsData
 export const GET_VUSER_ROLE=(state)=>state.vUserRole
 export const GET_VUSER_GROUP=(state)=>state.vUserGroup
+export const GET_VUSER=(state)=>state.vUser

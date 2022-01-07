@@ -196,6 +196,24 @@ export function LISTEN_S3 ({commit}){
             })
     })
 }
+//request data s-3 for admin 
+export async function REQUEST_S3({commit}, obj){
+    console.log("send obj=", obj)
+    const arr=[]
+  
+    const q=query(collection (db, "s3"), where('group', '==', obj.group), where('month','==', obj.month), where('yearService', '==', obj.serviceYear))
+    
+    
+    const qSnapshot=await getDocs(q)
+    qSnapshot.forEach(qdoc=>{
+                console.log("qdoc id=", qdoc.id)
+                arr.push({id:qdoc.id, data:qdoc.data()})
+            })
+    console.log("arr=", arr)
+    return arr
+
+
+}
 //add a document to the collection s3__________________________________
 export async function ADD_S3(ctx, obj){
     console.log("action ADD_S3")

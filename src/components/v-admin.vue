@@ -106,7 +106,35 @@
             </v-confirm>
         </span>
         
-       
+       <div class="v-admin-a">
+                     
+           <input type="number" v-model="groupNumber" placeholder="group"/>
+           <input type="number" v-model="monthNumber" placeholder="month"/>
+           <input type="text" v-model="serviceYear" placeholder="service year"/> 
+           <v-button textButton="Request" @click="requestS3"/>
+           <table class="v-table-s88">
+                <thead>
+                   
+                    <th class="v-admin-users-table-head">id</th>
+                    <th class="v-admin-users-table-head">Week</th>
+                    <th class="v-admin-users-table-head">WD/WE</th>
+                    <th class="v-admin-users-table-head">Total</th>
+                    <th class="v-admin-users-table-head">Date</th>
+                    <th class="v-admin-users-table-head">Author</th>
+                </thead>
+                <tbody class="v-admin-users-table-body">
+                   <tr v-for="i in arr" :key="i.id">
+                      <td>{{i.id}}</td>
+                      <td>{{i.data.weekNumber}}</td>
+                      <td>{{i.data.weekday}}</td>
+                      <td>{{i.data.total}}</td>
+                      <td>{{i.data.date}}</td>
+                      <td>{{i?.data?.author}}</td>
+                   </tr>
+                </tbody>
+            </table>
+       </div>
+
      </div> <!--v-admin -->
 </template>
 
@@ -208,6 +236,24 @@ const addDataUser=()=>{
      store.dispatch('ADD_USER', obj)
 }
 // logEvent(analytics, 'notification_received');
+
+//Request data s-3
+const groupNumber=ref(null)
+const monthNumber=ref(null)
+const serviceYear=ref(null)
+let arr=ref([])
+const requestS3=()=>{
+    arr.value=[]
+    let obj={
+        group:''+groupNumber.value,
+        month:monthNumber.value,
+        serviceYear:Number(serviceYear.value)
+    }
+    console.log("obj=", obj)
+    store.dispatch('REQUEST_S3', obj)
+      .then((el)=>arr.value=el)
+}
+
 </script>
 
 <style>

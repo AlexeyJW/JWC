@@ -78,6 +78,7 @@ const groupsData=computed(()=>store.getters.GET_NAME_GROUPS)
 
 const groupUser=computed(()=>store.getters.GET_VUSER_GROUP)
 
+
 watchEffect(()=>{
     Group.value=groupUser.value
     
@@ -113,8 +114,12 @@ let bd=null
 // }
 // новый вариант
 const isRecord=(obj)=>{
+  let o=isCorrectYearAndMonth(Number(vDate.value.slice(0,4)), Number(vDate.value.slice(5,7)-1)-isCorrectMonth(new Date(vDate.value)))  
   bd=null
-  bd=store.getters.GET_S3(vDate.value.slice(0,4), vDate.value.slice(5,7)-1 )
+//  bd=store.getters.GET_S3(vDate.value.slice(0,4), vDate.value.slice(5,7)-1 )
+ //вставка
+  bd=store.getters.GET_S3((o?.year).toString(),  o?.month)
+//end
 //   console.log("isRecord bd=",bd)
   return bd.find(el=>el.data.group==obj.group && el.data.weekNumber==obj.weekNumber&& el.data.weekday==obj.weekday)
 }
@@ -124,12 +129,13 @@ const prepareTheObj=()=>{
         const obj={
             month: o?.month,
             year: (o?.year).toString(),
-            yearService:serviceYear,
+            yearService:Number(serviceYear),
             weekday:Weekday.value,
             weekNumber:WeekNumber.value,
             group:Group.value,
             date:vDate.value,
-            total:vTotal.value
+            total:vTotal.value,
+            author:store.getters.GET_VUSER
         }
         return obj
 }
