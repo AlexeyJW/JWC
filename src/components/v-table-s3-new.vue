@@ -103,8 +103,11 @@
        wd.value.forEach(el=>{
            if(el.data.weekNumber>max) max=el.data.weekNumber
        })
+       let l=wd.value.length
+      
        if (max!=0) {
-           let num=(wd.value.reduce((sum, el)=>sum+el.data.total, 0)/max).toFixed(2)
+        //    let num=(wd.value.reduce((sum, el)=>sum+el.data.total, 0)/max).toFixed(2)
+           let num=l!=0? (wd.value.reduce((sum, el)=>sum+el.data.total, 0)/l).toFixed(2) :(wd.value.reduce((sum, el)=>sum+el.data.total, 0)).toFixed(2)
       
            return  num
        }
@@ -115,9 +118,9 @@
        we.value.forEach(el=>{
            if(el.data.weekNumber>max) max=el.data.weekNumber
        })
-
+        let l=we.value.length
         if (max!=0) {
-           let num=(we.value.reduce((sum, el)=>sum+el.data.total, 0)/max).toFixed(2)
+           let num=l!=0? (we.value.reduce((sum, el)=>sum+el.data.total, 0)/l).toFixed(2) :(we.value.reduce((sum, el)=>sum+el.data.total, 0)).toFixed(2)
        
            return  num
        }

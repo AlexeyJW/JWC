@@ -141,7 +141,7 @@ const prepareTheObj=()=>{
 }
 // const isAll=(obj)=>{
 const isAll=()=>{    
-    if (Group.value==''|| WeekNumber.value==null || Weekday.value==''|| vDate.value==null||vTotal.value==null ) return false
+    if (Group.value==''|| WeekNumber.value==null || Weekday.value==''|| vDate.value==null||vTotal.value==null || vTotal.value==0) return false
     else return true
     }
 

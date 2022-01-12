@@ -2,7 +2,7 @@ export const GET_ACTIVE_PAGE=state=>state.activePage
 export const PAGINATOR=state=>page=>state.paginator[page]
 export const ACTIVE_PAGE=state=>state.activePage
 export const TOTAL_GROUPS =state=>state.groups
-export const TOTAL_GROUPS_N=state=>state.grousNovonikolaevka
+export const TOTAL_GROUPS_N=state=>state.groupsNovonikolaevka
 export const NUMBER_GROUPS=state=>state.groupsData
 //  table s3
 export const GET_S3=(state)=>(year, month)=>{

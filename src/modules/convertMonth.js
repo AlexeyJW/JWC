@@ -78,3 +78,13 @@ export const isCorrectMonth=(dateNow)=>{
  
     return correct
 }
+export const isNumberWeek=(receivedDate)=>{
+   dateNow=new Date(receivedDate)
+   const sun=sundayMonth(dateNow.getFullYear(), dateNow.getMonth())
+   let mon=[]
+   
+   sun.forEach((el)=>{
+       if(el>6) mon.push(el-6)
+   })
+
+}
