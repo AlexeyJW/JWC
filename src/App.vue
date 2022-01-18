@@ -13,10 +13,41 @@
     // onDeactivated(()=>{
     //  console.log("Goodbye!!")
     // })
-</script>
+    // Touch event
+    let x1=null
+    let y1=null
+    const handleTouchStart=(event)=>{
+      const firstTouch=event.touches[0]
+      x1=firstTouch.clientX
+      y1=firstTouch.clientY
+      console.log("x1=",x1, "  y1=", y1)
+    }
+    const handleTouchMove=(event)=>{
+      if(!x1 || !y1) return false
+      let x2=event.touches[0].clientX
+      let y2=event.touches[0].clientY
+
+      let xDiff=x2-x1
+      let yDiff=y2-y1
+      if (Math.abs(xDiff)>Math.abs(yDiff)){
+        // right - left
+        if (xDiff>0)console.log('right')
+        else console.log('left')
+
+      }else
+         //top - bottom
+         if(yDiff>0){
+           console.log('down')
+
+         } 
+         else console.log('top')
+      x1=null
+      y1=null
+    }
+    </script>
 
 <template>
-    <div id="app">
+    <div id="app" @touchstart="handleTouchStart" @touchmove.prevent="handleTouchMove">
       <div v-if="isAuth">
          <Auth/>  
       </div> 
