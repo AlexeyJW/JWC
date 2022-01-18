@@ -26,7 +26,7 @@ const isActive=computed(()=>route.path==props.to)
 <style scoped>
 .fade-enter-active,
 .fade-leave-active{
-    transition: opacity 0.1s;
+    transition: opacity 0.2s;
 }
 .fade-enter,
 .fade-leave{

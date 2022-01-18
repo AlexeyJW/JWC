@@ -1,7 +1,21 @@
 <template>
    <div class="v-block-table-s88">
-       <h3><strong>Общий отчёт о посещении встреч (S-88)</strong></h3>
-       <table class="v-table-s88">
+     <div class="v-block-title">
+      <h3><strong>Общий отчёт о посещении встреч (S-88)</strong></h3>
+       <div class="v-button-pdf" @click="reportPdf">
+           <div class="v-button-text">
+               <!-- <i class="fas fa-arrow-right"/> -->
+               скачать в PDF
+           </div>
+           <div class="v-button-icon">
+              <i class="fas fa-file-pdf"/>
+           </div> 
+            
+       </div>
+     </div>
+      
+     
+       <table class="v-table-s88" id="my-table">
            <thead>
                <tr>
                    <th rowspan="2">{{serviceYear}}</th>
@@ -140,12 +154,26 @@
    import {useStore} from 'vuex'
    import {computed, ref} from 'vue'
    import {isServiceYear} from '../modules/convertMonth.js'
+//    import {jsPDF} from 'jspdf'
+//    import 'jspdf-autotable'
+   import '../modules/calibril-normal.js'
+   import {jsPDF} from 'jspdf'
+   import { applyPlugin } from 'jspdf-autotable'
+   applyPlugin(jsPDF)
 //    import {listenS88, listenChangeS88} from '../modules/initFB.js'
    const serviceYear=ref(isServiceYear(new Date().getFullYear(), new Date().getMonth()))
    const store=useStore()
    const s88=computed(()=>store.getters.YEAR_SERVICE(serviceYear.value))
    const averageWD=computed(()=>store.getters.GET_AVERAGE_S88_WD)
    const averageWE=computed(()=>store.getters.GET_AVERAGE_S88_WE)
+   //PDF
+   const reportPdf=()=>{
+       const doc = new jsPDF()
+       doc.setFont('helvetica')
+       doc.setLanguage("ru-RU")
+       doc.autoTable({ html:'#my-table', styles: { font: 'calibril',  fontStyle: 'normal'}})
+       doc.save('table.pdf')
+   }
 </script>
 <style>
    .v-block-table-s88{
@@ -159,6 +187,42 @@
         /* max-width:600px; */
         
    }
+     .v-block-title{
+         display: flex;
+         flex-direction: row;
+         justify-content:center;
+         align-items:center;
+     }
+     .v-button-pdf{
+         display: flex;
+         flex-direction:row;
+         justify-content: center;
+          width:100px;
+         height:40px;
+         border:1px solid var(--sidebar-icon-color);
+         border-radius: 5px;
+          margin:10px;
+
+     }
+      .v-button-pdf:active{
+         border:1px solid orange;
+     }
+     
+     .v-button-text{
+         align-self: center;
+         
+         font-size:10px;
+         color:var(--sidebar-icon-color)
+     }
+     .v-button-icon{
+         align-self:center;
+        
+        
+         font-size:30px;
+         color:#bd1414;
+         padding:5px;
+        
+     }
      .v-table-s88{
        border-collapse: collapse;
        border-spacing: 0;
