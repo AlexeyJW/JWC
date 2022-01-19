@@ -8,9 +8,9 @@
     <div class="display-poster">
         <v-poster-novonikolaevka/>
     </div>
-    
+    <v-chart-line-novonikolaevka/>
     <v-table-s3-novonikolaevka/>
     <v-table-s88-novonikolaevka/>
-    <v-chart-line-novonikolaevka/>
+    
 </template>
 <style></style>

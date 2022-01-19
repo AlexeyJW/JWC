@@ -22,7 +22,6 @@
    import { useStore } from 'vuex';
    import {ref, computed} from 'vue'
    import vPaginator from '../components/v-paginator.vue'
-   import VTableS3 from '../components/v-table-s3.vue';
    import VTitle from '../components/v-title.vue'
    import VWrapperTable from '../components/v-wrapper-table.vue'
    import vPoster from '../components/v-poster.vue'
@@ -39,7 +38,7 @@
 
 const pageClick=page=>{
   pageNumber.value=page
-  // color.value='lightblue'
+ 
   isActive.value=true
   store.commit('SET_FALSE')
   store.commit('SET_IS_ACTIVE',{index:page-1, newIsActive:true})
@@ -48,12 +47,7 @@ const pageClick=page=>{
 </script>
 
 <style>
- /* .all-group{
-    display: flex;
-    flex-direction: column;
-    justify-content:center;
-    align-items: center;
-  } */
+ 
   .pagination{
     display:flex;
     flex-direction:row;

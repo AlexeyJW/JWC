@@ -69,11 +69,5 @@ const propsYear='2022'
 const propsMonth='0'
 </script>
 <style>
-    /* .v-input-group-number{
-       display:flex;
-       flex-direction: column;
-       align-items:center;
-       justify-content: center;
-       
-    } */
+  
 </style>

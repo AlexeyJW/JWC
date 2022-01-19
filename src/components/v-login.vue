@@ -50,6 +50,7 @@ const logGoogle=()=>{
                     store.dispatch('LISTEN_USERS_FOR_ADMIN')
                     store.dispatch('AVERAGE_S88', yearService)
                     store.dispatch('AVERAGE_S88_N',yearService)
+                    router.push({name:'InputV'})
                 }else{
                     isRegister.value=true
                     el=null

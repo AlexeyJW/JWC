@@ -47,7 +47,7 @@
     </script>
 
 <template>
-    <div id="app" @touchstart="handleTouchStart" @touchmove.prevent="handleTouchMove">
+    <div id="app" @touchstart.prevent="handleTouchStart" @touchmove.prevent="handleTouchMove">
       <div v-if="isAuth">
          <Auth/>  
       </div> 
@@ -56,9 +56,7 @@
          <div class="display-nav-bar">
             <v-nav-bar/>
          </div>
-        <!-- <div class="display-poster">
-            <v-poster/>
-        </div> -->
+      
          <div class="display-sidebar">
             <v-sidebar/>
             
@@ -76,7 +74,7 @@
 <style>
 *{
   text-decoration: none;
-  /* font-size: calc(25px+(40+40*0.7)*(100vw-320px)/1170); */
+  
   box-sizing:border-box;
    
 }
@@ -87,14 +85,11 @@ body{
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  /* font-family: 'Microsoft YaHei UI Light', sans-serif; */
-  /* font-size:auto; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   display: flex;
-  /* flex-direction: row; */
   justify-content: center;
   align-items: center;
   flex-basis:100%;
@@ -124,13 +119,7 @@ body{
   #v-table-s88-name-month{
     font-size:15px;
   } 
-  /* .v-table-s88, .v-table{
-    font-size:1rem;
-  }
-  
-  #v-table-s88-name-month{
-    font-size:2rem;
-  } */
+ 
 }
 
 @media screen and (max-width:1199px) {
@@ -179,7 +168,7 @@ body{
   .router-view,
   .display-poster{
      width:600px;
-     /* margin-left:20px; */
+    
   }
   .v-input-content{
   
