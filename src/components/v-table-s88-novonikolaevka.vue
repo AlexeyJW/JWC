@@ -1,7 +1,19 @@
 <template>
    <div class="v-block-table-s88">
-       <h3><strong>Общий отчёт о посещении встреч (S-88)</strong></h3>
-       <table class="v-table-s88">
+       <div class="v-block-title">
+      <h3><strong>Общий отчёт о посещении встреч (S-88)</strong></h3>
+       <div class="v-button-pdf" @click="reportPdf">
+           <div class="v-button-text">
+               <!-- <i class="fas fa-arrow-right"/> -->
+               скачать в PDF
+           </div>
+           <div class="v-button-icon">
+              <i class="fas fa-file-pdf"/>
+           </div> 
+            
+       </div>
+     </div>
+       <table class="v-table-s88" id="novonikolaevka">
            <thead>
                <tr>
                    <th rowspan="2">{{serviceYear}}</th>
@@ -128,9 +140,9 @@
                </tr>
                <tr>
                    <td colspan="3"><strong>Среднее:</strong></td>
-                    <td>{{averageWD}}</td>
+                    <td>{{averageWD.toFixed(2)}}</td>
                    <td colspan="2"><strong>Среднее:</strong></td>
-                     <td>{{averageWE}}</td>
+                     <td>{{averageWE.toFixed(2)}}</td>
                </tr>
            </tbody>
        </table>
@@ -140,12 +152,25 @@
    import {useStore} from 'vuex'
    import {computed, ref} from 'vue'
    import {isServiceYear} from '../modules/convertMonth.js'
-//    import {listenS88, listenChangeS88} from '../modules/initFB.js'
+   import '../modules/calibril-normal.js'
+   import {jsPDF} from 'jspdf'
+   import { applyPlugin } from 'jspdf-autotable'
+   applyPlugin(jsPDF)
+
    const serviceYear=ref(isServiceYear(new Date().getFullYear(), new Date().getMonth()))
    const store=useStore()
    const s88=computed(()=>store.getters.YEAR_SERVICE_N(serviceYear.value))
    const averageWD=computed(()=>store.getters.GET_AVERAGE_S88_N_WD)
    const averageWE=computed(()=>store.getters.GET_AVERAGE_S88_N_WE)
+
+   //PDF
+   const reportPdf=()=>{
+       const doc = new jsPDF()
+       doc.setFont('helvetica')
+       doc.setLanguage("ru-RU")
+       doc.autoTable({ html:'#novonikolaevka', styles: { font: 'calibril',  fontStyle: 'normal'}})
+       doc.save('s88_novonikolaevka.pdf')
+   }
 </script>
 <style>
    .v-block-table-s88{
@@ -153,10 +178,10 @@
        flex-direction: column;
        justify-content: center;
         border: 1px solid lightgray;
-        /* margin: 5px; */
+      
         box-shadow: 0 0 8px 0 darkgray;
         padding: 10px;
-        /* max-width:600px; */
+      
         
    }
      .v-table-s88{
@@ -165,12 +190,12 @@
        width:100%;
        
        overflow: hidden;
-       /* font-size:auto; */
+     
 
    }
    .v-table-s88 th, .v-table-s88 td{
        border:1px solid #888;
-       /* padding:10px; */
+      
        padding:5px;
        text-align: center;
        vertical-align: middle;

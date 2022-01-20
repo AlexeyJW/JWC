@@ -82,7 +82,7 @@ export async function MODI_S88 (ctx, obj){
 //...
 //average S88___________________________________________________________
 export async function AVERAGE_S88 ({commit}, yearService){
-    console.log("action AVERAGE_S88")
+    // console.log("action AVERAGE_S88")
     let averageWD=0
     let averageWE=0
     let i=0
@@ -154,7 +154,7 @@ updateDoc(doc(db, 's88n',qdoc.id), obj)
 //...
 //average S88___________________________________________________________
 export async function AVERAGE_S88_N ({commit}, yearService){
-console.log("action AVERAGE_S88_N")
+// console.log("action AVERAGE_S88_N")
 let averageWD=0
 let averageWE=0
 let i=0
@@ -198,7 +198,7 @@ export function LISTEN_S3 ({commit}){
 }
 //request data s-3 for admin 
 export async function REQUEST_S3({commit}, obj){
-    console.log("send obj=", obj)
+    // console.log("send obj=", obj)
     const arr=[]
   
     const q=query(collection (db, "s3"), where('group', '==', obj.group), where('month','==', obj.month), where('yearService', '==', obj.serviceYear))
@@ -206,10 +206,10 @@ export async function REQUEST_S3({commit}, obj){
     
     const qSnapshot=await getDocs(q)
     qSnapshot.forEach(qdoc=>{
-                console.log("qdoc id=", qdoc.id)
+                // console.log("qdoc id=", qdoc.id)
                 arr.push({id:qdoc.id, data:qdoc.data()})
             })
-    console.log("arr=", arr)
+    // console.log("arr=", arr)
     return arr
 
 
@@ -228,20 +228,16 @@ export async function ADD_S3(ctx, obj){
 }
 //modify a document in the collection s3_______________________________
 export async function MODI_S3 (ctx, {id:id, obj:obj}){
-    // console.log("action MODI", obj.month)
-    // const q=query(collection (db, "s3"),where('month','==',obj.month))
-    // const qSnapshot=await getDocs(q)
-    // qSnapshot.forEach(qdoc=>{
-        // console.log(qdoc.id)
-        
-        // updateDoc(doc(db, 's3',qdoc.id), obj)
+   
         updateDoc(doc(db, 's3', id), obj)
         .then(()=>console.log('Success'))
         .catch(()=>console.log('error'))
     // })
 }
 //remove a document in the collection s3_______________________________
-//...
+export async function DEL_S3({commit}, id){
+    await deleteDoc(doc(db, "s3", id))
+} 
 //________User________________________
 export async function GET_GROUP_USER({commit}, email){
     const q=query(collection (db, "users"), where('email', '==', email))

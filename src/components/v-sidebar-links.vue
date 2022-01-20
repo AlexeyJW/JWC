@@ -50,8 +50,7 @@ const isActive=computed(()=>route.path==props.to)
        text-decoration: none;
    }
    .link:hover{
-       /* background: var(--sidebar-item-hover);
-       padding:5px; */
+     
        color: var(--sidebar-item-hover)
    }
    .link:active{

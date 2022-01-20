@@ -3,10 +3,7 @@
       <h2>
           <span v-if="collapsed">
               <br/>
-              <!-- <div>J</div>
-              <div>W</div>
-              <div>C</div> -->
-          </span>
+           </span>
           <span v-else>JWC</span>
       </h2>
       <v-sidebar-links to='/' icon="fas fa-chart-bar">Главная</v-sidebar-links> 
@@ -59,16 +56,11 @@ const store=useStore()
 const router=useRouter()
 const role=computed(()=>store.state.vUserRole)
  const logOut=()=>{
-    //    store.commit('SET_IS_AUTH')
-       
-    //    store.commit('DESTROY_STATE')
-       store.dispatch('UNSUBSCRIBE')
-    //    const r=resOut()
-    //    console.log(r)
-        router.push({name:'Home'})
+          store.dispatch('UNSUBSCRIBE')
+          router.push({name:'Home'})
        
    }
-// console.log("toggleSidebar=", collapsed.value)
+
 </script>
 
 <style>
@@ -77,24 +69,22 @@ const role=computed(()=>store.state.vUserRole)
     --sidebar-item-color:white;
     --sidebar-item-hover:#ce6f16;
     --sidebar-item-active:#73e2d0;
-    /* --sidebar-icon-color:#0079AF; */
+   
     --sidebar-icon-color: rgb(71, 74, 75);
 }
 </style>
 <style scoped>
    .sidebar{
-       /* margin-top:10px; */
-       /* margin-right:10px; */
+       
        color:var(--sidebar-item-color);
        background-color: var(--sidebar-bg-color);
-       /* float: left; */
+      
        position: fixed;
        opacity:0.9;
        z-index:1;
        top:0;
        bottom:0;
-       /* padding: 0.5em; */
-
+      
        transition: 0.3ms ease;
 
        display: flex;

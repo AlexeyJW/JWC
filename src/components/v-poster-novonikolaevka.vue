@@ -5,16 +5,14 @@
 </template>
 
 <script setup>
-//   import {inject} from 'vue'
-//   let globalD=inject('dateNow')
-//   let monthNow=inject('monthNow')
+
 </script>
 
 <style scoped>
    .v-poster{
        display: flex;
        flex-direction:row;
-       /* margin-left:50px; */
+       
        justify-content: center;
        align-items:center;
        border: 1px solid lightgrey;

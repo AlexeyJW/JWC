@@ -31,7 +31,7 @@
    const router=useRouter()
    const store=useStore()
    let isActive=ref(false)
-//    const user=computed(()=>store.getters.GET_VUSER)
+
    const avatar=computed(()=>store.state.vUserPhoto)
    const role =computed(()=>store.state.vUserRole)
 
@@ -40,17 +40,14 @@
        {id:2, label:'Главная', path:'/',choice: false}, 
        {id:3, label:'Все группы', path:'/AllGroups', choice: false},
        {id:4, label:'Новониколаевка', path:'/Novonikolaevka', choice: false}
-    //    {id:4, label:'Logout', path:'/Auth', choice: false}
+  
    ]
    const logOut=()=>{
-    //    store.commit('SET_IS_AUTH')
-    //    store.commit('DESTROY_STATE')
+   
        router.push({name:'Home'})
        store.dispatch('UNSUBSCRIBE')
       
-    //    const r=resOut()
-    //    console.log(r)
-      
+        
        
    }
    const admin=()=>{

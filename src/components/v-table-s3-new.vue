@@ -2,7 +2,7 @@
     <div class="block-table">
         <div class="v-block-title">
             <h3><strong>Отчёт о посещаемости (S-3) {{props.title}}</strong></h3>
-            <div class="v-button-remove" @click="vRemoveTable">
+            <div class="v-button-remove" v-if="props.removeIcon" @click="vRemoveTable">
                 <div class="v-button-icon-remove">
                     <i class="fas fa-wrench"/>
                 </div>
@@ -26,7 +26,6 @@
             
         <div>
         <div class="v-show-change-remove" v-if="isVRemoveTable">
-            <!-- <VChangeRemove @cansel="isChangeRemove=!isChangeRemove"/> -->
             <VRemoveTable :sYear="serviceYear" :group="props.group" :month="monthNow" @cansel="isVRemoveTable=!isVRemoveTable"/>
         </div>
         <table class="v-table">
@@ -42,18 +41,11 @@
             <tbody class="v-tbody">
                 <tr>
                     <td>1</td>
-                    <!-- <td @click="removeData()"> -->
-                    <td>{{wd.find((el)=>el.data.weekNumber==1)?.data?.total}}
-                          <!-- <button class="admin-user-button-delete"
-                                @click="removeData()">
-                                <i class="fas fa-trash"/>
-                           </button> -->
-                    
-                    </td>
+                    <td>{{wd.find((el)=>el.data.weekNumber==1)?.data?.total}}</td>
                     <td>{{we.find((el)=>el.data.weekNumber==1)?.data?.total}}</td>
                 </tr>
                 <tr>
-                    <td>2</td>
+                   <td>2</td>
                    <td>{{wd.find((el)=>el.data.weekNumber==2)?.data?.total}}</td>
                    <td>{{we.find((el)=>el.data.weekNumber==2)?.data?.total}}</td>
                 </tr>
@@ -94,13 +86,11 @@
    import {useStore} from 'vuex'
    import {convertMonth, isServiceYear} from '../modules/convertMonth'
    import VRemoveTable from './v-remove-table.vue'
-//    import VChangeRemove from './v-changeRemove.vue'
   
    const props=defineProps ({
        title:{type:String},
-       group:{type:String,
-              default:'6'
-              }
+       group:{type:String},
+       removeIcon:{type:Boolean}
             
    })
 
@@ -174,10 +164,7 @@ const monthToNow=()=>{
    isButtonBack.value=!isButtonBack.value
 }
 
-// let isChangeRemove=ref(false)
-// const removeData=()=>{
-//   isChangeRemove.value=true
-// }    
+
 let isVRemoveTable=ref(false)
 const vRemoveTable=()=>{
     isVRemoveTable.value=true

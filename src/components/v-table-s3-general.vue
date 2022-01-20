@@ -1,14 +1,7 @@
 <template>
     <div class="block-table-general">
         <div class="v-button-block">
-            <h3>
-                <strong>
-                   Общий отчёт о посещаемости встреч (S-3) 
-                    <!-- {{props.title}}.  -->
-                   
-                   
-                </strong>
-            </h3>
+            <h3><strong>Общий отчёт о посещаемости встреч (S-3)</strong></h3>
             <div v-if="store.getters.GET_VUSER_ROLE=='admin'">
                 <v-button class="v-button-item" textButton="Send" @click="sendReport" v-show="isSend"/>
                 <v-button class="v-button-item" textButton="Modify" @click="modifyReport" v-show="!isSend"/>
@@ -89,7 +82,6 @@
    import {useStore} from 'vuex'
    import vButton from './v-button.vue'
    import {convertMonth, isServiceYear} from '../modules/convertMonth'
-//    import {addS88} from '../modules/initFB.js'
 
    const props=defineProps({
        title:{type:String},
@@ -188,7 +180,7 @@ const prepareTheReport=()=>{
 setTimeout(()=>{
     let d=store.getters.YEAR_SERVICE(serviceYear.value)
     if(d.find(el=>el.month==Number(monthNow.value))){
-            //   console.log('YES!!!!!')
+         
               store.commit('SET_IS_BUTTON_SEND_S3_FALSE')
           } 
           }, 1000)
@@ -249,7 +241,7 @@ const monthToNow=()=>{
        margin-bottom: 10px;
        box-shadow: 0 0 8px 0 darkgray;
        padding: 10px;
-       /* max-width:600px; */
+     
       
    }
    .v-button-block{

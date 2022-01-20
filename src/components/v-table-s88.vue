@@ -142,9 +142,9 @@
                </tr>
                <tr>
                    <td colspan="3"><strong>Среднее:</strong></td>
-                   <td>{{averageWD}}</td>
+                   <td>{{averageWD.toFixed(2)}}</td>
                    <td colspan="2"><strong>Среднее:</strong></td>
-                   <td>{{averageWE}}</td>
+                   <td>{{averageWE.toFixed(2)}}</td>
                </tr>
            </tbody>
        </table>
@@ -154,13 +154,11 @@
    import {useStore} from 'vuex'
    import {computed, ref} from 'vue'
    import {isServiceYear} from '../modules/convertMonth.js'
-//    import {jsPDF} from 'jspdf'
-//    import 'jspdf-autotable'
    import '../modules/calibril-normal.js'
    import {jsPDF} from 'jspdf'
    import { applyPlugin } from 'jspdf-autotable'
    applyPlugin(jsPDF)
-//    import {listenS88, listenChangeS88} from '../modules/initFB.js'
+
    const serviceYear=ref(isServiceYear(new Date().getFullYear(), new Date().getMonth()))
    const store=useStore()
    const s88=computed(()=>store.getters.YEAR_SERVICE(serviceYear.value))
@@ -172,7 +170,7 @@
        doc.setFont('helvetica')
        doc.setLanguage("ru-RU")
        doc.autoTable({ html:'#my-table', styles: { font: 'calibril',  fontStyle: 'normal'}})
-       doc.save('table.pdf')
+       doc.save('s88_molodejnoye.pdf')
    }
 </script>
 <style>
@@ -181,11 +179,9 @@
        flex-direction: column;
        justify-content: center;
         border: 1px solid lightgray;
-        /* margin: 5px; */
         box-shadow: 0 0 8px 0 darkgray;
         padding: 10px;
-        /* max-width:600px; */
-        
+               
    }
      .v-block-title{
          display: flex;
@@ -229,12 +225,11 @@
        width:100%;
        
        overflow: hidden;
-       /* font-size:auto; */
+      
 
    }
    .v-table-s88 th, .v-table-s88 td{
        border:1px solid #888;
-       /* padding:10px; */
        padding:5px;
        text-align: center;
        vertical-align: middle;

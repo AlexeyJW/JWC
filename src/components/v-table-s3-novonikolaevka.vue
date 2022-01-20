@@ -4,7 +4,7 @@
             <h3>
                 <strong>
                    Общий отчёт о посещаемости встреч (S-3) 
-                    <!-- {{props.title}}.  -->
+                  
                    
                    
                 </strong>
@@ -89,7 +89,7 @@
    import {useStore} from 'vuex'
    import vButton from './v-button.vue'
    import {convertMonth, isServiceYear} from '../modules/convertMonth'
-//    import {addS88} from '../modules/initFB.js'
+
 
    const props=defineProps({
        title:{type:String},
@@ -251,7 +251,7 @@ const monthToNow=()=>{
        margin-bottom: 10px;
        box-shadow: 0 0 8px 0 darkgray;
        padding: 10px;
-       /* max-width:600px; */
+      
       
    }
    .v-button-block{
