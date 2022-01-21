@@ -4,7 +4,7 @@
         <span v-if="!collapsed">
             <slot/>
         </span>
-        <transition/>
+        <!-- <transition/> -->
     </router-link>
 </template>
 
@@ -24,14 +24,14 @@ const isActive=computed(()=>route.path==props.to)
 </script>
 
 <style scoped>
-.fade-enter-active,
+/* .fade-enter-active,
 .fade-leave-active{
     transition: opacity 0.2s;
 }
 .fade-enter,
 .fade-leave{
     opacity: 0;
-}
+} */
    .link{
        display: flex;
        align-items: center;

@@ -171,6 +171,9 @@ export default{
     SET_NAME_GROUPS (state, arr){
         state.groupsData=[]
         state.groupsData=[...arr]
+    },
+    SET_REMINDER(state, val){
+        state.isReminder=val
     }
     
 }

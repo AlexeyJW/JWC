@@ -50,12 +50,15 @@
     <span class="v-span" v-if="isConfirm"><v-confirm  @pressedCancel="isConfirm=!isConfirm" @pressedOK="confirmPressedOK">Уже есть запись, хотите её заменить?</v-confirm></span>
     <span class="v-span" v-if="isConfirmForIsAll"><v-confirm  @pressedCancel="isConfirmForIsAll=!isConfirmForIsAll" @pressedOK="isConfirmForIsAll=!isConfirmForIsAll">Введите недостающие данные</v-confirm></span>
      <div  :class="{activeoverflow: isConfirm}"></div>
+    <span class="reminder" v-if="rem">
+            <div>Обратите внимание, что сегодня - {{WeekNumber}}-я неделя!!!</div>
+    </span>
 </template>
    
 <script setup>
 import VButton from './v-button.vue'
 import vConfirm from './v-confirm.vue'
-import {isCorrectMonth, isServiceYear, isCorrectYearAndMonth} from '../modules/convertMonth.js'
+import {isCorrectMonth, isServiceYear, isCorrectYearAndMonth, calcWeekNumber} from '../modules/convertMonth.js'
 import {ref, computed, watchEffect} from 'vue'
 import {useStore} from 'vuex'
 const store=useStore()
@@ -77,12 +80,9 @@ const selectRoot=ref(null)
 const groupsData=computed(()=>store.getters.GET_NAME_GROUPS)
 
 const groupUser=computed(()=>store.getters.GET_VUSER_GROUP)
+const rem=computed(()=>store.state.isReminder)
 
 
-watchEffect(()=>{
-    Group.value=groupUser.value
-    
-})
 
 //Вводим данные в поля инпутов при открытии (инициализируем поля)
 let initDate=''+yearNow+"-"+((monthNow+1)<10?"0"+(monthNow+1):(monthNow+1))+"-"+(dateNow.getDate()<10?"0"+dateNow.getDate():dateNow.getDate())
@@ -90,7 +90,16 @@ const vDate=ref(initDate)
 
 const vTotal=ref(null)
 const Weekday=ref((dateNow.getDay()==0||dateNow.getDay()==6)?'weekend':'weekdays')
+
+// init WeekNumber
 const WeekNumber=ref(null)
+
+
+watchEffect(()=>{
+    Group.value=groupUser.value
+    WeekNumber.value=calcWeekNumber(Number(vDate.value.slice(0,4)), Number(vDate.value.slice(5,7)-1), Number(vDate.value.slice(-2)))?.week ??null
+})
+
 
 // создаю переменную для выборки месячной проверки
 let bd=null
@@ -151,6 +160,10 @@ const confirmPressedOK=()=>{
       store.dispatch('MODI_S3',{id:backRacord.id, obj:sendObj})
       isConfirm.value=!isConfirm.value
 }
+
+
+if (store.state.isReminder)
+    setTimeout(()=>store.commit('SET_REMINDER', false), 5000)
 </script>
    
 <style>
@@ -217,5 +230,23 @@ const confirmPressedOK=()=>{
         bottom: 0;
         background: rgba(0,0,0,.2);
         z-index: 2;
+   }
+   .reminder{
+        display: flex;
+        flex-direction: row;
+        flex-wrap:wrap;
+        justify-content:center;
+        align-items:center;
+        margin:5px;
+        padding:5px;
+        position:absolute;
+            /* top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); */
+         z-index:9999999;
+         color:#2682be;
+         font-size:35px;
+         background:#e2d8d8;
+        
    }
 </style>

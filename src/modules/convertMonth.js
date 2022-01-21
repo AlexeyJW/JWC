@@ -88,3 +88,54 @@ export const isNumberWeek=(receivedDate)=>{
    })
 
 }
+// find dates all mondays
+export const mondayMonth=(y,m)=>{
+   let days=new Date(y,m+1,0).getDate()//Last day
+   let index=new Date(y,m,1).getDay()//index first day month
+   let mon=[]
+// first monday
+   if (index<1) mon.push(2)
+   else if(index==1) mon.push(1)
+   else if(index>1) mon.push(9-index)
+       
+// array monday
+   for(let i=mon[0]+7;i<=days; i+=7)
+      mon.push(i)
+       
+    return mon
+}
+
+
+  //find week number
+export const calcWeekNumber=(y,m,d)=>{
+  let mon=mondayMonth(y,m)
+  let obj={
+       month:null,
+       week:null
+   }
+//if date < first monday
+  if(d<mon[0]) {
+      let o=isCorrectYearAndMonth(y, m-1)
+      mon=mondayMonth(o.year,o.month)
+      obj.month=o.month
+      obj.week=mon.length
+      return obj
+// if date = last monday
+  }else if(d==mon[mon.length-1]) {
+      obj.month=m
+      obj.week=mon.length
+      return obj
+// if date located in between first and last monday
+  }else if (d>mon[0]&&d<mon[mon.length-1])
+   {
+   for (let i=1; i<mon.length; i++)
+     {
+       if (d>=mon[i-1]&&d<mon[i]) {
+           obj.month=m
+           obj.week=i
+       return obj
+        
+       }
+    }
+   }
+}

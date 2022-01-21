@@ -34,8 +34,8 @@ const state={
     vUserGroup:'',
     vUserPhoto:'',
     vUserRole:'',
-    usersForAdmin:[]
-    
+    usersForAdmin:[],
+    isReminder:true
 }
 
 export default createStore({
