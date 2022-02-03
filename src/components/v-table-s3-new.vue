@@ -84,7 +84,7 @@
 <script setup>
    import {ref, computed} from 'vue'
    import {useStore} from 'vuex'
-   import {convertMonth, isServiceYear} from '../modules/convertMonth'
+   import {convertMonth, isServiceYear, isCorrectYearAndMonth, isCorrectMonth} from '../modules/convertMonth'
    import VRemoveTable from './v-remove-table.vue'
   
    const props=defineProps ({
@@ -102,6 +102,14 @@
    const yearNow=ref(dateNow.getFullYear())
   
    const store=useStore()
+   //++++++++++++++++++++++++++++ correct last week month or first numbers new month
+    let o=isCorrectYearAndMonth(Number(yearNow.value), Number(monthNow.value)-isCorrectMonth(dateNow))
+    console.log ('o=', o)
+    yearNow.value=o.year
+    monthNow.value=o.month
+
+
+   //_____________________________________________
    
    const tableData =computed(()=>store.getters.FILTER_GROUP(props.group, ''+yearNow.value, ''+monthNow.value))
    const wd=computed(()=>tableData.value.filter(el=>el.data.weekday=='weekdays'))

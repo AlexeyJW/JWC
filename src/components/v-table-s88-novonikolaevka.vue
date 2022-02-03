@@ -166,9 +166,13 @@
    //PDF
    const reportPdf=()=>{
        const doc = new jsPDF()
-       doc.setFont('helvetica')
+       doc.setFont('calibril')
        doc.setLanguage("ru-RU")
-       doc.autoTable({ html:'#novonikolaevka', styles: { font: 'calibril',  fontStyle: 'normal'}})
+      
+        doc.text('Отчёт о посещаемости встреч собрания. Новониколаевка', 100,10,{align:'center'})
+        
+       doc.autoTable({ html:'#novonikolaevka', styles: { font: 'calibril',  fontStyle: 'normal'},theme:'grid', headStyles:{lineWidth:0.1, lineColor:255}})
+
        doc.save('s88_novonikolaevka.pdf')
    }
 </script>

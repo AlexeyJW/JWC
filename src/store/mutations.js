@@ -158,7 +158,8 @@ export default{
         state.vUserGroup=''
         state.vUserPhoto=''
         state.vUserRole=''
-        state.usersForAdmin=[]
+        state.usersForAdmin=[],
+        state.isReminder=true
     },
     SET_USER_PHOTO (state, url){
         // console.log('set_user_photo', url)

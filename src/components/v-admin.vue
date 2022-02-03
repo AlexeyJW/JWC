@@ -121,6 +121,7 @@
                     <th class="v-admin-users-table-head">Total</th>
                     <th class="v-admin-users-table-head">Date</th>
                     <th class="v-admin-users-table-head">Author</th>
+                    <th class="v-admin-users-table-head">Action</th>
                 </thead>
                 <tbody class="v-admin-users-table-body">
                    <tr v-for="i in arr" :key="i.id">
@@ -130,6 +131,7 @@
                       <td>{{i.data.total}}</td>
                       <td>{{i.data.date}}</td>
                       <td>{{i?.data?.author}}</td>
+                      <td @click="removeAction(i.id)"><i class="fas fa-trash"/></td>
                    </tr>
                 </tbody>
             </table>
@@ -253,7 +255,10 @@ const requestS3=()=>{
     store.dispatch('REQUEST_S3', obj)
       .then((el)=>arr.value=el)
 }
-
+const removeAction=(id)=>{
+     store.dispatch('DEL_S3', id)
+     requestS3()
+}
 </script>
 
 <style>

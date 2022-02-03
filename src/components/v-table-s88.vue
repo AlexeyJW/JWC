@@ -167,9 +167,13 @@
    //PDF
    const reportPdf=()=>{
        const doc = new jsPDF()
-       doc.setFont('helvetica')
+       doc.setFont('calibril')
        doc.setLanguage("ru-RU")
-       doc.autoTable({ html:'#my-table', styles: { font: 'calibril',  fontStyle: 'normal'}})
+       doc.text('Отчёт о посещаемости встреч собрания. Молодёжное', 100,10,{align:'center'})
+        
+       doc.autoTable({ html:'#my-table', styles: { font: 'calibril',  fontStyle: 'normal'},theme:'striped', headStyles:{lineWidth:0.1, lineColor:255}})
+
+     
        doc.save('s88_molodejnoye.pdf')
    }
 </script>

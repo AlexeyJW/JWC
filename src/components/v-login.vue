@@ -15,7 +15,7 @@
                <h2>Вы не зарегистрированы, обратитесь к администратору!</h2>
            </div>
        </span>
-       
+       <span v-if="isPreloader1"><v-preloader/></span>
     </div>
 </template>
 
@@ -25,6 +25,7 @@ import {isServiceYear} from '../modules/convertMonth.js'
 import {useStore} from 'vuex'
 import {useRouter} from 'vue-router'
 import {ref} from 'vue'
+import VPreloader from './v-preloader.vue'
 const store=useStore()
 const router=useRouter()
 let isRegister=ref(false)
@@ -33,7 +34,9 @@ const dateNow=new Date()
 const yearNow=dateNow.getFullYear()
 const monthNow=dateNow.getMonth()
 const yearService=isServiceYear(yearNow, monthNow)
+const isPreloader1=ref(false)
 const logGoogle=()=>{
+    isPreloader1.value=true
     resGoogle()
     .then((el)=>{
         // console.log("el=",el)
@@ -50,6 +53,7 @@ const logGoogle=()=>{
                     store.dispatch('LISTEN_USERS_FOR_ADMIN')
                     store.dispatch('AVERAGE_S88', yearService)
                     store.dispatch('AVERAGE_S88_N',yearService)
+                    isPreloader1.value=false
                     router.push({name:'InputV'})
                 }else{
                     isRegister.value=true

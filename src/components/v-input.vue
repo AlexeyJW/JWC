@@ -5,14 +5,19 @@
         
         <div class="v-input-group">
             <h5 class="v-input-label">Группа:</h5>
-            <select ref="selectRoot" class="field-select" v-model="Group" >
+            <select ref="selectRoot" class="field-select" v-model="Group" :disabled="role" v-if="!role" >
                 <option disabled selected>Выбери номер</option>
                 <option v-for="i in groupsData" :key="i" :value="i">{{i}}</option>
             </select>
+            <div  class="v-input-else" v-else>{{Group}}</div>
         </div>
         <div class="v-input-group">
             <h5 class="v-input-label">Неделя:</h5>
-            <select class="field-week-number" v-model="WeekNumber" name='Week' id="week">
+            <select class="field-week-number"
+               v-model="WeekNumber"
+               name='Week'
+               id="week"
+               :disabled="role" v-if="!role" >
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -20,29 +25,33 @@
                 <option value="5">5</option>
             
             </select>
+            <div  class="v-input-else" v-else>{{WeekNumber}}</div>
         </div>
         <div class="v-input-group">
-            <h5 class="v-input-label">Будн./Вых.:</h5>
-            <select  class="v-field-weekday" name="weekday" v-model="Weekday" id="w">
+            <h5 class="v-input-label input-weekdays">Будн./Вых.:</h5>
+            <select  class="v-field-weekday" name="weekday" v-model="Weekday" id="w" :disabled="role" v-if="!role" >
                 <option disabled selected>Выбери:</option>
                 <option value="weekdays">Будни</option>
                 <option value="weekend">Выходные</option>
             </select>
+            <div class="v-input-else input-weekdays" v-else>{{Weekday=='weekdays'?'Будни':'Выходные'}}</div>
         </div>
         
+        <div class="v-input-group-block">
+            <div class="v-input-group" >
+                <h5 class="v-input-label" >Дата встречи:</h5>
+                <input class="field-data"  type="date" v-model="vDate"/>
+            </div>
+            <div class="v-input-group" >
+                <h5 class="v-input-label">Всего:</h5>
+                <input class="v-field-input" type="number" placeholder="число" v-model="vTotal" id="total"/>
+            </div>
+            </div>
         
-        <div class="v-input-group">
-            <h5 class="v-input-label">Дата встречи:</h5>
-            <input class="field-data"  type="date" v-model="vDate"/>
-        </div>
-        <div class="v-input-group">
-            <h5 class="v-input-label">Всего:</h5>
-            <input class="v-field-input" type="number" placeholder="число" v-model="vTotal" id="total"/>
-        </div>
-        <div class="v-input-group">
-            <h5 class="v-input-label">Отправить:</h5>
-            <v-button class="field-button" textButton="Send"  @click="sendObj"/>
-        </div>
+            <div class="v-input-group">
+                <h5 class="v-input-label">Отправить:</h5>
+                <v-button class="v-input-group-field-button" textButton="Send"  @click="sendObj"/>
+            </div>
         
      
      </div>
@@ -50,9 +59,12 @@
     <span class="v-span" v-if="isConfirm"><v-confirm  @pressedCancel="isConfirm=!isConfirm" @pressedOK="confirmPressedOK">Уже есть запись, хотите её заменить?</v-confirm></span>
     <span class="v-span" v-if="isConfirmForIsAll"><v-confirm  @pressedCancel="isConfirmForIsAll=!isConfirmForIsAll" @pressedOK="isConfirmForIsAll=!isConfirmForIsAll">Введите недостающие данные</v-confirm></span>
      <div  :class="{activeoverflow: isConfirm}"></div>
-    <span class="reminder" v-if="rem">
-            <div>Обратите внимание, что сегодня - {{WeekNumber}}-я неделя!!!</div>
-    </span>
+    <!-- <span class="reminder" v-if="rem">
+           
+            <div>Новое: Теперь вводите точную дату встречи и число присутствующих, остальные данные вычисляются сами ;)</div>
+            <div>Спасибо за ваш труд!</div>
+            <div class="reminder-button"><v-button textButton="OK"  @click="store.commit('SET_REMINDER', false)"/></div>
+    </span> -->
 </template>
    
 <script setup>
@@ -78,9 +90,9 @@ const isConfirmForIsAll=ref(false)
 const Group=ref('')
 const selectRoot=ref(null)
 const groupsData=computed(()=>store.getters.GET_NAME_GROUPS)
-
+const role=ref(true)
 const groupUser=computed(()=>store.getters.GET_VUSER_GROUP)
-const rem=computed(()=>store.state.isReminder)
+// const rem=computed(()=>store.state.isReminder)
 
 
 
@@ -89,8 +101,8 @@ let initDate=''+yearNow+"-"+((monthNow+1)<10?"0"+(monthNow+1):(monthNow+1))+"-"+
 const vDate=ref(initDate)
 
 const vTotal=ref(null)
-const Weekday=ref((dateNow.getDay()==0||dateNow.getDay()==6)?'weekend':'weekdays')
-
+// const Weekday=ref((dateNow.getDay()==0||dateNow.getDay()==6)?'weekend':'weekdays')
+const Weekday=ref('')
 // init WeekNumber
 const WeekNumber=ref(null)
 
@@ -98,6 +110,9 @@ const WeekNumber=ref(null)
 watchEffect(()=>{
     Group.value=groupUser.value
     WeekNumber.value=calcWeekNumber(Number(vDate.value.slice(0,4)), Number(vDate.value.slice(5,7)-1), Number(vDate.value.slice(-2)))?.week ??null
+    Weekday.value=(new Date(vDate.value).getDay()==0|| new Date(vDate.value).getDay()==6) ?'weekend':'weekdays' 
+    role.value=store.state.vUserRole=='admin'?false: true
+    console.log(role.value)
 })
 
 
@@ -162,8 +177,8 @@ const confirmPressedOK=()=>{
 }
 
 
-if (store.state.isReminder)
-    setTimeout(()=>store.commit('SET_REMINDER', false), 5000)
+// if (store.state.isReminder)
+//     setTimeout(()=>store.commit('SET_REMINDER', false), 8000)
 </script>
    
 <style>
@@ -190,6 +205,22 @@ if (store.state.isReminder)
         justify-content:flex-end;
         align-items:flex-end;
     }
+    .v-input-group-block{
+        display: flex;
+        flex-direction: row;
+        
+    }
+    .v-input-group-field-button{
+      
+    }
+    .v-input-else{
+        align-self:center;
+        /* color:green; */
+    }
+    .input-weekdays{
+        
+        min-width: 78px;
+    }
    
     .v-input-content{
         display: flex;
@@ -200,7 +231,7 @@ if (store.state.isReminder)
         border:1px solid #539b9b;
         padding:5px;
         margin:5px;
-       
+        
     }
     .field-data, .field-select{
         margin-right:5px;
@@ -237,16 +268,27 @@ if (store.state.isReminder)
         flex-wrap:wrap;
         justify-content:center;
         align-items:center;
-        margin:5px;
+        margin:auto;
         padding:5px;
         position:absolute;
+        max-width:500px;
+        border:1px solid var(--sidebar-bg-color);
             /* top: 50%;
             left: 50%;
             transform: translate(-50%, -50%); */
          z-index:9999999;
          color:#2682be;
-         font-size:35px;
+         font-size:25px;
          background:#e2d8d8;
         
+   }
+   .reminder-button{
+      margin:20px;
+   }
+   .activeR{
+      
+       background:#e2d8d8;
+       border-radius: 50%;
+       
    }
 </style>

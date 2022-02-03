@@ -9,25 +9,25 @@
     position: absolute;
     top:50%;
     left: 50%;
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
     margin: 10px auto;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color:var(--sidebar-bg-color);
+    /* border-top-color:var(--sidebar-bg-color); */
     animation: preloader-5-spin 2s linear infinite;
     z-index:1001;
 }
 .preloader-5:before {
     content: "";
     position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: #BFE2FF;
+    border-top-color:var(--sidebar-bg-color);
     animation: preloader-5-spin 3s linear infinite;
 }
 .preloader-5:after {

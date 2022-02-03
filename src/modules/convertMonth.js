@@ -121,7 +121,11 @@ export const calcWeekNumber=(y,m,d)=>{
       obj.week=mon.length
       return obj
 // if date = last monday
-  }else if(d==mon[mon.length-1]) {
+  }else if (d==mon[0]){
+      obj.month=m
+      obj.week=1
+      return obj
+  }else if(d>=mon[mon.length-1]) {
       obj.month=m
       obj.week=mon.length
       return obj

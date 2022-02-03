@@ -88,7 +88,7 @@
    import {defineProps, computed, ref} from 'vue'
    import {useStore} from 'vuex'
    import vButton from './v-button.vue'
-   import {convertMonth, isServiceYear} from '../modules/convertMonth'
+   import {convertMonth, isServiceYear, isCorrectMonth, isCorrectYearAndMonth} from '../modules/convertMonth'
 
 
    const props=defineProps({
@@ -104,7 +104,16 @@
    const yearNow=ref(dateNow.getFullYear())
    const serviceYear=ref(isServiceYear(yearNow.value, monthNow.value))
    const store=useStore()
-  
+  //++++++++++++++++++++++++++++ correct last week month or first numbers new month
+    let o=isCorrectYearAndMonth(Number(yearNow.value), Number(monthNow.value)-isCorrectMonth(dateNow))
+    console.log ('o=', o)
+    yearNow.value=o.year
+    monthNow.value=o.month
+
+
+   //_____________________________________________
+
+
    // Переключатель кнопки Send / Modify
    const buttonSendModify=(yearS, month)=>{
        if(store.state.s88n.find(el=>el.month==month && el.yearService==yearS))
