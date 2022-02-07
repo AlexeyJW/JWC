@@ -143,3 +143,9 @@ export const calcWeekNumber=(y,m,d)=>{
     }
    }
 }
+export function compareMonthForChart(a,b) {
+    if (a.month<8 && b.month<8) return a.month-b.month
+    if (a.month>7 && b.month>7) return a.month-b.month
+    if (a.month<8 && b.month>7) return b.month-a.month
+    if (a.month>7 && b.month<8) return b.month-a.month
+}

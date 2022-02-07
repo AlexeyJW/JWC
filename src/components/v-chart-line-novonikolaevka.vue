@@ -11,7 +11,8 @@ import { LineChart, useLineChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
 import {ref, computed, defineProps} from 'vue'
 import {useStore} from 'vuex'
-import * as convertMonth from '../modules/convertMonth'
+// import * as convertMonth from '../modules/convertMonth'
+import {isServiceYear, compareMonthForChart, convertMonth} from '../modules/convertMonth'
 
 const store=useStore()
 
@@ -22,8 +23,11 @@ const props=defineProps({
     default:[]
   }
 })
-const serviceYear=ref(convertMonth.isServiceYear(new Date().getFullYear(), new Date().getMonth()))
-const dataArr = computed(()=>store.getters.YEAR_SERVICE_N(serviceYear.value).sort((a,b)=>a.month-b.month))
+// const serviceYear=ref(convertMonth.isServiceYear(new Date().getFullYear(), new Date().getMonth()))\
+const serviceYear=ref(isServiceYear(new Date().getFullYear(), new Date().getMonth()))
+// const dataArr = computed(()=>store.getters.YEAR_SERVICE_N(serviceYear.value).sort((a,b)=>a.month-b.month))
+// const dataArr = computed(()=>store.getters.YEAR_SERVICE_N(serviceYear.value).sort(convertMonth.compareMonthForChart))
+const dataArr = computed(()=>store.getters.YEAR_SERVICE_N(serviceYear.value).sort(compareMonthForChart))
  
 const dataWD=computed(() =>{
       let arr=[]
@@ -47,8 +51,8 @@ const dataWE=computed(() =>{
 const labels=computed(()=>{
        let arr=[]
        dataArr.value.forEach(el=>{
-         arr.push(convertMonth.convertMonth(el.month))
-         
+        //  arr.push(convertMonth.convertMonth(el.month))
+         arr.push(convertMonth(el.month))
        })
        return arr
 })

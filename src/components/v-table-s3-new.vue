@@ -104,7 +104,7 @@
    const store=useStore()
    //++++++++++++++++++++++++++++ correct last week month or first numbers new month
     let o=isCorrectYearAndMonth(Number(yearNow.value), Number(monthNow.value)-isCorrectMonth(dateNow))
-    console.log ('o=', o)
+    // console.log ('o=', o)
     yearNow.value=o.year
     monthNow.value=o.month
 
