@@ -2,8 +2,7 @@
     <div class="display-poster">
         <v-poster />
     </div>
-    <v-title :groupNumber="paginator" /> 
-    
+       
     <v-wrapper-table :groups="paginator"/>
  
     <div class="pagination">
@@ -22,7 +21,6 @@
    import { useStore } from 'vuex';
    import {ref, computed} from 'vue'
    import vPaginator from '../components/v-paginator.vue'
-   import VTitle from '../components/v-title.vue'
    import VWrapperTable from '../components/v-wrapper-table.vue'
    import vPoster from '../components/v-poster.vue'
    

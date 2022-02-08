@@ -9,9 +9,8 @@
 <script setup>
 import { LineChart, useLineChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
-import {ref, computed, defineProps} from 'vue'
+import {ref, computed} from 'vue'
 import {useStore} from 'vuex'
-// import * as convertMonth from '../modules/convertMonth'
 import {isServiceYear, compareMonthForChart, convertMonth} from '../modules/convertMonth'
 
 const store=useStore()
@@ -24,7 +23,7 @@ const props=defineProps({
   }
 })
 
-// const dataArr = computed(()=>store.getters.YEAR_SERVICE('2022').sort((a,b)=>a.month-b.month))
+
 const serviceYear=ref(isServiceYear(new Date().getFullYear(), new Date().getMonth()))
 const dataArr = computed(()=>store.getters.YEAR_SERVICE(serviceYear.value).sort(compareMonthForChart))
 

@@ -78,7 +78,7 @@
 </template>
 
 <script setup>
-   import {defineProps, computed, ref} from 'vue'
+   import {computed, ref} from 'vue'
    import {useStore} from 'vuex'
    import vButton from './v-button.vue'
    import {convertMonth, isServiceYear, isCorrectYearAndMonth, isCorrectMonth} from '../modules/convertMonth'
@@ -100,7 +100,7 @@
 
  //++++++++++++++++++++++++++++ correct last week month or first numbers new month
     let o=isCorrectYearAndMonth(Number(yearNow.value), Number(monthNow.value)-isCorrectMonth(dateNow))
-    // console.log ('o=', o)
+  
     yearNow.value=o.year
     monthNow.value=o.month
 
@@ -277,7 +277,7 @@ const monthToNow=()=>{
        border-spacing: 0;
        width:100%;
        overflow: hidden;
-       /* font-size: 12px; */
+      
        
 
    }

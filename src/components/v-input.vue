@@ -92,7 +92,7 @@ const selectRoot=ref(null)
 const groupsData=computed(()=>store.getters.GET_NAME_GROUPS)
 const role=ref(true)
 const groupUser=computed(()=>store.getters.GET_VUSER_GROUP)
-// const rem=computed(()=>store.state.isReminder)
+
 
 
 
@@ -101,7 +101,7 @@ let initDate=''+yearNow+"-"+((monthNow+1)<10?"0"+(monthNow+1):(monthNow+1))+"-"+
 const vDate=ref(initDate)
 
 const vTotal=ref(null)
-// const Weekday=ref((dateNow.getDay()==0||dateNow.getDay()==6)?'weekend':'weekdays')
+
 const Weekday=ref('')
 // init WeekNumber
 const WeekNumber=ref(null)
@@ -210,12 +210,10 @@ const confirmPressedOK=()=>{
         flex-direction: row;
         
     }
-    .v-input-group-field-button{
-      
-    }
+   
     .v-input-else{
         align-self:center;
-        /* color:green; */
+       
     }
     .input-weekdays{
         
@@ -273,9 +271,6 @@ const confirmPressedOK=()=>{
         position:absolute;
         max-width:500px;
         border:1px solid var(--sidebar-bg-color);
-            /* top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); */
          z-index:9999999;
          color:#2682be;
          font-size:25px;

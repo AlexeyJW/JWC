@@ -45,7 +45,7 @@
 <script setup>
 import vSidebarLinks from './v-sidebar-links.vue'
 import {collapsed, toggleSidebar, sidebarWidth} from '../store'
-import {resOut} from '../modules/initFB.js'
+// import {resOut} from '../modules/initFB.js'
 import {computed} from 'vue'
 import {useStore} from 'vuex'
 import {useRouter} from 'vue-router'

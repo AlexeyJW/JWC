@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import {defineProps} from 'vue'
+
     const props=defineProps({
         textButton: {type:String},
         colorButton:{type:String,

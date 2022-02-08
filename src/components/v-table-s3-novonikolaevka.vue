@@ -85,7 +85,7 @@
 </template>
 
 <script setup>
-   import {defineProps, computed, ref} from 'vue'
+   import {computed, ref} from 'vue'
    import {useStore} from 'vuex'
    import vButton from './v-button.vue'
    import {convertMonth, isServiceYear, isCorrectMonth, isCorrectYearAndMonth} from '../modules/convertMonth'

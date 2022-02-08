@@ -1,7 +1,7 @@
 <template>
     <div class="block-table">
         <div class="v-block-title">
-            <h3><strong>Отчёт о посещаемости (S-3) {{props.title}}</strong></h3>
+            <h3><strong>Отчёт о посещаемости (S-3) <a class="v-number-group" >{{props.title}} </a></strong></h3>
             <div class="v-button-remove" v-if="props.removeIcon" @click="vRemoveTable">
                 <div class="v-button-icon-remove">
                     <i class="fas fa-wrench"/>
@@ -123,7 +123,7 @@
        let l=wd.value.length
       
        if (max!=0) {
-        //    let num=(wd.value.reduce((sum, el)=>sum+el.data.total, 0)/max).toFixed(2)
+       
            let num=l!=0? (wd.value.reduce((sum, el)=>sum+el.data.total, 0)/l).toFixed(2) :(wd.value.reduce((sum, el)=>sum+el.data.total, 0)).toFixed(2)
       
            return  num
@@ -189,8 +189,13 @@ const vRemoveTable=()=>{
         margin-top: 10px;
         padding:10px;
         box-shadow: 0 0 8px 0 darkgray;
-        /* padding: 10px; */
       
+      
+   }
+  
+   .v-number-group{
+      
+       color:orange;
    }
    .v-table{
        border-collapse: collapse;
@@ -198,7 +203,7 @@ const vRemoveTable=()=>{
       
        width:100%;
        overflow: hidden;
-        /* font-size: 12px; */
+     
        
 
    }
@@ -241,7 +246,6 @@ const vRemoveTable=()=>{
        
         
          background: #fff;
-         /* opacity:0.9; */
          z-index:9;
    }
    .v-button-remove{
