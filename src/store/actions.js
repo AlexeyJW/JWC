@@ -1,6 +1,7 @@
-import axios from 'axios'
+// import axios from 'axios'
 import { db, resOut} from '../modules/initFB.js'
 import {collection, onSnapshot, query, where, addDoc, doc, getDocs, getDoc, updateDoc, deleteDoc} from 'firebase/firestore'
+// import {isCorrectYearAndMonth, isServiceYear} from '../modules/convertMonth'
 
 // listeners
 var unsubscribeS3=null
@@ -10,17 +11,17 @@ var unsubscribeUsers=null
 var unsubscribeS88N=null
 //_______________________________________
 
-export const GET_S88=({commit})=>{
-    axios.get('../src/assets/s88.json')
-    .then(res=>{
-        // console.log(res.data)
-        commit('SET_S88',res.data)
-    })
-}
-export const GET_S3 =({commit})=>{
-    axios.get('../src/assets/s3.json')
-    .then(res=>commit('SET_S3', res.data))
-}
+// export const GET_S88=({commit})=>{
+//     axios.get('../src/assets/s88.json')
+//     .then(res=>{
+//         // console.log(res.data)
+//         commit('SET_S88',res.data)
+//     })
+// }
+// export const GET_S3 =({commit})=>{
+//     axios.get('../src/assets/s3.json')
+//     .then(res=>commit('SET_S3', res.data))
+// }
 
 // export async function FB_GET_S88({commit}){
 //  let arr= await s88Snap()
@@ -178,12 +179,43 @@ commit('SET_AVERAGE_S88_N_WE', averageWE)
 //----------End s-88- Novonikolaevka----------------
 // listen base collection s3____________________________________________
 export function LISTEN_S3 ({commit}){
+        const dateNow=new Date()
+        const monthNow=dateNow.getMonth()
+        const yearNow=dateNow.getFullYear()
+        // const serviceYear=isServiceYear(yearNow, monthNow)
+
+
+        const dataBefore=()=>{
+            let o={
+                year:null,
+                month:null,
+                serviceYear:null
+            }
+            if (monthNow==0)
+             {
+                o.month=11
+                o.year=yearNow-1
+                // o.serviceYear=isServiceYear(o.year, o.month)
+         
+            }else {
+                o.month=monthNow-1
+                o.year=yearNow
+                // o.serviceYear=isServiceYear(o.year, o.month)
+            }
+         return o
+
+        }
+
+        let oBefore=dataBefore()
+        console.log("oBefore=", oBefore)
         const q=query(collection(db, "s3"))
         unsubscribeS3=onSnapshot(q, snapshot=>{
             snapshot.docChanges().forEach(change=>{
             if (change.type==="added"){
                 // console.log("Add", change.doc.data())
-                commit('SET_S3_EL', {id:change.doc.id, data:change.doc.data()})
+                if (Number(change.doc.data().year)==Number(yearNow)|| (Number(change.doc.data().year)==Number(oBefore.year)))
+                  if(change.doc.data().month==monthNow || change.doc.data().month==oBefore.month)
+                     commit('SET_S3_EL', {id:change.doc.id, data:change.doc.data()})
             }
             if (change.type==="modified"){
                 // console.log("Modified",change.doc.id, change.doc.data())

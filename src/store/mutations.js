@@ -20,9 +20,9 @@ export default{
     ADD_S3 (state, o){
         state.s3.push(o)
     },
-    SET_S3 (state, arr){
-        state.s3=[...arr]
-    },
+    // SET_S3 (state, arr){
+    //     state.s3=[...arr]
+    // },
     DEL_S88 (state){
         console.log('DEL_S88')
         state.s88=[]

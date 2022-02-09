@@ -13,7 +13,6 @@
     
 </template>
 <script setup>
-  import {defineEmits} from 'vue'
   import vButton from './v-button.vue'
 
   const emits=defineEmits(['pressedOK', 'pressedCancel'])

@@ -150,7 +150,7 @@ const isAll=()=>{
     if (Group.value==''|| WeekNumber.value==null || Weekday.value==''|| vDate.value==null||vTotal.value==null || vTotal.value==0) return false
     else return true
     }
-
+const beforeDate=()=>{}
 const sendObj=()=>{
      if (!isAll()) isConfirmForIsAll.value=true
      else{
