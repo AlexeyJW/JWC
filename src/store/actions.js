@@ -219,11 +219,15 @@ export function LISTEN_S3 ({commit}){
             }
             if (change.type==="modified"){
                 // console.log("Modified",change.doc.id, change.doc.data())
-                commit('MODI_S3',{id:change.doc.id, obj:change.doc.data()})
+                if (Number(change.doc.data().year)==Number(yearNow)|| (Number(change.doc.data().year)==Number(oBefore.year)))
+                  if(change.doc.data().month==monthNow || change.doc.data().month==oBefore.month)
+                     commit('MODI_S3',{id:change.doc.id, obj:change.doc.data()})
             }
             if (change.type==="removed"){
                 // console.log("Removed", change.doc.data())
-                commit('REMOVE_S3', change.doc.id)
+                if (Number(change.doc.data().year)==Number(yearNow)|| (Number(change.doc.data().year)==Number(oBefore.year)))
+                  if(change.doc.data().month==monthNow || change.doc.data().month==oBefore.month)
+                         commit('REMOVE_S3', change.doc.id)
             }
             })
     })
@@ -270,6 +274,16 @@ export async function MODI_S3 (ctx, {id:id, obj:obj}){
 export async function DEL_S3({commit}, id){
     await deleteDoc(doc(db, "s3", id))
 } 
+export async function CLEAN_S3({commit}, obj){
+    let arrId=[]
+    const q=query(collection (db, "s3"), where('month','==', obj.month), where('yearService', '==', obj.serviceYear))
+    const qSnapshot=await getDocs(q)
+    qSnapshot.forEach(qdoc=>{
+        arrId.push(qdoc.id)
+    })
+    if (arrId.length>0)
+       arrId.forEach(id=>deleteDoc(doc(db, "s3", id)))
+}
 //________User________________________
 export async function GET_GROUP_USER({commit}, email){
     const q=query(collection (db, "users"), where('email', '==', email))
@@ -301,7 +315,7 @@ export function GET_TOTAL_GROUPS({commit}){
             commit('SET_NAME_GROUPS', change.doc.data().nameGroups)
         }
         if (change.type==="removed"){
-            console.log("Removed", change.doc.data())
+            // console.log("Removed", change.doc.data())
            
         }
         })

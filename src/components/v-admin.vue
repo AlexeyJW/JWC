@@ -136,6 +136,11 @@
                 </tbody>
             </table>
        </div>
+       <div class="v-admin-clean">
+          <input type="number" v-model="monthClean" placeholder="month clean"/>
+          <input type="number" v-model="serviceYear" placeholder="service Year"/>
+          <v-button textButton="Clean" @click="cleanS3"/>
+       </div>
 
      </div> <!--v-admin -->
 </template>
@@ -144,7 +149,7 @@
 import VButton from './v-button.vue'
 import vConfirm from './v-confirm.vue'
 import {ref, computed} from 'vue'
-import {analytics} from '../modules/initFB.js'
+// import {analytics} from '../modules/initFB.js'
 import {useStore} from 'vuex'
 import VConfirm from './v-confirm.vue'
 const isConfirmAdmin=ref(false)
@@ -251,13 +256,22 @@ const requestS3=()=>{
         month:monthNumber.value,
         serviceYear:Number(serviceYear.value)
     }
-    console.log("obj=", obj)
+    // console.log("obj=", obj)
     store.dispatch('REQUEST_S3', obj)
       .then((el)=>arr.value=el)
 }
 const removeAction=(id)=>{
      store.dispatch('DEL_S3', id)
      requestS3()
+}
+// clean s3
+const monthClean=ref(null)
+const cleanS3=()=>{
+    let o={
+        month:monthClean.value,
+        serviceYear:Number(serviceYear.value)
+    }
+    store.dispatch('CLEAN_S3', o)
 }
 </script>
 

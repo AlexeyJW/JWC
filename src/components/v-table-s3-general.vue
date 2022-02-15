@@ -73,16 +73,19 @@
                 </tr>
             </tbody>
         </table>
+       
         </div>
+
     </div>
+     <span class="v-span-s3" v-if="isCheckSend"><v-confirm  @pressedCancel="pressOKandCancel" @pressedOK="pressOKandCancel">Ещё не все группы ввели данные за все недели!</v-confirm></span> 
 </template>
 
 <script setup>
    import {computed, ref} from 'vue'
    import {useStore} from 'vuex'
    import vButton from './v-button.vue'
-   import {convertMonth, isServiceYear, isCorrectYearAndMonth, isCorrectMonth} from '../modules/convertMonth'
-
+   import {convertMonth, isServiceYear, isCorrectYearAndMonth, isCorrectMonth, mondayMonth} from '../modules/convertMonth'
+   import VConfirm from './v-confirm.vue'
    const props=defineProps({
        title:{type:String},
       
@@ -123,14 +126,31 @@
    const sum=computed(()=>store.getters.FILTER_ALL_GROUPS(''+yearNow.value, monthNow.value))
    const arrWD=computed(()=>store.getters.GET_S3(''+yearNow.value, monthNow.value).filter(el=>el.data.weekday=='weekdays'))
    const arrWE=computed(()=>store.getters.GET_S3(''+yearNow.value, monthNow.value).filter(el=>el.data.weekday=='weekend'))
-   const allReports=ref(false)
+//    const allReports=ref(false)
+  
+   const isCheckSend=ref(false)
+
+   
+ 
+
+   const pressOKandCancel=()=>
+     {
+        
+         isCheckSend.value=false
+     }
+
    const isAllReportsWD=(week)=>{
        let all=0
        arrWD.value.forEach(el=>{
            if (el.data.weekNumber==week) all++
        })
       
-       if (all!=store.getters.TOTAL_GROUPS) return true
+       if (all!=store.getters.TOTAL_GROUPS)
+          {
+           
+           return true
+          } 
+       
        return false
    }
 
@@ -140,7 +160,12 @@
            if (el.data.weekNumber==week) all++
        })
       
-       if (all!=store.getters.TOTAL_GROUPS) return true
+       if (all!=store.getters.TOTAL_GROUPS)
+          {
+          
+           return true
+          } 
+       
        return false
    }
 
@@ -196,16 +221,37 @@ setTimeout(()=>{
           } 
           }, 1000)
 
+// check all groups input the reports
+const checkAllGroupsInputReports=()=>{
+    let mon=mondayMonth(yearNow.value, monthNow.value)
+    console.log(arrWD.value.length)
+    console.log(mon.length)
+    if(arrWD.value.length==mon.length*store.getters.TOTAL_GROUPS && arrWE.value.length==mon.length*store.getters.TOTAL_GROUPS) return true
+    else return false
+}
+
+
+
 
 const sendReport=()=>{
+    if (checkAllGroupsInputReports()){
+        store.dispatch('ADD_S88', prepareTheReport())
+        store.commit('SET_IS_BUTTON_SEND_S3_FALSE')
         
-    store.dispatch('ADD_S88', prepareTheReport())
-    store.commit('SET_IS_BUTTON_SEND_S3_FALSE')
+    }else {
+        isCheckSend.value=true
+         }  
+    
 }
 
 const modifyReport=()=>{
-   
-    store.dispatch('MODI_S88', prepareTheReport())
+   if (checkAllGroupsInputReports()){
+       store.dispatch('MODI_S88', prepareTheReport())
+    
+   }else{
+        isCheckSend.value=true
+        }
+    
 }
 
 //Button back
@@ -213,6 +259,7 @@ const modifyReport=()=>{
 
 const isButtonBack=ref(true)
 const monthBack=()=>{
+   
    if (monthNow.value==0)
       {
          monthNow.value=11
@@ -227,6 +274,7 @@ const monthBack=()=>{
 
 }
 const monthToNow=()=>{
+  
    if (monthNow.value==11)
       {
          monthNow.value=0
@@ -321,4 +369,11 @@ const monthToNow=()=>{
        color:#539b9b;
         
    }
+   .v-span-s3{
+         position:absolute;
+         top: 500px;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         z-index:999999;
+    }
 </style>

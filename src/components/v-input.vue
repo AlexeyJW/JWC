@@ -58,6 +58,16 @@
     </div>
     <span class="v-span" v-if="isConfirm"><v-confirm  @pressedCancel="isConfirm=!isConfirm" @pressedOK="confirmPressedOK">Уже есть запись, хотите её заменить?</v-confirm></span>
     <span class="v-span" v-if="isConfirmForIsAll"><v-confirm  @pressedCancel="isConfirmForIsAll=!isConfirmForIsAll" @pressedOK="isConfirmForIsAll=!isConfirmForIsAll">Введите недостающие данные</v-confirm></span>
+     <span class="v-span" v-if="isConfirmDate"><v-confirm  @pressedCancel="isConfirmDate=!isConfirmDate" @pressedOK="isConfirmDate=!isConfirmDate">Этот месяц уже закрыт для ввода! Измените дату</v-confirm></span> 
+     <span class="v-span" v-if="isCheck">
+        <div class="v-check">
+         Вам ещё нужно ввести:
+          <ol>
+             <li v-for="i in arrCheck" :key="i">{{i.month}} {{i.weekNumber}}-я нед.-{{i.weekday}} </li>
+          </ol>
+          <v-button class="v-input-group-field-button" textButton="OK"  @click="isCheck=!isCheck"/>
+        </div>
+    </span>
      <div  :class="{activeoverflow: isConfirm}"></div>
     <!-- <span class="reminder" v-if="rem">
            
@@ -70,7 +80,7 @@
 <script setup>
 import VButton from './v-button.vue'
 import vConfirm from './v-confirm.vue'
-import {isCorrectMonth, isServiceYear, isCorrectYearAndMonth, calcWeekNumber} from '../modules/convertMonth.js'
+import {isCorrectMonth, isServiceYear, isCorrectYearAndMonth, calcWeekNumber, checkInputBefore} from '../modules/convertMonth.js'
 import {ref, computed, watchEffect} from 'vue'
 import {useStore} from 'vuex'
 const store=useStore()
@@ -82,6 +92,17 @@ const yearNow=dateNow.getFullYear()
 let monthNow=dateNow.getMonth()
 // const sundayArr=sundayMonth(yearNow, monthNow)
 const serviceYear=isServiceYear(yearNow, monthNow)
+
+//limit date before
+let monthBefore
+let yearBefore
+if (monthNow==0){
+    monthBefore=11
+    yearBefore=Number(yearNow)-1
+}else{
+    monthBefore=monthNow-1
+    yearBefore=yearNow
+}
 
 //----------------------------------------
 
@@ -132,12 +153,13 @@ const isRecord=(obj)=>{
 
 const prepareTheObj=()=>{
         let o=isCorrectYearAndMonth(Number(vDate.value.slice(0,4)), Number(vDate.value.slice(5,7)-1)-isCorrectMonth(new Date(vDate.value)))
+      
         const obj={
             month: o?.month,
             year: (o?.year).toString(),
             yearService:Number(serviceYear),
             weekday:Weekday.value,
-            weekNumber:WeekNumber.value,
+            weekNumber:Number(WeekNumber.value),
             group:Group.value,
             date:vDate.value,
             total:vTotal.value,
@@ -150,20 +172,38 @@ const isAll=()=>{
     if (Group.value==''|| WeekNumber.value==null || Weekday.value==''|| vDate.value==null||vTotal.value==null || vTotal.value==0) return false
     else return true
     }
+// for alert if earlier data has not been input
 const beforeDate=()=>{}
-const sendObj=()=>{
+let isConfirmDate=ref(false)
+let arrCheck=ref([])
+let isCheck=ref(false)
+async function sendObj(){
+     if (arrCheck.value.length>0) arrCheck.value=[]
      if (!isAll()) isConfirmForIsAll.value=true
      else{
         let sendObj=prepareTheObj()   
-        if (typeof isRecord(sendObj)!='object'){
-          
-             store.dispatch('ADD_S3', sendObj)
-             vTotal.value=null
-        }
+          //check date, limit -1 month
+        console.log("limit date=", new Date(yearBefore, monthBefore, 1))
+        if (new Date(sendObj.date)< new Date(yearBefore, monthBefore, 1)){
+            isConfirmDate.value=true
+        } 
         else {
-       
-         isConfirm.value=true
-        }
+            if (typeof isRecord(sendObj)!='object'){
+            
+                await store.dispatch('ADD_S3', sendObj)
+                // arrCheck.value=checkInputBefore(sendObj.group, store.state.s3, new Date(sendObj.date), monthBefore, yearBefore)
+                arrCheck.value=checkInputBefore(sendObj.group, store.state.s3, dateNow, monthBefore, yearBefore)
+                console.log('arrCheck=',arrCheck.value)
+                if (arrCheck.value.length>0){
+                    isCheck.value=true
+                }
+                vTotal.value=null
+            }
+            else {
+        
+            isConfirm.value=true
+            }
+      }
      }
 }  
 const confirmPressedOK=()=>{
@@ -285,5 +325,16 @@ const confirmPressedOK=()=>{
        background:#e2d8d8;
        border-radius: 50%;
        
+   }
+   .v-check{
+       display:flex;
+       flex-direction:column;
+       align-items:center;
+       justify-content:center;
+       color: red;
+       background: #fff;
+       padding:5px;
+       border: 1px solid lightgrey;
+       box-shadow: 0 0 8px 0 darkgray;
    }
 </style>

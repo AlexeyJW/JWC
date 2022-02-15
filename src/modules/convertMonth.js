@@ -31,7 +31,7 @@ export const isCorrectYearAndMonth=(y, m)=>{
     // console.log("is correct Year: y=", y, "m=", m)
     let obj={
              year: y,
-             month: m
+             month: Number(m)
             }
     if (m==-1) {
         obj.month=11
@@ -102,7 +102,7 @@ export const mondayMonth=(y,m)=>{
    for(let i=mon[0]+7;i<=days; i+=7)
       mon.push(i)
        
-    return mon
+    return mon //array number
 }
 
 
@@ -117,16 +117,16 @@ export const calcWeekNumber=(y,m,d)=>{
   if(d<mon[0]) {
       let o=isCorrectYearAndMonth(y, m-1)
       mon=mondayMonth(o.year,o.month)
-      obj.month=o.month
+      obj.month=Number(o.month)
       obj.week=mon.length
       return obj
 // if date = last monday
   }else if (d==mon[0]){
-      obj.month=m
+      obj.month=Number(m)
       obj.week=1
       return obj
   }else if(d>=mon[mon.length-1]) {
-      obj.month=m
+      obj.month=Number(m)
       obj.week=mon.length
       return obj
 // if date located in between first and last monday
@@ -135,7 +135,7 @@ export const calcWeekNumber=(y,m,d)=>{
    for (let i=1; i<mon.length; i++)
      {
        if (d>=mon[i-1]&&d<mon[i]) {
-           obj.month=m
+           obj.month=Number(m)
            obj.week=i
        return obj
         
@@ -148,4 +148,41 @@ export function compareMonthForChart(a,b) {
     if (a.month>7 && b.month>7) return a.month-b.month
     if (a.month<8 && b.month>7) return b.month-a.month
     if (a.month>7 && b.month<8) return b.month-a.month
+}
+
+export function checkInputBefore(group, arr, dateInput, monthBefore, yearBefore) {
+   
+    let nameMonthBefore=convertMonth(monthBefore)
+    let nameMonthInput=convertMonth(dateInput.getMonth())
+    // console.log("arr=", arr)
+    let check=[]
+   
+    let mon=mondayMonth(yearBefore, monthBefore)
+    for(let i=1; i<=mon.length; i++)
+       {
+           let arrWeek=arr.filter(el=>el.data.weekNumber==i && el.data.group==group &&el.data.month==monthBefore)
+        //    console.log('arrWeek=', arrWeek)
+           
+           if (arrWeek.length!=0){
+            //    console.log("find=",i,"=", arrWeek.find(el=>el.data.weekday=='weekdays'))
+              if(arrWeek.find(el=>el.data.weekday=='weekdays')==undefined) check.push({month:nameMonthBefore, weekNumber:i, weekday:'Будни'})
+              if(arrWeek.find(el=>el.data.weekday=='weekend')==undefined) check.push({month:nameMonthBefore, weekNumber:i, weekday:'Выходные'})
+
+           }else check.push({month:nameMonthBefore, weekNumber:i, weekday:'Будни'},{month:nameMonthBefore, weekNumber:i, weekday:'Выходные'})
+       }
+       let objInput=calcWeekNumber(Number(dateInput.getFullYear()), dateInput.getMonth(), Number(dateInput.getDate()))
+    //    console.log("monthInput=", objInput.month, "monthBefore=", monthBefore)
+       if (objInput.month!=monthBefore){
+           for (let y=1; y<=objInput.week; y++)
+           {
+            let arrWeek=arr.filter(el=>el.data.weekNumber==y && el.data.group==group &&el.data.month==objInput.month)
+            // console.log("arrWeek monthInput=", arrWeek)
+            if (arrWeek.length!=0){
+               if(arrWeek.find(el=>el.data.weekday=='weekdays')==undefined) check.push({month:nameMonthInput, weekNumber:y, weekday:'Будни'})
+               if(arrWeek.find(el=>el.data.weekday=='weekend')==undefined) check.push({month:nameMonthInput, weekNumber:y, weekday:'Выходные'})
+ 
+            }else check.push({month:nameMonthInput, weekNumber:y, weekday:'Будни'},{month:nameMonthInput, weekNumber:y, weekday:'Выходные'})
+        }
+       }
+       return check//array obj {weekNumber, weekday}
 }
