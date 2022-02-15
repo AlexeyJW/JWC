@@ -224,8 +224,8 @@ setTimeout(()=>{
 // check all groups input the reports
 const checkAllGroupsInputReports=()=>{
     let mon=mondayMonth(yearNow.value, monthNow.value)
-    console.log(arrWD.value.length)
-    console.log(mon.length)
+    // console.log(arrWD.value.length)
+    // console.log(mon.length)
     if(arrWD.value.length==mon.length*store.getters.TOTAL_GROUPS && arrWE.value.length==mon.length*store.getters.TOTAL_GROUPS) return true
     else return false
 }

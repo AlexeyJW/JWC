@@ -59,6 +59,7 @@
     <span class="v-span" v-if="isConfirm"><v-confirm  @pressedCancel="isConfirm=!isConfirm" @pressedOK="confirmPressedOK">Уже есть запись, хотите её заменить?</v-confirm></span>
     <span class="v-span" v-if="isConfirmForIsAll"><v-confirm  @pressedCancel="isConfirmForIsAll=!isConfirmForIsAll" @pressedOK="isConfirmForIsAll=!isConfirmForIsAll">Введите недостающие данные</v-confirm></span>
      <span class="v-span" v-if="isConfirmDate"><v-confirm  @pressedCancel="isConfirmDate=!isConfirmDate" @pressedOK="isConfirmDate=!isConfirmDate">Этот месяц уже закрыт для ввода! Измените дату</v-confirm></span> 
+     <span class="v-span" v-if="isFuture"><v-confirm  @pressedCancel="isFuture=!isFuture" @pressedOK="isFuture=!isFuture">Это будущее, оно ещё не настало! Измените дату</v-confirm></span> 
      <span class="v-span" v-if="isCheck">
         <div class="v-check">
          Вам ещё нужно ввести:
@@ -133,7 +134,7 @@ watchEffect(()=>{
     WeekNumber.value=calcWeekNumber(Number(vDate.value.slice(0,4)), Number(vDate.value.slice(5,7)-1), Number(vDate.value.slice(-2)))?.week ??null
     Weekday.value=(new Date(vDate.value).getDay()==0|| new Date(vDate.value).getDay()==6) ?'weekend':'weekdays' 
     role.value=store.state.vUserRole=='admin'?false: true
-    console.log(role.value)
+    // console.log(role.value)
 })
 
 
@@ -177,13 +178,16 @@ const beforeDate=()=>{}
 let isConfirmDate=ref(false)
 let arrCheck=ref([])
 let isCheck=ref(false)
+let isFuture=ref(false)
+
 async function sendObj(){
+  if (dateNow >= new Date(vDate.value)){
      if (arrCheck.value.length>0) arrCheck.value=[]
      if (!isAll()) isConfirmForIsAll.value=true
      else{
         let sendObj=prepareTheObj()   
           //check date, limit -1 month
-        console.log("limit date=", new Date(yearBefore, monthBefore, 1))
+        // console.log("limit date=", new Date(yearBefore, monthBefore, 1))
         if (new Date(sendObj.date)< new Date(yearBefore, monthBefore, 1)){
             isConfirmDate.value=true
         } 
@@ -193,7 +197,7 @@ async function sendObj(){
                 await store.dispatch('ADD_S3', sendObj)
                 // arrCheck.value=checkInputBefore(sendObj.group, store.state.s3, new Date(sendObj.date), monthBefore, yearBefore)
                 arrCheck.value=checkInputBefore(sendObj.group, store.state.s3, dateNow, monthBefore, yearBefore)
-                console.log('arrCheck=',arrCheck.value)
+                // console.log('arrCheck=',arrCheck.value)
                 if (arrCheck.value.length>0){
                     isCheck.value=true
                 }
@@ -205,8 +209,12 @@ async function sendObj(){
             }
       }
      }
+  }else {
+      isFuture.value=true
+  }
 }  
 const confirmPressedOK=()=>{
+     
       let sendObj=prepareTheObj()
       let backRacord=null
    

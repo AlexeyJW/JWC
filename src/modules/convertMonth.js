@@ -151,7 +151,8 @@ export function compareMonthForChart(a,b) {
 }
 
 export function checkInputBefore(group, arr, dateInput, monthBefore, yearBefore) {
-   
+    let isWeekday=dateInput.getDay()==0||dateInput.getDay()==6?2:1
+    // console.log("date now- is weekday=", isWeekday)
     let nameMonthBefore=convertMonth(monthBefore)
     let nameMonthInput=convertMonth(dateInput.getMonth())
     // console.log("arr=", arr)
@@ -178,10 +179,20 @@ export function checkInputBefore(group, arr, dateInput, monthBefore, yearBefore)
             let arrWeek=arr.filter(el=>el.data.weekNumber==y && el.data.group==group &&el.data.month==objInput.month)
             // console.log("arrWeek monthInput=", arrWeek)
             if (arrWeek.length!=0){
-               if(arrWeek.find(el=>el.data.weekday=='weekdays')==undefined) check.push({month:nameMonthInput, weekNumber:y, weekday:'Будни'})
-               if(arrWeek.find(el=>el.data.weekday=='weekend')==undefined) check.push({month:nameMonthInput, weekNumber:y, weekday:'Выходные'})
+                if (isWeekday==2){
+                    if(arrWeek.find(el=>el.data.weekday=='weekdays')==undefined) check.push({month:nameMonthInput, weekNumber:y, weekday:'Будни'})
+                    if(arrWeek.find(el=>el.data.weekday=='weekend')==undefined) check.push({month:nameMonthInput, weekNumber:y, weekday:'Выходные'})
+                }else if (isWeekday==1){
+                    if(arrWeek.find(el=>el.data.weekday=='weekdays')==undefined) check.push({month:nameMonthInput, weekNumber:y, weekday:'Будни'})
+                }
+               
  
-            }else check.push({month:nameMonthInput, weekNumber:y, weekday:'Будни'},{month:nameMonthInput, weekNumber:y, weekday:'Выходные'})
+            }else if (isWeekday==2) {
+                check.push({month:nameMonthInput, weekNumber:y, weekday:'Будни'},{month:nameMonthInput, weekNumber:y, weekday:'Выходные'})
+            }else if (isWeekday==1){
+                check.push({month:nameMonthInput, weekNumber:y, weekday:'Будни'})
+            }
+            
         }
        }
        return check//array obj {weekNumber, weekday}
