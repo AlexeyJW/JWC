@@ -171,7 +171,10 @@ export function checkInputBefore(group, arr, dateInput, monthBefore, yearBefore)
 
            }else check.push({month:nameMonthBefore, weekNumber:i, weekday:'Будни'},{month:nameMonthBefore, weekNumber:i, weekday:'Выходные'})
        }
+//month now
+       //week number
        let objInput=calcWeekNumber(Number(dateInput.getFullYear()), dateInput.getMonth(), Number(dateInput.getDate()))
+
     //    console.log("monthInput=", objInput.month, "monthBefore=", monthBefore)
        if (objInput.month!=monthBefore){
            for (let y=1; y<=objInput.week; y++)
@@ -179,21 +182,18 @@ export function checkInputBefore(group, arr, dateInput, monthBefore, yearBefore)
             let arrWeek=arr.filter(el=>el.data.weekNumber==y && el.data.group==group &&el.data.month==objInput.month)
             // console.log("arrWeek monthInput=", arrWeek)
             if (arrWeek.length!=0){
-                if (isWeekday==2){
+             
                     if(arrWeek.find(el=>el.data.weekday=='weekdays')==undefined) check.push({month:nameMonthInput, weekNumber:y, weekday:'Будни'})
                     if(arrWeek.find(el=>el.data.weekday=='weekend')==undefined) check.push({month:nameMonthInput, weekNumber:y, weekday:'Выходные'})
-                }else if (isWeekday==1){
-                    if(arrWeek.find(el=>el.data.weekday=='weekdays')==undefined) check.push({month:nameMonthInput, weekNumber:y, weekday:'Будни'})
-                }
+              
                
  
-            }else if (isWeekday==2) {
+            }else 
                 check.push({month:nameMonthInput, weekNumber:y, weekday:'Будни'},{month:nameMonthInput, weekNumber:y, weekday:'Выходные'})
-            }else if (isWeekday==1){
-                check.push({month:nameMonthInput, weekNumber:y, weekday:'Будни'})
-            }
+            
             
         }
+        if (isWeekday==1) check.splice(-1,1)
        }
        return check//array obj {weekNumber, weekday}
 }
