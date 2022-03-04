@@ -151,7 +151,8 @@ export function compareMonthForChart(a,b) {
 }
 
 export function checkInputBefore(group, arr, dateInput, monthBefore, yearBefore) {
-    let isWeekday=dateInput.getDay()==0||dateInput.getDay()==6?2:1
+    // let isWeekday=dateInput.getDay()==0||dateInput.getDay()==6?2:1
+    let isWeekday=dateInput.getDay()==0?2:1
     // console.log("date now- is weekday=", isWeekday)
     let nameMonthBefore=convertMonth(monthBefore)
     let nameMonthInput=convertMonth(dateInput.getMonth())

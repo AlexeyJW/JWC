@@ -132,7 +132,8 @@ const WeekNumber=ref(null)
 watchEffect(()=>{
     Group.value=groupUser.value
     WeekNumber.value=calcWeekNumber(Number(vDate.value.slice(0,4)), Number(vDate.value.slice(5,7)-1), Number(vDate.value.slice(-2)))?.week ??null
-    Weekday.value=(new Date(vDate.value).getDay()==0|| new Date(vDate.value).getDay()==6) ?'weekend':'weekdays' 
+    // Weekday.value=(new Date(vDate.value).getDay()==0|| new Date(vDate.value).getDay()==6) ?'weekend':'weekdays' 
+    Weekday.value=(new Date(vDate.value).getDay()==0) ?'weekend':'weekdays'
     role.value=store.state.vUserRole=='admin'?false: true
     // console.log(role.value)
 })
